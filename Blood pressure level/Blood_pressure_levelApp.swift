@@ -13,7 +13,7 @@ struct Blood_pressure_levelApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+			PressureOverviewScreen()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
