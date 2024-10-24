@@ -17,25 +17,32 @@ struct PressureChartsView: View {
 					.bold()
 				Spacer()
 			})
+
 			HStack {
 				Text("Сегодня")
 					.font(.system(size: 10))
 			}
+
 			Divider()
+
 			HStack(spacing: 16) {
 				Group {
 					Circle()
 						.fill(.systolic)
+					
 					Text("Систолическое")
+					
 					Circle()
 						.fill(.diastolic)
+
 					Text("Диастолическое")
 				}
 				.frame(height: 8)
 				.font(.system(size: 12))
-				
+
 				Spacer()
 			}
+			
 			VStack {
 			}
 			.frame(maxWidth: .infinity, maxHeight: 215)
@@ -70,15 +77,4 @@ struct PressureChartsView: View {
 
 #Preview {
     PressureChartsView()
-}
-
-struct Triangle: Shape {
-	func path(in rect: CGRect) -> Path {
-		var path = Path()
-		path.move(to: CGPoint(x: rect.midX, y: rect.minY)) // Верхняя точка
-		path.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY)) // Нижний правый угол
-		path.addLine(to: CGPoint(x: rect.minX, y: rect.maxY)) // Нижний левый угол
-		path.closeSubpath() // Замыкаем путь
-		return path
-	}
 }

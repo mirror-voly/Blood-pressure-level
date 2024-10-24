@@ -14,18 +14,22 @@ struct PresureOverviewHeaderView: View {
 					Image("logo")
 						.renderingMode(.template)
 						.foregroundStyle(.primary)
+					
 					Text("Мой доктор")
 						.font(.system(size: 16))
 				})
+				
 				ZStack(alignment: .center, content: {
 					VStack(spacing: 2, content: {
 						Text("Давление")
 							.font(.system(size: 18))
 							.bold()
+						
 						let formattedDate = Date.now.formatted(.dateTime.month().year())
 						Text(formattedDate + " " + "г.")
 							.font(.system(size: 14))
 					})
+					
 					Button(action: {
 						
 					}, label: {
@@ -33,6 +37,7 @@ struct PresureOverviewHeaderView: View {
 							RoundedRectangle(cornerRadius: 10)
 								.fill(.scheme)
 								.frame(width: 32, height: 32)
+
 							Image(systemName: "plus")
 								.tint(.primary)
 								.font(.system(size: 24))
@@ -40,6 +45,7 @@ struct PresureOverviewHeaderView: View {
 						})						
 					})
 					.frame(maxWidth: .infinity, alignment: .trailing)
+					
 				})
 			}
 	}

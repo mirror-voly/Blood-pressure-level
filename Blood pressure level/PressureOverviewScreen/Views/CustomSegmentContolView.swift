@@ -15,9 +15,7 @@ struct CustomSegmentContolView: View {
 		HStack(spacing: 6, content: {
 			ForEach(PresentationPeriod.allCases, id: \.self) { period in
 				Button(action: {
-					withAnimation { 
 						self.period = period
-					}
 				}, label: {
 					Text(String(describing: period).capitalized)
 						.font(.system(size: 14))
@@ -32,7 +30,6 @@ struct CustomSegmentContolView: View {
 		})
 		.background(.scheme)
 		.clipShape(Capsule())
-
     }
 }
 

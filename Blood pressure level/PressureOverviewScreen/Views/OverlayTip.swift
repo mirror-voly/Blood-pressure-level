@@ -12,10 +12,9 @@ struct OverlayTip: View {
 	@Binding var tipIsActive: Bool
 	
     var body: some View {
-		
 		if tipIsActive {
 			ZStack {
-				Color.main.opacity(0.3)
+				Color.black.opacity(0.3)
 					.ignoresSafeArea()
 				
 				VStack(spacing: 0, content: {
@@ -48,11 +47,11 @@ struct OverlayTip: View {
 					}
 					.frame(width: 311, height: 180)
 					.padding()
-					.background(.scheme)
+					.background(.schemeForTips)
 					.clipShape(RoundedRectangle(cornerRadius: 16))
 
 					Triangle()
-						.fill(.scheme)
+						.fill(.schemeForTips)
 						.frame(width: 16, height: 16)
 						.rotationEffect(Angle(degrees: 180))
 						.frame(maxWidth: 250, alignment: .trailing)

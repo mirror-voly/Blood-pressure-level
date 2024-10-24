@@ -11,7 +11,7 @@ import SwiftUI
 struct PressureOverviewScreen: View {
 	
 	@State var period: PresentationPeriod = .day
-	@State var tipIsActive = false
+	@State var tipIsActive = true
 	
 	var body: some View {
 		ZStack {

@@ -21,6 +21,7 @@
 		5191C62E2CCA308500AD3403 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5191C62D2CCA308500AD3403 /* BackgroundView.swift */; };
 		5191C6312CCA413600AD3403 /* AddMeasurementTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5191C6302CCA413600AD3403 /* AddMeasurementTip.swift */; };
 		5191C6332CCA693E00AD3403 /* OverlayTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5191C6322CCA693E00AD3403 /* OverlayTip.swift */; };
+		5191C6352CCA782300AD3403 /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5191C6342CCA782300AD3403 /* Triangle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		5191C62D2CCA308500AD3403 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		5191C6302CCA413600AD3403 /* AddMeasurementTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMeasurementTip.swift; sourceTree = "<group>"; };
 		5191C6322CCA693E00AD3403 /* OverlayTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayTip.swift; sourceTree = "<group>"; };
+		5191C6342CCA782300AD3403 /* Triangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Triangle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 			children = (
 				517015062CC939900058BC9F /* Enums */,
 				5191C6302CCA413600AD3403 /* AddMeasurementTip.swift */,
+				5191C6342CCA782300AD3403 /* Triangle.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -208,6 +211,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5191C62E2CCA308500AD3403 /* BackgroundView.swift in Sources */,
+				5191C6352CCA782300AD3403 /* Triangle.swift in Sources */,
 				517014FA2CC8E1860058BC9F /* Blood_pressure_level.xcdatamodeld in Sources */,
 				517015012CC92C0F0058BC9F /* PresentationPeriod.swift in Sources */,
 				517014F72CC8E1860058BC9F /* Persistence.swift in Sources */,
