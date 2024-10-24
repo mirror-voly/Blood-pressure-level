@@ -11,54 +11,33 @@ import SwiftUI
 struct PressureOverviewScreen: View {
 	
 	@State var period: PresentationPeriod = .day
+	@State var tipIsActive = false
 	
 	var body: some View {
 		ZStack {
-			Color.teal
-				.ignoresSafeArea()
+			BackgroundView()
+			
 			VStack {
 				PresureOverviewHeaderView()
-					.padding(.bottom)
+					.padding(.vertical)
+				
 				VStack(spacing: 16) {
 					CustomSegmentContolView(period: $period)
-					ZStack {
-						Color.scheme
-						VStack(alignment: .leading, spacing: 16) {
-							HStack(content: {
-								Text("Нет данных")
-									.font(.system(size: 18))
-									.bold()
-								Spacer()
-							})
-							HStack {
-								Text("Сегодня")
-									.font(.system(size: 10))
-							}
-							Divider()
-							HStack(spacing: 16) {
-								Group {
-									Circle()
-										.fill(.systolic)
-									Text("Систолическое")
-									Circle()
-										.fill(.diastolic)
-									Text("Диастолическое")
-								}
-								.frame(height: 8)
-								.font(.system(size: 12))
-								
-								Spacer()
-							}
-							
-							Spacer()
-						}
-						.padding()
-					}
-					.clipShape(RoundedRectangle(cornerRadius: 24))
+
+					PressureChartsView()
+
+					PresureNoteView()
+
 				}
+				
 				Spacer()
+
 			}
-			.padding()
+			.padding(.horizontal)
+
+			if tipIsActive {
+				OverlayTip(tipIsActive: $tipIsActive)
+			}
 		}
 	}
 }

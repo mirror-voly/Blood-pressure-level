@@ -23,7 +23,7 @@ struct CustomSegmentContolView: View {
 						.font(.system(size: 14))
 						.foregroundStyle(.main)
 						.frame(maxWidth: 99, maxHeight: 26)
-						.background(self.period == period ? .main.opacity(0.1) : .clear)
+						.background(self.period == period ? .secondaryGray.opacity(0.3) : .clear)
 						.bold(self.period == period ? true : false)
 						.clipShape(Capsule())
 				})

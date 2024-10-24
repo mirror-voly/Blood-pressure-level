@@ -1,0 +1,67 @@
+//
+//  OverlayTip.swift
+//  Blood pressure level
+//
+//  Created by mix on 24.10.2024.
+//
+
+import SwiftUI
+
+struct OverlayTip: View {
+	
+	@Binding var tipIsActive: Bool
+	
+    var body: some View {
+		
+		if tipIsActive {
+			ZStack {
+				Color.main.opacity(0.3)
+					.ignoresSafeArea()
+				
+				VStack(spacing: 0, content: {
+					ZStack {
+						Button(action: {
+							withAnimation { 
+								tipIsActive = false
+							}
+						}, label: {
+							Image(systemName: "xmark.circle.fill")
+								.resizable()
+								.foregroundStyle(.secondaryGray)
+								.fontWeight(.thin)
+								.frame(width: 21, height: 21)
+						})
+						.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+						
+						VStack(spacing: 16) {
+							Image("camera")
+							
+							Text("Добавьте данные")
+								.font(.system(size: 18))
+								.bold()
+
+							Text("Добавить данные можно, кликнув на кнопку. Или попробуйте отсканировать данные на вашем аппарате.")
+								.font(.system(size: 14))
+								.multilineTextAlignment(.center) 
+								.padding(.horizontal)
+						}
+					}
+					.frame(width: 311, height: 180)
+					.padding()
+					.background(.scheme)
+					.clipShape(RoundedRectangle(cornerRadius: 16))
+
+					Triangle()
+						.fill(.scheme)
+						.frame(width: 16, height: 16)
+						.rotationEffect(Angle(degrees: 180))
+						.frame(maxWidth: 250, alignment: .trailing)
+				})
+			}
+		}
+    }
+}
+
+#Preview {
+	OverlayTip(tipIsActive: .constant(true))
+}

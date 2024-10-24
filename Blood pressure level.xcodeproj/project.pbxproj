@@ -16,6 +16,11 @@
 		517015012CC92C0F0058BC9F /* PresentationPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517015002CC92C0F0058BC9F /* PresentationPeriod.swift */; };
 		517015052CC930520058BC9F /* CustomSegmentContolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517015042CC930520058BC9F /* CustomSegmentContolView.swift */; };
 		5170150A2CC93A5C0058BC9F /* PresureOverviewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517015092CC93A5C0058BC9F /* PresureOverviewHeaderView.swift */; };
+		5191C6292CCA1E8F00AD3403 /* PressureChartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5191C6282CCA1E8F00AD3403 /* PressureChartsView.swift */; };
+		5191C62B2CCA1EFB00AD3403 /* PresureNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5191C62A2CCA1EFB00AD3403 /* PresureNoteView.swift */; };
+		5191C62E2CCA308500AD3403 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5191C62D2CCA308500AD3403 /* BackgroundView.swift */; };
+		5191C6312CCA413600AD3403 /* AddMeasurementTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5191C6302CCA413600AD3403 /* AddMeasurementTip.swift */; };
+		5191C6332CCA693E00AD3403 /* OverlayTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5191C6322CCA693E00AD3403 /* OverlayTip.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +34,11 @@
 		517015002CC92C0F0058BC9F /* PresentationPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationPeriod.swift; sourceTree = "<group>"; };
 		517015042CC930520058BC9F /* CustomSegmentContolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentContolView.swift; sourceTree = "<group>"; };
 		517015092CC93A5C0058BC9F /* PresureOverviewHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresureOverviewHeaderView.swift; sourceTree = "<group>"; };
+		5191C6282CCA1E8F00AD3403 /* PressureChartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressureChartsView.swift; sourceTree = "<group>"; };
+		5191C62A2CCA1EFB00AD3403 /* PresureNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresureNoteView.swift; sourceTree = "<group>"; };
+		5191C62D2CCA308500AD3403 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
+		5191C6302CCA413600AD3403 /* AddMeasurementTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMeasurementTip.swift; sourceTree = "<group>"; };
+		5191C6322CCA693E00AD3403 /* OverlayTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayTip.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,7 +73,7 @@
 			children = (
 				517014ED2CC8E1850058BC9F /* Blood_pressure_levelApp.swift */,
 				517015072CC939AB0058BC9F /* PressureOverviewScreen */,
-				517015062CC939900058BC9F /* Enums */,
+				5191C62F2CCA410600AD3403 /* Helpers */,
 				517014F12CC8E1860058BC9F /* Assets.xcassets */,
 				517015082CC939E80058BC9F /* CoreData */,
 				517014F82CC8E1860058BC9F /* Blood_pressure_level.xcdatamodeld */,
@@ -92,8 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				517014EF2CC8E1850058BC9F /* PressureOverviewScreen.swift */,
-				517015092CC93A5C0058BC9F /* PresureOverviewHeaderView.swift */,
-				517015042CC930520058BC9F /* CustomSegmentContolView.swift */,
+				5191C62C2CCA301300AD3403 /* Views */,
 			);
 			path = PressureOverviewScreen;
 			sourceTree = "<group>";
@@ -104,6 +113,28 @@
 				517014F62CC8E1860058BC9F /* Persistence.swift */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		5191C62C2CCA301300AD3403 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				517015092CC93A5C0058BC9F /* PresureOverviewHeaderView.swift */,
+				517015042CC930520058BC9F /* CustomSegmentContolView.swift */,
+				5191C6282CCA1E8F00AD3403 /* PressureChartsView.swift */,
+				5191C62A2CCA1EFB00AD3403 /* PresureNoteView.swift */,
+				5191C6322CCA693E00AD3403 /* OverlayTip.swift */,
+				5191C62D2CCA308500AD3403 /* BackgroundView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5191C62F2CCA410600AD3403 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				517015062CC939900058BC9F /* Enums */,
+				5191C6302CCA413600AD3403 /* AddMeasurementTip.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -176,12 +207,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5191C62E2CCA308500AD3403 /* BackgroundView.swift in Sources */,
 				517014FA2CC8E1860058BC9F /* Blood_pressure_level.xcdatamodeld in Sources */,
 				517015012CC92C0F0058BC9F /* PresentationPeriod.swift in Sources */,
 				517014F72CC8E1860058BC9F /* Persistence.swift in Sources */,
 				517014F02CC8E1850058BC9F /* PressureOverviewScreen.swift in Sources */,
+				5191C6292CCA1E8F00AD3403 /* PressureChartsView.swift in Sources */,
+				5191C6332CCA693E00AD3403 /* OverlayTip.swift in Sources */,
 				517014EE2CC8E1850058BC9F /* Blood_pressure_levelApp.swift in Sources */,
 				5170150A2CC93A5C0058BC9F /* PresureOverviewHeaderView.swift in Sources */,
+				5191C6312CCA413600AD3403 /* AddMeasurementTip.swift in Sources */,
+				5191C62B2CCA1EFB00AD3403 /* PresureNoteView.swift in Sources */,
 				517015052CC930520058BC9F /* CustomSegmentContolView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
