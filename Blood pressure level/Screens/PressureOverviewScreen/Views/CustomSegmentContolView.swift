@@ -9,21 +9,21 @@ import SwiftUI
 
 struct CustomSegmentContolView: View {
 	
-	@Binding var period: PresentationPeriod
+	@StateObject var viewModel: PressureOverviewViewModel
 
     var body: some View {
 		HStack(spacing: Constants.SegmentedControl.spacing, content: {
 			ForEach(PresentationPeriod.allCases, id: \.self) { period in
 				Button(action: {
-						self.period = period
+					viewModel.period = period
 				}, label: {
 					Text(String(describing: period).localized)
 						.font(.system(size: Constants.FontSize.small))
 						.foregroundStyle(.main)
 						.frame(maxWidth: Constants.SegmentedControl.buttonWidth,
 							   maxHeight: Constants.SegmentedControl.height)
-						.background(self.period == period ? .secondaryGray.opacity(Constants.Opacity.regular) : .clear)
-						.bold(self.period == period ? true : false)
+						.background(viewModel.period == period ? .secondaryGray.opacity(Constants.Opacity.regular) : .clear)
+						.bold(viewModel.period == period ? true : false)
 						.clipShape(Capsule())
 				})
 				.padding(Constants.SegmentedControl.padding)
@@ -32,8 +32,4 @@ struct CustomSegmentContolView: View {
 		.background(.scheme)
 		.clipShape(Capsule())
     }
-}
-
-#Preview {
-	CustomSegmentContolView(period: .constant(.day))
 }

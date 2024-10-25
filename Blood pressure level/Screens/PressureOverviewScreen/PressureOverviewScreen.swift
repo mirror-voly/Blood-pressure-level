@@ -6,28 +6,26 @@
 //
 
 import SwiftUI
-
+import RxSwift
 
 struct PressureOverviewScreen: View {
 	
-	@State var period: PresentationPeriod = .day
-	@State var tipIsActive = false
-	@State var addNewScreenIsPresented = false
+	@StateObject private var viewModel = PressureOverviewViewModel()
 	
 	var body: some View {
 		ZStack {
 			BackgroundView(backgroundType: .mainScreen)
 			
 			VStack {
-				PresureOverviewHeaderView(addNewScreenIsPresented: $addNewScreenIsPresented)
+				PresureOverviewHeaderView(viewModel: viewModel)
 					.padding(.vertical)
 				
 				VStack(spacing: Constants.Spacing.defaultSpacing) {
-					CustomSegmentContolView(period: $period)
+					CustomSegmentContolView(viewModel: viewModel)
 
-					PressureChartsView(addNewScreenIsPresented: $addNewScreenIsPresented)
+					PressureChartsView(viewModel: viewModel)
 
-					PresureNoteView()
+					PresureNoteView(viewModel: viewModel)
 
 				}
 				
@@ -36,11 +34,11 @@ struct PressureOverviewScreen: View {
 			}
 			.padding(.horizontal)
 
-			if tipIsActive {
-				OverlayTip(tipIsActive: $tipIsActive)
+			if viewModel.tipIsActive {
+				OverlayTip(viewModel: viewModel)
 			}
 		}
-		.fullScreenCover(isPresented: $addNewScreenIsPresented, content: { 
+		.fullScreenCover(isPresented: $viewModel.addNewScreenIsPresented, content: { 
 			AddNewMeasurementScreen()
 		})
 

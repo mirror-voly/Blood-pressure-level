@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,6 +19,9 @@
 		516E7EB12CCBBF7700741283 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 516E7EAF2CCBBF7700741283 /* Localizable.strings */; };
 		516E7EB32CCBBFE000741283 /* String+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516E7EB22CCBBFE000741283 /* String+Localized.swift */; };
 		516E7EB72CCBCED300741283 /* Measurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516E7EB62CCBCED300741283 /* Measurement.swift */; };
+		516E7EBD2CCBDC4E00741283 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 516E7EBC2CCBDC4E00741283 /* RxCocoa */; };
+		516E7EBF2CCBDC4E00741283 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 516E7EBE2CCBDC4E00741283 /* RxSwift */; };
+		516E7EC12CCBDC8600741283 /* PressureOverviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516E7EC02CCBDC8600741283 /* PressureOverviewViewModel.swift */; };
 		517014EE2CC8E1850058BC9F /* Blood_pressure_levelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517014ED2CC8E1850058BC9F /* Blood_pressure_levelApp.swift */; };
 		517014F02CC8E1850058BC9F /* PressureOverviewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517014EF2CC8E1850058BC9F /* PressureOverviewScreen.swift */; };
 		517014F22CC8E1860058BC9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 517014F12CC8E1860058BC9F /* Assets.xcassets */; };
@@ -50,6 +53,7 @@
 		516E7EB22CCBBFE000741283 /* String+Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localized.swift"; sourceTree = "<group>"; };
 		516E7EB42CCBC0A600741283 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		516E7EB62CCBCED300741283 /* Measurement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Measurement.swift; sourceTree = "<group>"; };
+		516E7EC02CCBDC8600741283 /* PressureOverviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressureOverviewViewModel.swift; sourceTree = "<group>"; };
 		517014EA2CC8E1850058BC9F /* Blood pressure level.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Blood pressure level.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		517014ED2CC8E1850058BC9F /* Blood_pressure_levelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blood_pressure_levelApp.swift; sourceTree = "<group>"; };
 		517014EF2CC8E1850058BC9F /* PressureOverviewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressureOverviewScreen.swift; sourceTree = "<group>"; };
@@ -73,6 +77,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				516E7EBF2CCBDC4E00741283 /* RxSwift in Frameworks */,
+				516E7EBD2CCBDC4E00741283 /* RxCocoa in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,6 +178,7 @@
 			children = (
 				517014EF2CC8E1850058BC9F /* PressureOverviewScreen.swift */,
 				5191C62C2CCA301300AD3403 /* Views */,
+				516E7EC02CCBDC8600741283 /* PressureOverviewViewModel.swift */,
 			);
 			path = PressureOverviewScreen;
 			sourceTree = "<group>";
@@ -233,6 +240,10 @@
 			dependencies = (
 			);
 			name = "Blood pressure level";
+			packageProductDependencies = (
+				516E7EBC2CCBDC4E00741283 /* RxCocoa */,
+				516E7EBE2CCBDC4E00741283 /* RxSwift */,
+			);
 			productName = "Blood pressure level";
 			productReference = 517014EA2CC8E1850058BC9F /* Blood pressure level.app */;
 			productType = "com.apple.product-type.application";
@@ -262,6 +273,9 @@
 				ru,
 			);
 			mainGroup = 517014E12CC8E1850058BC9F;
+			packageReferences = (
+				516E7EBB2CCBDC4E00741283 /* XCLocalSwiftPackageReference "../../RxSwift-main" */,
+			);
 			productRefGroup = 517014EB2CC8E1850058BC9F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -310,6 +324,7 @@
 				516E7EAC2CCBBB9400741283 /* MainFieldsView.swift in Sources */,
 				516E7EAA2CCB9D0400741283 /* Constants.swift in Sources */,
 				5170150A2CC93A5C0058BC9F /* PresureOverviewHeaderView.swift in Sources */,
+				516E7EC12CCBDC8600741283 /* PressureOverviewViewModel.swift in Sources */,
 				5191C62B2CCA1EFB00AD3403 /* PresureNoteView.swift in Sources */,
 				517015052CC930520058BC9F /* CustomSegmentContolView.swift in Sources */,
 				516E7EA82CCB9B6100741283 /* BackgroundType.swift in Sources */,
@@ -542,6 +557,24 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		516E7EBB2CCBDC4E00741283 /* XCLocalSwiftPackageReference "../../RxSwift-main" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../../RxSwift-main";
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		516E7EBC2CCBDC4E00741283 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RxCocoa;
+		};
+		516E7EBE2CCBDC4E00741283 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RxSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		517014F82CC8E1860058BC9F /* Blood_pressure_level.xcdatamodeld */ = {

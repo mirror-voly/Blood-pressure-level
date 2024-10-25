@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import Charts
 
 struct PressureChartsView: View {
 	
-	@Binding var addNewScreenIsPresented: Bool
+	@StateObject var viewModel: PressureOverviewViewModel
 
     var body: some View {
 		VStack(alignment: .leading, spacing: Constants.Spacing.defaultSpacing) {
@@ -46,13 +47,16 @@ struct PressureChartsView: View {
 			}
 			
 			VStack {
+				Chart {
+					
+				}
 			}
 			.frame(maxWidth: .infinity, maxHeight: Constants.FrameSize.chartHeight)
 			
 			Spacer()
 			
 			Button(action: {
-				addNewScreenIsPresented = true
+				viewModel.addNewScreenIsPresented = true
 			}, label: {
 				Text("add_data".localized)
 					.font(.system(size: Constants.FontSize.micro))
@@ -76,7 +80,7 @@ struct PressureChartsView: View {
 		.clipShape(RoundedRectangle(cornerRadius: Constants.Radius.big))
     }
 }
-
-#Preview {
-	PressureChartsView(addNewScreenIsPresented: .constant(true))
-}
+//
+//#Preview {
+//	PressureChartsView(addNewScreenIsPresented: .constant(true))
+//}

@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import RxSwift
 
 struct PresureOverviewHeaderView: View {
 	
-	@Binding var addNewScreenIsPresented: Bool
+	@StateObject var viewModel: PressureOverviewViewModel
 	
 	var body: some View {
 		VStack(alignment: .center, spacing: Constants.Spacing.defaultSpacing) {
@@ -28,13 +29,12 @@ struct PresureOverviewHeaderView: View {
 							.font(.system(size: Constants.FontSize.big))
 							.bold()
 						
-						let formattedDate = Date.now.formatted(.dateTime.month().year())
-						Text(formattedDate + " " + "y.".localized)
+						Text(viewModel.formattedDate.localizedCapitalized)
 							.font(.system(size: Constants.FontSize.small))
 					})
 					
 					Button(action: {
-						addNewScreenIsPresented = true
+						viewModel.addNewScreenIsPresented = true
 					}, label: {
 						ZStack(content: {
 							RoundedRectangle(cornerRadius: Constants.Button.buttonCornerRadius)
@@ -54,7 +54,7 @@ struct PresureOverviewHeaderView: View {
 			}
 	}
 }
-
-#Preview {
-	PresureOverviewHeaderView(addNewScreenIsPresented: .constant(true))
-}
+//
+//#Preview {
+//	PresureOverviewHeaderView(addNewScreenIsPresented: .constant(true))
+//}

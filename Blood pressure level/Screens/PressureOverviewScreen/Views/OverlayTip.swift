@@ -9,10 +9,9 @@ import SwiftUI
 
 struct OverlayTip: View {
 	
-	@Binding var tipIsActive: Bool
+	@StateObject var viewModel: PressureOverviewViewModel
 	
     var body: some View {
-		if tipIsActive {
 			ZStack {
 				Color.black.opacity(Constants.Opacity.regular)
 					.ignoresSafeArea()
@@ -21,7 +20,7 @@ struct OverlayTip: View {
 					ZStack {
 						Button(action: {
 							withAnimation { 
-								tipIsActive = false
+								viewModel.tipIsActive = false
 							}
 						}, label: {
 							Image(systemName: "xmark.circle.fill")
@@ -60,10 +59,5 @@ struct OverlayTip: View {
 						.frame(maxWidth: Constants.FrameSize.tipTriangleFrameWidth, alignment: .trailing)
 				})
 			}
-		}
     }
-}
-
-#Preview {
-	OverlayTip(tipIsActive: .constant(true))
 }
