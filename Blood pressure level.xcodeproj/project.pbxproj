@@ -10,6 +10,8 @@
 		516E7E9C2CCB6CE400741283 /* View+Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516E7E9B2CCB6CE400741283 /* View+Placeholder.swift */; };
 		516E7E9E2CCB736600741283 /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516E7E9D2CCB736600741283 /* TextFieldView.swift */; };
 		516E7EA02CCB77C600741283 /* DateFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516E7E9F2CCB77C600741283 /* DateFieldView.swift */; };
+		516E7EA22CCB990400741283 /* AddNewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516E7EA12CCB990400741283 /* AddNewHeaderView.swift */; };
+		516E7EA42CCB99EF00741283 /* AddNewButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516E7EA32CCB99EF00741283 /* AddNewButtonView.swift */; };
 		517014EE2CC8E1850058BC9F /* Blood_pressure_levelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517014ED2CC8E1850058BC9F /* Blood_pressure_levelApp.swift */; };
 		517014F02CC8E1850058BC9F /* PressureOverviewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517014EF2CC8E1850058BC9F /* PressureOverviewScreen.swift */; };
 		517014F22CC8E1860058BC9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 517014F12CC8E1860058BC9F /* Assets.xcassets */; };
@@ -31,6 +33,8 @@
 		516E7E9B2CCB6CE400741283 /* View+Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Placeholder.swift"; sourceTree = "<group>"; };
 		516E7E9D2CCB736600741283 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
 		516E7E9F2CCB77C600741283 /* DateFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFieldView.swift; sourceTree = "<group>"; };
+		516E7EA12CCB990400741283 /* AddNewHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewHeaderView.swift; sourceTree = "<group>"; };
+		516E7EA32CCB99EF00741283 /* AddNewButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewButtonView.swift; sourceTree = "<group>"; };
 		517014EA2CC8E1850058BC9F /* Blood pressure level.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Blood pressure level.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		517014ED2CC8E1850058BC9F /* Blood_pressure_levelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blood_pressure_levelApp.swift; sourceTree = "<group>"; };
 		517014EF2CC8E1850058BC9F /* PressureOverviewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressureOverviewScreen.swift; sourceTree = "<group>"; };
@@ -151,7 +155,9 @@
 			isa = PBXGroup;
 			children = (
 				5191C6362CCA7A6F00AD3403 /* AddNewMeasurementScreen.swift */,
+				516E7EA12CCB990400741283 /* AddNewHeaderView.swift */,
 				516E7E9D2CCB736600741283 /* TextFieldView.swift */,
+				516E7EA32CCB99EF00741283 /* AddNewButtonView.swift */,
 				516E7E9F2CCB77C600741283 /* DateFieldView.swift */,
 			);
 			path = AddNewMeasurementScreen;
@@ -228,6 +234,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5191C62E2CCA308500AD3403 /* BackgroundView.swift in Sources */,
+				516E7EA22CCB990400741283 /* AddNewHeaderView.swift in Sources */,
 				5191C6352CCA782300AD3403 /* Triangle.swift in Sources */,
 				517014FA2CC8E1860058BC9F /* Blood_pressure_level.xcdatamodeld in Sources */,
 				517015012CC92C0F0058BC9F /* PresentationPeriod.swift in Sources */,
@@ -235,6 +242,7 @@
 				5191C6372CCA7A6F00AD3403 /* AddNewMeasurementScreen.swift in Sources */,
 				517014F02CC8E1850058BC9F /* PressureOverviewScreen.swift in Sources */,
 				5191C6292CCA1E8F00AD3403 /* PressureChartsView.swift in Sources */,
+				516E7EA42CCB99EF00741283 /* AddNewButtonView.swift in Sources */,
 				516E7E9C2CCB6CE400741283 /* View+Placeholder.swift in Sources */,
 				5191C6332CCA693E00AD3403 /* OverlayTip.swift in Sources */,
 				517014EE2CC8E1850058BC9F /* Blood_pressure_levelApp.swift in Sources */,

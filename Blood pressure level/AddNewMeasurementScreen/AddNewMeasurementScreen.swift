@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct AddNewMeasurementScreen: View {
-
+	
 	@State var date = Date()
-	@Environment(\.dismiss) var dismiss
 	@State var systolicTextFieeld = ""
 	@State var diastolicTextFieeld = ""
 	@State var pulseTextFieeld = ""
@@ -25,24 +24,8 @@ struct AddNewMeasurementScreen: View {
 			BackgroundView(backgroundType: .addNewScreen)
 			
 			VStack(spacing: 24) {
-				ZStack { 
-					Button {
-						dismiss()
-					} label: {
-						RoundedRectangle(cornerRadius: 10)
-							.fill(.scheme)
-							.frame(width: 32, height: 32)
-							.overlay(Image(systemName: "chevron.backward"))
-					}
-					.foregroundStyle(.main)
-					.frame(maxWidth: .infinity, alignment: .leading)
-					
-					Text("Добавить данные")
-						.font(.system(size: 18))
-						.bold()
-						.frame(maxWidth: .infinity, alignment: .center)
-					
-				}
+				
+				AddNewHeaderView()
 				
 				HStack(alignment: .top, spacing: 24) {
 
@@ -111,15 +94,8 @@ struct AddNewMeasurementScreen: View {
 				
 				Spacer()
 				
-				Button {
-					dismiss()
-				} label: {
-					Text("Сохранить")
-						.frame(maxWidth: .infinity)
-				}
-				.buttonStyle(BorderedProminentButtonStyle())
-				.clipShape(RoundedRectangle(cornerRadius: 14))
-				.disabled(cantBeSaved)
+				AddNewButtonView(cantBeSaved: cantBeSaved)
+				
 			}
 			.padding()
 		}
