@@ -9,6 +9,8 @@ import SwiftUI
 
 struct BackgroundView: View {
 	
+	let backgroundType: BackgroundType
+	
 	var body: some View {
 		ZStack {
 			Color.backgroundMain
@@ -24,7 +26,9 @@ struct BackgroundView: View {
 					.blur(radius: 25)
 			}
 			.rotationEffect(Angle(degrees: 45))
-			.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+			.frame(maxWidth: .infinity,
+				   maxHeight: .infinity,
+				   alignment: backgroundType == .mainScreen ? .topTrailing : .trailing)
 			.padding(.trailing, -50)
 			.padding(.top, 50)
 		}
@@ -32,5 +36,10 @@ struct BackgroundView: View {
 }
 
 #Preview {
-	BackgroundView()
+	BackgroundView(backgroundType: .addNewScreen)
+}
+
+enum BackgroundType {
+	case mainScreen
+	case addNewScreen
 }
