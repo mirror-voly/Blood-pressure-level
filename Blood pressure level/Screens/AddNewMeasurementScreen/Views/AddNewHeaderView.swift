@@ -18,7 +18,7 @@ struct AddNewHeaderView: View {
 			} label: {
 				RoundedRectangle(cornerRadius: Constants.Button.buttonCornerRadius)
 					.fill(.scheme)
-					.frame(width: 32, height: 32)
+					.frame(width: Constants.Button.height, height: Constants.Button.height)
 					.overlay(Image(systemName: "chevron.backward"))
 			}
 			.foregroundStyle(.main)

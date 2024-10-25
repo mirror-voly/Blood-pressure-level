@@ -19,7 +19,7 @@ struct AddNewButtonView: View {
 			Text("Сохранить")
 				.frame(maxWidth: .infinity)
 		}
-		.tint(cantBeSaved ? .blue.opacity(0.3) : .blue)
+		.tint(cantBeSaved ? .blue.opacity(Constants.Opacity.regular) : .blue)
 		.buttonStyle(BorderedProminentButtonStyle())
 		.clipShape(RoundedRectangle(cornerRadius: Constants.Radius.small))
 		.allowsHitTesting(!cantBeSaved)

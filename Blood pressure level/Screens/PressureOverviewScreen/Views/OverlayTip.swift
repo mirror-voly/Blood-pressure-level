@@ -14,10 +14,10 @@ struct OverlayTip: View {
     var body: some View {
 		if tipIsActive {
 			ZStack {
-				Color.black.opacity(0.3)
+				Color.black.opacity(Constants.Opacity.regular)
 					.ignoresSafeArea()
 				
-				VStack(spacing: 0, content: {
+				VStack(spacing: .zero, content: {
 					ZStack {
 						Button(action: {
 							withAnimation { 
@@ -28,7 +28,8 @@ struct OverlayTip: View {
 								.resizable()
 								.foregroundStyle(.secondaryGray)
 								.fontWeight(.thin)
-								.frame(width: 21, height: 21)
+								.frame(width: Constants.FrameSize.tipButtonSize,
+									   height: Constants.FrameSize.tipButtonSize)
 						})
 						.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
 						
@@ -45,16 +46,18 @@ struct OverlayTip: View {
 								.padding(.horizontal)
 						}
 					}
-					.frame(width: 311, height: 180)
+					.frame(width: Constants.FrameSize.tipBaseWidth,
+						   height: Constants.FrameSize.tipBaseHeight)
 					.padding()
 					.background(.schemeForTips)
 					.clipShape(RoundedRectangle(cornerRadius: Constants.Radius.regular))
 
 					Triangle()
 						.fill(.schemeForTips)
-						.frame(width: 16, height: 16)
-						.rotationEffect(Angle(degrees: 180))
-						.frame(maxWidth: 250, alignment: .trailing)
+						.frame(width: Constants.FrameSize.tipTriangleSize,
+							   height: Constants.FrameSize.tipTriangleSize)
+						.rotationEffect(Angle(degrees: Constants.FrameSize.tipTriangleRotation))
+						.frame(maxWidth: Constants.FrameSize.tipTriangleFrameWidth, alignment: .trailing)
 				})
 			}
 		}

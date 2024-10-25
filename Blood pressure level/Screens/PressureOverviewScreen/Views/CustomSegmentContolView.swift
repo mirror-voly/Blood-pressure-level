@@ -22,7 +22,7 @@ struct CustomSegmentContolView: View {
 						.foregroundStyle(.main)
 						.frame(maxWidth: Constants.SegmentedControl.buttonWidth,
 							   maxHeight: Constants.SegmentedControl.height)
-						.background(self.period == period ? .secondaryGray.opacity(Constants.SegmentedControl.opacity) : .clear)
+						.background(self.period == period ? .secondaryGray.opacity(Constants.Opacity.regular) : .clear)
 						.bold(self.period == period ? true : false)
 						.clipShape(Capsule())
 				})

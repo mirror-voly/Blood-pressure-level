@@ -18,7 +18,6 @@ struct AddNewMeasurementScreen: View {
 		!systolicTextFieeld.isEmpty && !diastolicTextFieeld.isEmpty ? false : true 
 	}
 	
-	
     var body: some View {
 		ZStack {
 			BackgroundView(backgroundType: .addNewScreen)
@@ -26,64 +25,12 @@ struct AddNewMeasurementScreen: View {
 			VStack(spacing: Constants.Spacing.defaultSpacing) {
 				
 				AddNewHeaderView()
-				
-				HStack(alignment: .top, spacing: 24) {
 
-					VStack(alignment: .leading) {
-						Text("Кровянное давление")
-							.font(.system(size: Constants.FontSize.regular))
-						
-						HStack(spacing: 8) {
-							VStack(alignment: .leading, spacing: 8) {
-								Text("Систолическое")
-									.font(.system(size: Constants.FontSize.micro))
-									.foregroundStyle(.main.opacity(0.5))
-								
-								TextFieldView(placeholder: "120", text: $systolicTextFieeld)
-								
-							}
-							
-							VStack(alignment: .leading, spacing: 8) {
-								Text("Диастолическое")
-									.font(.system(size: Constants.FontSize.micro))
-									.foregroundStyle(.main.opacity(0.5))
-								
-								TextFieldView(placeholder: "90", text: $diastolicTextFieeld)
+				MainFieldsView(systolicTextFieeld: $systolicTextFieeld,
+							   diastolicTextFieeld: $diastolicTextFieeld,
+							   pulseTextFieeld: $pulseTextFieeld)
 
-							}
-						}
-					}
-					.frame(width: 214, height: 89)
-					
-					VStack(alignment: .leading)   { 
-						Text("Пульс")
-							.font(.system(size: Constants.FontSize.regular))
-						
-						Spacer()
-						
-						TextFieldView(placeholder: "70", text: $pulseTextFieeld)
-
-					}
-				}
-				.frame(maxHeight: 90)
-				
-				HStack {
-					VStack(alignment: .leading)  {
-						Text("Дата измерений")
-							.font(.system(size: Constants.FontSize.regular))
-						
-						DateFieldView(displayedComponents: .date, date: $date)
-
-					}
-					
-					VStack(alignment: .leading) {
-						Text("Время измерений")
-							.font(.system(size: Constants.FontSize.regular))
-						
-						DateFieldView(displayedComponents: .hourAndMinute, date: $date)
-						
-					}
-				}
+				DateFields(date: $date)
 				
 				VStack(alignment: .leading) {
 					Text("Заметка")

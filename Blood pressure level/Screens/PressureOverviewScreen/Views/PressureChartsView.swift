@@ -39,7 +39,7 @@ struct PressureChartsView: View {
 
 					Text("Диастолическое")
 				}
-				.frame(height: 8)
+				.frame(height: Constants.FrameSize.chartLegendHeight)
 				.font(.system(size: Constants.FontSize.micro))
 
 				Spacer()
@@ -47,7 +47,7 @@ struct PressureChartsView: View {
 			
 			VStack {
 			}
-			.frame(maxWidth: .infinity, maxHeight: 215)
+			.frame(maxWidth: .infinity, maxHeight: Constants.FrameSize.chartHeight)
 			
 			Spacer()
 			
@@ -56,23 +56,23 @@ struct PressureChartsView: View {
 			}, label: {
 				Text("Добавить данные")
 					.font(.system(size: Constants.FontSize.micro))
-					.padding(.vertical, 8)
-					.padding(.horizontal, 16)
+					.padding(.vertical, Constants.Padding.small)
+					.padding(.horizontal, Constants.Padding.regular)
 					.foregroundStyle(.systolic)
 					.background(.scheme)
 					.clipShape(.capsule)
 					.buttonBorderShape(.capsule)
 					.overlay(
 						RoundedRectangle(cornerRadius: Constants.Radius.regular)
-							.stroke(.systolic, lineWidth: 1))
+							.stroke(.systolic, lineWidth: Constants.General.originalValue))
 			})
 			.frame(maxWidth: .infinity, alignment: .bottomTrailing)
 
 		}
 		.padding(.horizontal)
-		.padding(.vertical, 20)
+		.padding(.vertical, Constants.Padding.big)
 		.background(.scheme)
-		.frame(maxWidth: .infinity, maxHeight: 397)
+		.frame(maxWidth: .infinity, maxHeight: Constants.FrameSize.wholeChartViewHeight )
 		.clipShape(RoundedRectangle(cornerRadius: Constants.Radius.big))
     }
 }

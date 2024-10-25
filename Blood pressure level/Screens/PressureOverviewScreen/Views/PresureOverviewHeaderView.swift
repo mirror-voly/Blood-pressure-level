@@ -39,8 +39,8 @@ struct PresureOverviewHeaderView: View {
 						ZStack(content: {
 							RoundedRectangle(cornerRadius: Constants.Button.buttonCornerRadius)
 								.fill(.scheme)
-								.frame(width: Constants.Button.buttonHeight,
-									   height: Constants.Button.buttonHeight)
+								.frame(width: Constants.Button.height,
+									   height: Constants.Button.height)
 
 							Image(systemName: "plus")
 								.tint(.primary)

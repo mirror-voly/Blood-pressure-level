@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PresureNoteView: View {
     var body: some View {
-		VStack(alignment: .leading, spacing: 8, content: {
+		VStack(alignment: .leading, spacing: Constants.Spacing.smallSpacing, content: {
 			VStack(content: {
 				HStack(alignment: .top, spacing: Constants.Spacing.defaultSpacing) {
 					Image("note")
@@ -25,10 +25,10 @@ struct PresureNoteView: View {
 						Image(systemName: "plus")
 							.font(.system(size: Constants.FontSize.large))
 							.fontWeight(.light)
-							.foregroundStyle(.main.opacity(0.3))
+							.foregroundStyle(.main.opacity(Constants.Opacity.regular))
 					})
 				}
-				.frame(maxHeight: 24)
+				.frame(maxHeight: Constants.FrameSize.presureNoteViewHearerHeight)
 				
 				Divider()
 				
@@ -37,7 +37,7 @@ struct PresureNoteView: View {
 						.font(.system(size: Constants.FontSize.small))
 						.foregroundStyle(.secondaryGrayDark)
 						.frame(maxWidth: .infinity, alignment: .leading)
-						.padding(.vertical, 4)
+						.padding(.vertical, Constants.Padding.micro)
 				}
 			})
 			.padding()
