@@ -21,7 +21,7 @@ struct AddNewButtonView: View {
 		}
 		.tint(cantBeSaved ? .blue.opacity(0.3) : .blue)
 		.buttonStyle(BorderedProminentButtonStyle())
-		.clipShape(RoundedRectangle(cornerRadius: 14))
+		.clipShape(RoundedRectangle(cornerRadius: Constants.Radius.small))
 		.allowsHitTesting(!cantBeSaved)
     }
 }

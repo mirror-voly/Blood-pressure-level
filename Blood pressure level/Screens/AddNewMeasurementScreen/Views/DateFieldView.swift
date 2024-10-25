@@ -38,12 +38,12 @@ struct DateFieldView: View {
 			.fixedSize()
 
 			Text(takeDate())
-				.font(.system(size: 18))
+				.font(.system(size: Constants.FontSize.big))
 				.padding()
 				.foregroundStyle(didChange ? .main : .secondaryGrayDark)
 				.frame(maxWidth: .infinity, alignment: .leading)
 				.background(Color.scheme)
-				.clipShape(RoundedRectangle(cornerRadius: 14))
+				.clipShape(RoundedRectangle(cornerRadius: Constants.Radius.small))
 				.allowsHitTesting(false)
 		})
     }

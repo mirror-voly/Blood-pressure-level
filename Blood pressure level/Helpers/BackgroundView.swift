@@ -17,20 +17,22 @@ struct BackgroundView: View {
 				.ignoresSafeArea()
 			ZStack(alignment: .top) {
 				Circle()
-					.fill(.backgroundSecond.opacity(0.8))
-					.frame(width: 138, height: 138)
-					.blur(radius: 50)
+					.fill(.backgroundSecond.opacity(Constants.Background.circleMainColorOpacity))
+					.frame(width: Constants.Background.circleMainSize,
+						   height: Constants.Background.circleMainSize)
+					.blur(radius: Constants.Background.circleMainBlurRadius)
 				Circle()
-					.fill(.backgroundFirst.opacity(0.7))
-					.frame(width: 78, height: 78)
-					.blur(radius: 25)
+					.fill(.backgroundFirst.opacity(Constants.Background.circleSecondColorOpacity))
+					.frame(width: Constants.Background.circleSecondSize,
+						   height: Constants.Background.circleSecondSize)
+					.blur(radius: Constants.Background.circleSecondBlurRadius)
 			}
-			.rotationEffect(Angle(degrees: 45))
+			.rotationEffect(Angle(degrees: Constants.Background.angle))
 			.frame(maxWidth: .infinity,
 				   maxHeight: .infinity,
 				   alignment: backgroundType == .mainScreen ? .topTrailing : .trailing)
-			.padding(.trailing, -50)
-			.padding(.top, 50)
+			.padding(.trailing, Constants.Background.paddingTrailing)
+			.padding(.top, Constants.Background.paddingTop)
 		}
 	}
 }

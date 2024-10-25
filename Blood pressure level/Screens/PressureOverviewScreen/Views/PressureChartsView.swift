@@ -12,22 +12,22 @@ struct PressureChartsView: View {
 	@Binding var addNewScreenIsPresented: Bool
 
     var body: some View {
-		VStack(alignment: .leading, spacing: 16) {
+		VStack(alignment: .leading, spacing: Constants.Spacing.defaultSpacing) {
 			HStack(content: {
 				Text("Нет данных")
-					.font(.system(size: 18))
+					.font(.system(size: Constants.FontSize.big))
 					.bold()
 				Spacer()
 			})
 
 			HStack {
 				Text("Сегодня")
-					.font(.system(size: 10))
+					.font(.system(size: Constants.FontSize.big))
 			}
 
 			Divider()
 
-			HStack(spacing: 16) {
+			HStack(spacing: Constants.Spacing.defaultSpacing) {
 				Group {
 					Circle()
 						.fill(.systolic)
@@ -40,7 +40,7 @@ struct PressureChartsView: View {
 					Text("Диастолическое")
 				}
 				.frame(height: 8)
-				.font(.system(size: 12))
+				.font(.system(size: Constants.FontSize.micro))
 
 				Spacer()
 			}
@@ -55,7 +55,7 @@ struct PressureChartsView: View {
 				addNewScreenIsPresented = true
 			}, label: {
 				Text("Добавить данные")
-					.font(.system(size: 12))
+					.font(.system(size: Constants.FontSize.micro))
 					.padding(.vertical, 8)
 					.padding(.horizontal, 16)
 					.foregroundStyle(.systolic)
@@ -63,7 +63,7 @@ struct PressureChartsView: View {
 					.clipShape(.capsule)
 					.buttonBorderShape(.capsule)
 					.overlay(
-						RoundedRectangle(cornerRadius: 16)
+						RoundedRectangle(cornerRadius: Constants.Radius.regular)
 							.stroke(.systolic, lineWidth: 1))
 			})
 			.frame(maxWidth: .infinity, alignment: .bottomTrailing)
@@ -73,7 +73,7 @@ struct PressureChartsView: View {
 		.padding(.vertical, 20)
 		.background(.scheme)
 		.frame(maxWidth: .infinity, maxHeight: 397)
-		.clipShape(RoundedRectangle(cornerRadius: 24))
+		.clipShape(RoundedRectangle(cornerRadius: Constants.Radius.big))
     }
 }
 

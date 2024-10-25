@@ -23,7 +23,7 @@ struct AddNewMeasurementScreen: View {
 		ZStack {
 			BackgroundView(backgroundType: .addNewScreen)
 			
-			VStack(spacing: 24) {
+			VStack(spacing: Constants.Spacing.defaultSpacing) {
 				
 				AddNewHeaderView()
 				
@@ -31,12 +31,12 @@ struct AddNewMeasurementScreen: View {
 
 					VStack(alignment: .leading) {
 						Text("Кровянное давление")
-							.font(.system(size: 16))
+							.font(.system(size: Constants.FontSize.regular))
 						
 						HStack(spacing: 8) {
 							VStack(alignment: .leading, spacing: 8) {
 								Text("Систолическое")
-									.font(.system(size: 12))
+									.font(.system(size: Constants.FontSize.micro))
 									.foregroundStyle(.main.opacity(0.5))
 								
 								TextFieldView(placeholder: "120", text: $systolicTextFieeld)
@@ -45,7 +45,7 @@ struct AddNewMeasurementScreen: View {
 							
 							VStack(alignment: .leading, spacing: 8) {
 								Text("Диастолическое")
-									.font(.system(size: 12))
+									.font(.system(size: Constants.FontSize.micro))
 									.foregroundStyle(.main.opacity(0.5))
 								
 								TextFieldView(placeholder: "90", text: $diastolicTextFieeld)
@@ -57,7 +57,7 @@ struct AddNewMeasurementScreen: View {
 					
 					VStack(alignment: .leading)   { 
 						Text("Пульс")
-							.font(.system(size: 16))
+							.font(.system(size: Constants.FontSize.regular))
 						
 						Spacer()
 						
@@ -70,7 +70,7 @@ struct AddNewMeasurementScreen: View {
 				HStack {
 					VStack(alignment: .leading)  {
 						Text("Дата измерений")
-							.font(.system(size: 16))
+							.font(.system(size: Constants.FontSize.regular))
 						
 						DateFieldView(displayedComponents: .date, date: $date)
 
@@ -78,7 +78,7 @@ struct AddNewMeasurementScreen: View {
 					
 					VStack(alignment: .leading) {
 						Text("Время измерений")
-							.font(.system(size: 16))
+							.font(.system(size: Constants.FontSize.regular))
 						
 						DateFieldView(displayedComponents: .hourAndMinute, date: $date)
 						
@@ -87,7 +87,7 @@ struct AddNewMeasurementScreen: View {
 				
 				VStack(alignment: .leading) {
 					Text("Заметка")
-						.font(.system(size: 16))
+						.font(.system(size: Constants.FontSize.regular))
 					
 					TextFieldView(placeholder: "Опиши свое самочуствие", text: $noteTextFieeld)
 				}

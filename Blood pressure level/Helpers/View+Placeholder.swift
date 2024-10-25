@@ -13,7 +13,7 @@ extension View {
 			self
 			if shouldShow {
 				placeholder()
-					.font(.system(size: 18))
+					.font(.system(size: Constants.FontSize.big))
 					.foregroundColor(.secondaryGrayDark)
 					.allowsHitTesting(false)
 					.padding(padding)

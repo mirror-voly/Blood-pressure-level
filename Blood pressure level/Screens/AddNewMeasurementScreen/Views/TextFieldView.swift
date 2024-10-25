@@ -17,15 +17,15 @@ struct TextFieldView: View {
 		TextField("", text: $text, onEditingChanged: { edit in
 			isOnChange = edit
 		})
-		.font(.system(size: 18))
+		.font(.system(size: Constants.FontSize.big))
 		.padding()
 		.background(Color.scheme)
-		.clipShape(RoundedRectangle(cornerRadius: 14))
+		.clipShape(RoundedRectangle(cornerRadius: Constants.Radius.small))
 		.placeholder(when: text.isEmpty) { Text(placeholder) }
 		.overlay(
 			Group {
 				if isOnChange {
-					RoundedRectangle(cornerRadius: 14)
+					RoundedRectangle(cornerRadius: Constants.Radius.small)
 						.stroke(.main, lineWidth: 1)
 				}
 			}

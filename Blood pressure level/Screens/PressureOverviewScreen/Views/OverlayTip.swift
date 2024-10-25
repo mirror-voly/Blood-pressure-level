@@ -32,15 +32,15 @@ struct OverlayTip: View {
 						})
 						.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
 						
-						VStack(spacing: 16) {
+						VStack(spacing: Constants.Spacing.defaultSpacing) {
 							Image("camera")
 							
 							Text("Добавьте данные")
-								.font(.system(size: 18))
+								.font(.system(size: Constants.FontSize.big))
 								.bold()
 
 							Text("Добавить данные можно, кликнув на кнопку. Или попробуйте отсканировать данные на вашем аппарате.")
-								.font(.system(size: 14))
+								.font(.system(size: Constants.FontSize.small))
 								.multilineTextAlignment(.center) 
 								.padding(.horizontal)
 						}
@@ -48,7 +48,7 @@ struct OverlayTip: View {
 					.frame(width: 311, height: 180)
 					.padding()
 					.background(.schemeForTips)
-					.clipShape(RoundedRectangle(cornerRadius: 16))
+					.clipShape(RoundedRectangle(cornerRadius: Constants.Radius.regular))
 
 					Triangle()
 						.fill(.schemeForTips)

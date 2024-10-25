@@ -129,9 +129,9 @@
 		517015062CC939900058BC9F /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				516E7EA92CCB9D0400741283 /* Constants.swift */,
 				517015002CC92C0F0058BC9F /* PresentationPeriod.swift */,
 				516E7EA72CCB9B6100741283 /* BackgroundType.swift */,
-				516E7EA92CCB9D0400741283 /* Constants.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";

@@ -11,10 +11,10 @@ struct PresureNoteView: View {
     var body: some View {
 		VStack(alignment: .leading, spacing: 8, content: {
 			VStack(content: {
-				HStack(alignment: .top, spacing: 16) {
+				HStack(alignment: .top, spacing: Constants.Spacing.defaultSpacing) {
 					Image("note")
 					Text("Заметки")
-						.font(.system(size: 16))
+						.font(.system(size: Constants.FontSize.regular))
 						.bold()
 					
 					Spacer()
@@ -23,7 +23,7 @@ struct PresureNoteView: View {
 						
 					}, label: {
 						Image(systemName: "plus")
-							.font(.system(size: 24))
+							.font(.system(size: Constants.FontSize.large))
 							.fontWeight(.light)
 							.foregroundStyle(.main.opacity(0.3))
 					})
@@ -34,7 +34,7 @@ struct PresureNoteView: View {
 				
 				VStack(alignment: .leading) {
 					Text("Опиши своё состояние")
-						.font(.system(size: 14))
+						.font(.system(size: Constants.FontSize.small))
 						.foregroundStyle(.secondaryGrayDark)
 						.frame(maxWidth: .infinity, alignment: .leading)
 						.padding(.vertical, 4)
@@ -44,7 +44,7 @@ struct PresureNoteView: View {
 			
 		})
 		.background(.scheme)
-		.clipShape(RoundedRectangle(cornerRadius: 24))
+		.clipShape(RoundedRectangle(cornerRadius: Constants.Radius.big))
     }
 }
 

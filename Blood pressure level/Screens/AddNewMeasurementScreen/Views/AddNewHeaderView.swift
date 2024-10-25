@@ -16,7 +16,7 @@ struct AddNewHeaderView: View {
 			Button {
 				dismiss()
 			} label: {
-				RoundedRectangle(cornerRadius: 10)
+				RoundedRectangle(cornerRadius: Constants.Button.buttonCornerRadius)
 					.fill(.scheme)
 					.frame(width: 32, height: 32)
 					.overlay(Image(systemName: "chevron.backward"))
@@ -25,7 +25,7 @@ struct AddNewHeaderView: View {
 			.frame(maxWidth: .infinity, alignment: .leading)
 			
 			Text("Добавить данные")
-				.font(.system(size: 18))
+				.font(.system(size: Constants.FontSize.big))
 				.bold()
 				.frame(maxWidth: .infinity, alignment: .center)
 			

@@ -22,7 +22,7 @@ struct PressureOverviewScreen: View {
 				PresureOverviewHeaderView(addNewScreenIsPresented: $addNewScreenIsPresented)
 					.padding(.vertical)
 				
-				VStack(spacing: 16) {
+				VStack(spacing: Constants.Spacing.defaultSpacing) {
 					CustomSegmentContolView(period: $period)
 
 					PressureChartsView(addNewScreenIsPresented: $addNewScreenIsPresented)
