@@ -56,12 +56,8 @@ struct AddNewMeasurementScreen: View {
 									.font(.system(size: 12))
 									.foregroundStyle(.main.opacity(0.5))
 								
-								TextField("", text: $systolicTextFieeld)
-									.font(.system(size: 18))
-									.padding()
-									.background(Color.scheme)
-									.clipShape(RoundedRectangle(cornerRadius: 14))
-									.placeholder(when: systolicTextFieeld.isEmpty) { Text("120") }
+								TextFieldView(placeholder: "120", text: $systolicTextFieeld)
+								
 							}
 							
 							VStack(alignment: .leading, spacing: 8) {
@@ -69,12 +65,8 @@ struct AddNewMeasurementScreen: View {
 									.font(.system(size: 12))
 									.foregroundStyle(.main.opacity(0.5))
 								
-								TextField("", text: $diastolicTextFieeld)
-									.font(.system(size: 18))
-									.padding()
-									.background(Color.scheme)
-									.clipShape(RoundedRectangle(cornerRadius: 14))
-									.placeholder(when: diastolicTextFieeld.isEmpty) { Text("90") }
+								TextFieldView(placeholder: "90", text: $diastolicTextFieeld)
+
 							}
 						}
 					}
@@ -86,12 +78,8 @@ struct AddNewMeasurementScreen: View {
 						
 						Spacer()
 						
-						TextField("", text: $pulseTextFieeld)
-							.font(.system(size: 18))
-							.padding()
-							.background(Color.scheme)
-							.clipShape(RoundedRectangle(cornerRadius: 14))
-							.placeholder(when: pulseTextFieeld.isEmpty) { Text("70") }
+						TextFieldView(placeholder: "70", text: $pulseTextFieeld)
+
 					}
 				}
 				.frame(maxHeight: 90)
@@ -100,43 +88,16 @@ struct AddNewMeasurementScreen: View {
 					VStack(alignment: .leading)  {
 						Text("Дата измерений")
 							.font(.system(size: 16))
-						ZStack(alignment: .leading, content: {
-							DatePicker("", selection: $date, in: Date()..., displayedComponents: .date)
-							.datePickerStyle(.compact)
-							.fixedSize()
-							
-							let formattedDate = date.formatted(date: .numeric, time: .omitted)
-							
-							Text(formattedDate)
-								.font(.system(size: 18))
-								.padding()
-								.foregroundStyle(.secondaryGrayDark)
-								.frame(maxWidth: .infinity, alignment: .leading)
-								.background(Color.scheme)
-								.clipShape(RoundedRectangle(cornerRadius: 14))
-								.allowsHitTesting(false)
-						})
+						
+						DateFieldView(displayedComponents: .date, date: $date)
+
 					}
 					
 					VStack(alignment: .leading) {
 						Text("Время измерений")
 							.font(.system(size: 16))
-						ZStack(alignment: .leading, content: {
-							DatePicker("", selection: $date, in: Date()..., displayedComponents: .hourAndMinute)
-							.datePickerStyle(.compact)
-							.fixedSize()
-							
-							let formattedDate = date.formatted(.dateTime.hour().minute())
-							
-							Text(formattedDate)
-								.font(.system(size: 18))
-								.padding()
-								.foregroundStyle(.secondaryGrayDark)
-								.frame(maxWidth: .infinity, alignment: .leading)
-								.background(Color.scheme)
-								.clipShape(RoundedRectangle(cornerRadius: 14))
-								.allowsHitTesting(false)
-						})
+						
+						DateFieldView(displayedComponents: .hourAndMinute, date: $date)
 						
 					}
 				}
@@ -145,18 +106,11 @@ struct AddNewMeasurementScreen: View {
 					Text("Заметка")
 						.font(.system(size: 16))
 					
-					TextField("", text: $noteTextFieeld)
-						.placeholder(when: noteTextFieeld.isEmpty) {
-										Text("Опиши свое самочуствие")	
-									}
-						.font(.system(size: 18))
-						.padding(.vertical)
-						.background(Color.scheme)
-						.clipShape(RoundedRectangle(cornerRadius: 14))
-						
+					TextFieldView(placeholder: "Опиши свое самочуствие", text: $noteTextFieeld)
 				}
 				
 				Spacer()
+				
 				Button {
 					dismiss()
 				} label: {
