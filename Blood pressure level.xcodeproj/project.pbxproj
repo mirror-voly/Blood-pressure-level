@@ -18,6 +18,7 @@
 		516E7EAE2CCBBCCD00741283 /* DateFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516E7EAD2CCBBCCD00741283 /* DateFields.swift */; };
 		516E7EB12CCBBF7700741283 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 516E7EAF2CCBBF7700741283 /* Localizable.strings */; };
 		516E7EB32CCBBFE000741283 /* String+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516E7EB22CCBBFE000741283 /* String+Localized.swift */; };
+		516E7EB72CCBCED300741283 /* Measurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516E7EB62CCBCED300741283 /* Measurement.swift */; };
 		517014EE2CC8E1850058BC9F /* Blood_pressure_levelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517014ED2CC8E1850058BC9F /* Blood_pressure_levelApp.swift */; };
 		517014F02CC8E1850058BC9F /* PressureOverviewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517014EF2CC8E1850058BC9F /* PressureOverviewScreen.swift */; };
 		517014F22CC8E1860058BC9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 517014F12CC8E1860058BC9F /* Assets.xcassets */; };
@@ -48,6 +49,7 @@
 		516E7EB02CCBBF7700741283 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		516E7EB22CCBBFE000741283 /* String+Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localized.swift"; sourceTree = "<group>"; };
 		516E7EB42CCBC0A600741283 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		516E7EB62CCBCED300741283 /* Measurement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Measurement.swift; sourceTree = "<group>"; };
 		517014EA2CC8E1850058BC9F /* Blood pressure level.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Blood pressure level.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		517014ED2CC8E1850058BC9F /* Blood_pressure_levelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blood_pressure_levelApp.swift; sourceTree = "<group>"; };
 		517014EF2CC8E1850058BC9F /* PressureOverviewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressureOverviewScreen.swift; sourceTree = "<group>"; };
@@ -108,6 +110,14 @@
 			path = Extentions;
 			sourceTree = "<group>";
 		};
+		516E7EB82CCBCEDA00741283 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				516E7EB62CCBCED300741283 /* Measurement.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		517014E12CC8E1850058BC9F = {
 			isa = PBXGroup;
 			children = (
@@ -128,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				517014ED2CC8E1850058BC9F /* Blood_pressure_levelApp.swift */,
+				516E7EB82CCBCEDA00741283 /* Model */,
 				516E7EA52CCB9B0E00741283 /* Screens */,
 				5191C62F2CCA410600AD3403 /* Helpers */,
 				517014F12CC8E1860058BC9F /* Assets.xcassets */,
@@ -280,6 +291,7 @@
 			files = (
 				5191C62E2CCA308500AD3403 /* BackgroundView.swift in Sources */,
 				516E7EA22CCB990400741283 /* AddNewHeaderView.swift in Sources */,
+				516E7EB72CCBCED300741283 /* Measurement.swift in Sources */,
 				516E7EAE2CCBBCCD00741283 /* DateFields.swift in Sources */,
 				5191C6352CCA782300AD3403 /* Triangle.swift in Sources */,
 				517014FA2CC8E1860058BC9F /* Blood_pressure_level.xcdatamodeld in Sources */,
