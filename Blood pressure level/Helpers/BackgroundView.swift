@@ -38,8 +38,3 @@ struct BackgroundView: View {
 #Preview {
 	BackgroundView(backgroundType: .addNewScreen)
 }
-
-enum BackgroundType {
-	case mainScreen
-	case addNewScreen
-}

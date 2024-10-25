@@ -12,6 +12,8 @@
 		516E7EA02CCB77C600741283 /* DateFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516E7E9F2CCB77C600741283 /* DateFieldView.swift */; };
 		516E7EA22CCB990400741283 /* AddNewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516E7EA12CCB990400741283 /* AddNewHeaderView.swift */; };
 		516E7EA42CCB99EF00741283 /* AddNewButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516E7EA32CCB99EF00741283 /* AddNewButtonView.swift */; };
+		516E7EA82CCB9B6100741283 /* BackgroundType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516E7EA72CCB9B6100741283 /* BackgroundType.swift */; };
+		516E7EAA2CCB9D0400741283 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516E7EA92CCB9D0400741283 /* Constants.swift */; };
 		517014EE2CC8E1850058BC9F /* Blood_pressure_levelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517014ED2CC8E1850058BC9F /* Blood_pressure_levelApp.swift */; };
 		517014F02CC8E1850058BC9F /* PressureOverviewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517014EF2CC8E1850058BC9F /* PressureOverviewScreen.swift */; };
 		517014F22CC8E1860058BC9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 517014F12CC8E1860058BC9F /* Assets.xcassets */; };
@@ -35,6 +37,8 @@
 		516E7E9F2CCB77C600741283 /* DateFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFieldView.swift; sourceTree = "<group>"; };
 		516E7EA12CCB990400741283 /* AddNewHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewHeaderView.swift; sourceTree = "<group>"; };
 		516E7EA32CCB99EF00741283 /* AddNewButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewButtonView.swift; sourceTree = "<group>"; };
+		516E7EA72CCB9B6100741283 /* BackgroundType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundType.swift; sourceTree = "<group>"; };
+		516E7EA92CCB9D0400741283 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		517014EA2CC8E1850058BC9F /* Blood pressure level.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Blood pressure level.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		517014ED2CC8E1850058BC9F /* Blood_pressure_levelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blood_pressure_levelApp.swift; sourceTree = "<group>"; };
 		517014EF2CC8E1850058BC9F /* PressureOverviewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressureOverviewScreen.swift; sourceTree = "<group>"; };
@@ -64,6 +68,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		516E7EA52CCB9B0E00741283 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				517015072CC939AB0058BC9F /* PressureOverviewScreen */,
+				5191C6382CCA7A8E00AD3403 /* AddNewMeasurementScreen */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		516E7EA62CCB9B2000741283 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				516E7EA12CCB990400741283 /* AddNewHeaderView.swift */,
+				516E7E9D2CCB736600741283 /* TextFieldView.swift */,
+				516E7EA32CCB99EF00741283 /* AddNewButtonView.swift */,
+				516E7E9F2CCB77C600741283 /* DateFieldView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		517014E12CC8E1850058BC9F = {
 			isa = PBXGroup;
 			children = (
@@ -83,9 +107,8 @@
 		517014EC2CC8E1850058BC9F /* Blood pressure level */ = {
 			isa = PBXGroup;
 			children = (
-				517015072CC939AB0058BC9F /* PressureOverviewScreen */,
-				5191C6382CCA7A8E00AD3403 /* AddNewMeasurementScreen */,
 				517014ED2CC8E1850058BC9F /* Blood_pressure_levelApp.swift */,
+				516E7EA52CCB9B0E00741283 /* Screens */,
 				5191C62F2CCA410600AD3403 /* Helpers */,
 				517014F12CC8E1860058BC9F /* Assets.xcassets */,
 				517015082CC939E80058BC9F /* CoreData */,
@@ -107,6 +130,8 @@
 			isa = PBXGroup;
 			children = (
 				517015002CC92C0F0058BC9F /* PresentationPeriod.swift */,
+				516E7EA72CCB9B6100741283 /* BackgroundType.swift */,
+				516E7EA92CCB9D0400741283 /* Constants.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -155,10 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				5191C6362CCA7A6F00AD3403 /* AddNewMeasurementScreen.swift */,
-				516E7EA12CCB990400741283 /* AddNewHeaderView.swift */,
-				516E7E9D2CCB736600741283 /* TextFieldView.swift */,
-				516E7EA32CCB99EF00741283 /* AddNewButtonView.swift */,
-				516E7E9F2CCB77C600741283 /* DateFieldView.swift */,
+				516E7EA62CCB9B2000741283 /* Views */,
 			);
 			path = AddNewMeasurementScreen;
 			sourceTree = "<group>";
@@ -248,9 +270,11 @@
 				517014EE2CC8E1850058BC9F /* Blood_pressure_levelApp.swift in Sources */,
 				516E7EA02CCB77C600741283 /* DateFieldView.swift in Sources */,
 				516E7E9E2CCB736600741283 /* TextFieldView.swift in Sources */,
+				516E7EAA2CCB9D0400741283 /* Constants.swift in Sources */,
 				5170150A2CC93A5C0058BC9F /* PresureOverviewHeaderView.swift in Sources */,
 				5191C62B2CCA1EFB00AD3403 /* PresureNoteView.swift in Sources */,
 				517015052CC930520058BC9F /* CustomSegmentContolView.swift in Sources */,
+				516E7EA82CCB9B6100741283 /* BackgroundType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
