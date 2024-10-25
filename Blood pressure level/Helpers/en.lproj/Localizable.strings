@@ -1,0 +1,29 @@
+/* 
+  Localizable.strings
+  Blood pressure level
+
+  Created by mix on 25.10.2024.
+  
+*/
+
+"my_doctor" = "My Doctor";
+"pressure" = "Pressure";
+"no_data" = "No Data";
+"today" = "Today";
+"systolic" = "Systolic";
+"diastolic" = "Diastolic";
+"add_data" = "Add Data";
+"describe_your_condition" = "Describe your condition";
+"blood_pressure" = "Blood Pressure";
+"pulse" = "Pulse";
+"date_of_measurement" = "Date of Measurement";
+"time_of_measurement" = "Time of Measurement";
+"save" = "Save";
+"notes" = "Notes";
+"note" = "Note";
+"add_data_button" = "Add Data";
+"add_data_instruction" = "You can add data by clicking the button. Or try scanning the data on your device.";
+"y." = "y.";
+"day"= "Day";
+"week" = "Week";
+"month" = "Month";

@@ -16,7 +16,7 @@ struct AddNewButtonView: View {
 		Button {
 			dismiss()
 		} label: {
-			Text("Сохранить")
+			Text("save".localized)
 				.frame(maxWidth: .infinity)
 		}
 		.tint(cantBeSaved ? .blue.opacity(Constants.Opacity.regular) : .blue)

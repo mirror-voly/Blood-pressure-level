@@ -24,7 +24,7 @@ struct AddNewHeaderView: View {
 			.foregroundStyle(.main)
 			.frame(maxWidth: .infinity, alignment: .leading)
 			
-			Text("Добавить данные")
+			Text("add_data".localized)
 				.font(.system(size: Constants.FontSize.big))
 				.bold()
 				.frame(maxWidth: .infinity, alignment: .center)

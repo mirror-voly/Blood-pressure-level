@@ -7,8 +7,8 @@
 
 import Foundation
 
-enum PresentationPeriod: String, CaseIterable {
-	case day = "День"
-	case week = "Неделя"
-	case month = "Месяц"
+enum PresentationPeriod: CaseIterable {
+	case day
+	case week
+	case month
 }

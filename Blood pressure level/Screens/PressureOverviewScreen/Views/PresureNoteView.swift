@@ -13,7 +13,7 @@ struct PresureNoteView: View {
 			VStack(content: {
 				HStack(alignment: .top, spacing: Constants.Spacing.defaultSpacing) {
 					Image("note")
-					Text("Заметки")
+					Text("notes".localized)
 						.font(.system(size: Constants.FontSize.regular))
 						.bold()
 					
@@ -33,7 +33,7 @@ struct PresureNoteView: View {
 				Divider()
 				
 				VStack(alignment: .leading) {
-					Text("Опиши своё состояние")
+					Text("describe_your_condition".localized)
 						.font(.system(size: Constants.FontSize.small))
 						.foregroundStyle(.secondaryGrayDark)
 						.frame(maxWidth: .infinity, alignment: .leading)

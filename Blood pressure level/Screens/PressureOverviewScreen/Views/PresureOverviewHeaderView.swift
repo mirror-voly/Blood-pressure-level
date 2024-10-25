@@ -18,18 +18,18 @@ struct PresureOverviewHeaderView: View {
 						.renderingMode(.template)
 						.foregroundStyle(.primary)
 					
-					Text("Мой доктор")
+					Text("my_doctor".localized)
 						.font(.system(size: Constants.FontSize.regular))
 				})
 				
 				ZStack(alignment: .center, content: {
 					VStack(content: {
-						Text("Давление")
+						Text("pressure".localized)
 							.font(.system(size: Constants.FontSize.big))
 							.bold()
 						
 						let formattedDate = Date.now.formatted(.dateTime.month().year())
-						Text(formattedDate + " " + "г.")
+						Text(formattedDate + " " + "y.".localized)
 							.font(.system(size: Constants.FontSize.small))
 					})
 					

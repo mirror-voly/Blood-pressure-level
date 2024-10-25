@@ -1,0 +1,28 @@
+/* 
+  Localizable.strings
+  Blood pressure level
+
+  Created by mix on 25.10.2024.
+  
+*/
+"my_doctor" = "Мой доктор";
+"pressure" = "Давление";
+"no_data" = "Нет данных";
+"today" = "Сегодня";
+"systolic" = "Систолическое";
+"diastolic" = "Диастолическое";
+"add_data" = "Добавить данные";
+"describe_your_condition" = "Опиши своё состояние";
+"blood_pressure" = "Кровянное давление";
+"pulse" = "Пульс";
+"date_of_measurement" = "Дата измерений";
+"time_of_measurement" = "Время измерений";
+"save" = "Сохранить";
+"notes" = "Заметки";
+"note" = "Заметкa";
+"add_data_button" = "Добавьте данные";
+"add_data_instruction" = "Добавить данные можно, кликнув на кнопку. Или попробуйте отсканировать данные на вашем аппарате.";
+"y." = "г.";
+"day"= "День";
+"week" = "Неделя";
+"month" = "Месяц";

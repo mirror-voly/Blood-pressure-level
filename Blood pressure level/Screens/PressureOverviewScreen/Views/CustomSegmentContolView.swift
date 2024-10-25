@@ -17,7 +17,7 @@ struct CustomSegmentContolView: View {
 				Button(action: {
 						self.period = period
 				}, label: {
-					Text(String(describing: period).capitalized)
+					Text(String(describing: period).localized)
 						.font(.system(size: Constants.FontSize.small))
 						.foregroundStyle(.main)
 						.frame(maxWidth: Constants.SegmentedControl.buttonWidth,

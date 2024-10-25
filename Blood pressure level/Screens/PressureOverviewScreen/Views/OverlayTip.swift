@@ -36,11 +36,11 @@ struct OverlayTip: View {
 						VStack(spacing: Constants.Spacing.defaultSpacing) {
 							Image("camera")
 							
-							Text("Добавьте данные")
+							Text("add_data".localized)
 								.font(.system(size: Constants.FontSize.big))
 								.bold()
 
-							Text("Добавить данные можно, кликнув на кнопку. Или попробуйте отсканировать данные на вашем аппарате.")
+							Text("add_data_instruction".localized)
 								.font(.system(size: Constants.FontSize.small))
 								.multilineTextAlignment(.center) 
 								.padding(.horizontal)

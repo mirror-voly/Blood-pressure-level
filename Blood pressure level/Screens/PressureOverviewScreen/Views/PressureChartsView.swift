@@ -14,14 +14,14 @@ struct PressureChartsView: View {
     var body: some View {
 		VStack(alignment: .leading, spacing: Constants.Spacing.defaultSpacing) {
 			HStack(content: {
-				Text("Нет данных")
+				Text("no_data".localized)
 					.font(.system(size: Constants.FontSize.big))
 					.bold()
 				Spacer()
 			})
 
 			HStack {
-				Text("Сегодня")
+				Text("today".localized)
 					.font(.system(size: Constants.FontSize.big))
 			}
 
@@ -32,12 +32,12 @@ struct PressureChartsView: View {
 					Circle()
 						.fill(.systolic)
 					
-					Text("Систолическое")
+					Text("systolic".localized)
 					
 					Circle()
 						.fill(.diastolic)
 
-					Text("Диастолическое")
+					Text("diastolic".localized)
 				}
 				.frame(height: Constants.FrameSize.chartLegendHeight)
 				.font(.system(size: Constants.FontSize.micro))
@@ -54,7 +54,7 @@ struct PressureChartsView: View {
 			Button(action: {
 				addNewScreenIsPresented = true
 			}, label: {
-				Text("Добавить данные")
+				Text("add_data".localized)
 					.font(.system(size: Constants.FontSize.micro))
 					.padding(.vertical, Constants.Padding.small)
 					.padding(.horizontal, Constants.Padding.regular)

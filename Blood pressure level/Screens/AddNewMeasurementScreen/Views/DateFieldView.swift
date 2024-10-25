@@ -33,7 +33,10 @@ struct DateFieldView: View {
 	
     var body: some View {
 		ZStack(alignment: .leading, content: {
-			DatePicker("", selection: $date, in: currentDate..., displayedComponents: displayedComponents)
+			DatePicker(Constants.General.emptyString,
+					   selection: $date,
+					   in: currentDate...,
+					   displayedComponents: displayedComponents)
 			.datePickerStyle(.compact)
 			.fixedSize()
 

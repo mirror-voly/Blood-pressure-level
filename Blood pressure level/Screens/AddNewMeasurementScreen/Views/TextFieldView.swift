@@ -14,7 +14,8 @@ struct TextFieldView: View {
 	@State var isOnChange = false
 	
 	var body: some View {
-		TextField("", text: $text, onEditingChanged: { edit in
+		TextField(Constants.General.emptyString,
+				  text: $text, onEditingChanged: { edit in
 			isOnChange = edit
 		})
 		.font(.system(size: Constants.FontSize.big))
@@ -26,7 +27,7 @@ struct TextFieldView: View {
 			Group {
 				if isOnChange {
 					RoundedRectangle(cornerRadius: Constants.Radius.small)
-						.stroke(.main, lineWidth: 1)
+						.stroke(.main, lineWidth: Constants.General.originalValue)
 				}
 			}
 		)

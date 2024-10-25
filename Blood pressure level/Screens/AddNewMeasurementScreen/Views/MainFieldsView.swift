@@ -16,12 +16,12 @@ struct MainFieldsView: View {
 	var body: some View {
 		HStack(alignment: .top, spacing: Constants.Spacing.largeSpacing) {
 			VStack(alignment: .leading) {
-				Text("Кровянное давление")
+				Text("blood_pressure".localized)
 					.font(.system(size: Constants.FontSize.regular))
 				
 				HStack(spacing: Constants.Spacing.smallSpacing) {
 					VStack(alignment: .leading, spacing: Constants.Spacing.smallSpacing) {
-						Text("Систолическое")
+						Text("systolic".localized)
 							.font(.system(size: Constants.FontSize.micro))
 							.foregroundStyle(.main.opacity(Constants.Opacity.big))
 						
@@ -29,7 +29,7 @@ struct MainFieldsView: View {
 					}
 					
 					VStack(alignment: .leading, spacing: Constants.Spacing.smallSpacing) {
-						Text("Диастолическое")
+						Text("diastolic".localized)
 							.font(.system(size: Constants.FontSize.micro))
 							.foregroundStyle(.main.opacity(Constants.Opacity.big))
 						
@@ -40,7 +40,7 @@ struct MainFieldsView: View {
 			.frame(width: Constants.FrameSize.pressureFieldsViewWidth, height: Constants.FrameSize.mainFieldsViewHeight)
 			
 			VStack(alignment: .leading)   { 
-				Text("Пульс")
+				Text("pulse".localized)
 					.font(.system(size: Constants.FontSize.regular))
 				
 				Spacer()

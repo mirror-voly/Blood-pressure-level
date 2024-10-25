@@ -11,6 +11,7 @@ enum Constants {
 	
 	enum General {
 		static let originalValue: CGFloat = 1
+		static let emptyString: String = ""
 	}
 	
 	enum Background {

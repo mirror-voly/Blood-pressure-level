@@ -33,10 +33,10 @@ struct AddNewMeasurementScreen: View {
 				DateFields(date: $date)
 				
 				VStack(alignment: .leading) {
-					Text("Заметка")
+					Text("note".localized)
 						.font(.system(size: Constants.FontSize.regular))
 					
-					TextFieldView(placeholder: "Опиши свое самочуствие", text: $noteTextFieeld)
+					TextFieldView(placeholder: "describe_your_condition".localized, text: $noteTextFieeld)
 				}
 				
 				Spacer()
