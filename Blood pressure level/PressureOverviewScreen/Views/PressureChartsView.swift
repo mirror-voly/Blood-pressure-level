@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
-import TipKit
 
 struct PressureChartsView: View {
+	
+	@Binding var addNewScreenIsPresented: Bool
+
     var body: some View {
 		VStack(alignment: .leading, spacing: 16) {
 			HStack(content: {
@@ -50,7 +52,7 @@ struct PressureChartsView: View {
 			Spacer()
 			
 			Button(action: {
-				
+				addNewScreenIsPresented = true
 			}, label: {
 				Text("Добавить данные")
 					.font(.system(size: 12))
@@ -76,5 +78,5 @@ struct PressureChartsView: View {
 }
 
 #Preview {
-    PressureChartsView()
+	PressureChartsView(addNewScreenIsPresented: .constant(true))
 }

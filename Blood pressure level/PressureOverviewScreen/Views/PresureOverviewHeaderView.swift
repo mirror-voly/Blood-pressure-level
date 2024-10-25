@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct PresureOverviewHeaderView: View {
+	
+	@Binding var addNewScreenIsPresented: Bool
+	
 	var body: some View {
 			VStack(alignment: .center, spacing: 16) {
 				HStack(alignment: .center, content: {
@@ -31,7 +34,7 @@ struct PresureOverviewHeaderView: View {
 					})
 					
 					Button(action: {
-						
+						addNewScreenIsPresented = true
 					}, label: {
 						ZStack(content: {
 							RoundedRectangle(cornerRadius: 10)
@@ -52,5 +55,5 @@ struct PresureOverviewHeaderView: View {
 }
 
 #Preview {
-    PresureOverviewHeaderView()
+	PresureOverviewHeaderView(addNewScreenIsPresented: .constant(true))
 }
