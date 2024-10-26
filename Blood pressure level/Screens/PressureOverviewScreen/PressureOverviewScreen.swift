@@ -6,42 +6,40 @@
 //
 
 import SwiftUI
-import RxSwift
 
 struct PressureOverviewScreen: View {
 	
 	@StateObject private var viewModel = PressureOverviewViewModel()
 	
 	var body: some View {
-		ZStack {
-			BackgroundView(backgroundType: .mainScreen)
-			
-			VStack {
-				PresureOverviewHeaderView(viewModel: viewModel)
-					.padding(.vertical)
+		NavigationStack {
+			ZStack {
+				BackgroundView(backgroundType: .mainScreen)
 				
-				VStack(spacing: Constants.Spacing.defaultSpacing) {
-					CustomSegmentContolView(viewModel: viewModel)
-
-					PressureChartsView(viewModel: viewModel)
-
-					PresureNoteView(viewModel: viewModel)
-
+				VStack {
+					PresureOverviewHeaderView(viewModel: viewModel)
+						.padding(.vertical)
+					
+					VStack(spacing: Constants.Spacing.defaultSpacing) {
+						CustomSegmentContolView(viewModel: viewModel)
+						
+						PressureChartsView(viewModel: viewModel)
+						
+						PresureNoteView(viewModel: viewModel)
+					}
+					
+					Spacer()
 				}
+				.padding(.horizontal)
 				
-				Spacer()
-
+				if viewModel.tipIsActive {
+					OverlayTip(viewModel: viewModel)
+				}
 			}
-			.padding(.horizontal)
-
-			if viewModel.tipIsActive {
-				OverlayTip(viewModel: viewModel)
+			.navigationDestination(isPresented: $viewModel.addNewScreenIsPresented) {
+				AddNewMeasurementScreen()
 			}
 		}
-		.fullScreenCover(isPresented: $viewModel.addNewScreenIsPresented, content: { 
-			AddNewMeasurementScreen()
-		})
-
 	}
 }
 

@@ -11,10 +11,10 @@ final class Measurement {
 	private let id = UUID()
 	private let systolicLevel: Int
 	private let diastolicLevel: Int
-	private let pulse: Int
 	private let date: Date
-	private let note: String
-	
+	private let pulse: Int?
+	private let note: String?
+
 	init(systolicLevel: Int, diastolicLevel: Int, pulse: Int, date: Date, note: String) {
 		self.systolicLevel = systolicLevel
 		self.diastolicLevel = diastolicLevel

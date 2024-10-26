@@ -11,8 +11,8 @@ import Charts
 struct PressureChartsView: View {
 	
 	@StateObject var viewModel: PressureOverviewViewModel
-
-    var body: some View {
+	
+	var body: some View {
 		VStack(alignment: .leading, spacing: Constants.Spacing.defaultSpacing) {
 			HStack(content: {
 				Text("no_data".localized)
@@ -20,14 +20,14 @@ struct PressureChartsView: View {
 					.bold()
 				Spacer()
 			})
-
+			
 			HStack {
 				Text("today".localized)
 					.font(.system(size: Constants.FontSize.big))
 			}
-
+			
 			Divider()
-
+			
 			HStack(spacing: Constants.Spacing.defaultSpacing) {
 				Group {
 					Circle()
@@ -37,12 +37,12 @@ struct PressureChartsView: View {
 					
 					Circle()
 						.fill(.diastolic)
-
+					
 					Text("diastolic".localized)
 				}
 				.frame(height: Constants.FrameSize.chartLegendHeight)
 				.font(.system(size: Constants.FontSize.micro))
-
+				
 				Spacer()
 			}
 			
@@ -71,16 +71,12 @@ struct PressureChartsView: View {
 							.stroke(.systolic, lineWidth: Constants.General.originalValue))
 			})
 			.frame(maxWidth: .infinity, alignment: .bottomTrailing)
-
+			
 		}
 		.padding(.horizontal)
 		.padding(.vertical, Constants.Padding.big)
 		.background(.scheme)
 		.frame(maxWidth: .infinity, maxHeight: Constants.FrameSize.wholeChartViewHeight )
 		.clipShape(RoundedRectangle(cornerRadius: Constants.Radius.big))
-    }
+	}
 }
-//
-//#Preview {
-//	PressureChartsView(addNewScreenIsPresented: .constant(true))
-//}

@@ -10,8 +10,8 @@ import SwiftUI
 struct CustomSegmentContolView: View {
 	
 	@StateObject var viewModel: PressureOverviewViewModel
-
-    var body: some View {
+	
+	var body: some View {
 		HStack(spacing: Constants.SegmentedControl.spacing, content: {
 			ForEach(PresentationPeriod.allCases, id: \.self) { period in
 				Button(action: {
@@ -31,5 +31,5 @@ struct CustomSegmentContolView: View {
 		})
 		.background(.scheme)
 		.clipShape(Capsule())
-    }
+	}
 }

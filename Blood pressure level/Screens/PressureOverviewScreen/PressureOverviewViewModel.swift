@@ -17,12 +17,4 @@ final class PressureOverviewViewModel: ObservableObject {
 	@Published var tipIsActive = false
 	@Published var addNewScreenIsPresented = false
 	
-	
-	private let disposeBag = DisposeBag()
-	
-	init() {
-//		Observable.just("Hello, RxSwift!")
-//			.bind(to: $tipIsActive)
-//			.disposed(by: disposeBag)
-	}
 }
