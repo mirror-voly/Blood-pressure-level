@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DateFields: View {
 	
-	@Binding var date: Date
+	@StateObject var viewModel: AddNewMeasurementViewModel
 	
     var body: some View {
 		HStack {
@@ -17,14 +17,14 @@ struct DateFields: View {
 				Text("date_of_measurement".localized)
 					.font(.system(size: Constants.FontSize.regular))
 				
-				DateFieldView(displayedComponents: .date, date: $date)
+				DateFieldView(viewModel: viewModel, displayedComponents: .date)
 			}
 			
 			VStack(alignment: .leading) {
 				Text("time_of_measurement".localized)
 					.font(.system(size: Constants.FontSize.regular))
 				
-				DateFieldView(displayedComponents: .hourAndMinute, date: $date)
+				DateFieldView(viewModel: viewModel, displayedComponents: .hourAndMinute)
 			}
 		}
     }

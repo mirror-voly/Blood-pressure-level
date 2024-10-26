@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PressureOverviewScreen: View {
 	
-	@StateObject private var viewModel = PressureOverviewViewModel()
+	@StateObject private var viewModel = PressureOverviewViewModel(dataStore: DataStore.shared)
 	
 	var body: some View {
 		NavigationStack {

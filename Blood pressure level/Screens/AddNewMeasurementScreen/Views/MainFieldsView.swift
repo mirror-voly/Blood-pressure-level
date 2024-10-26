@@ -9,9 +9,7 @@ import SwiftUI
 
 struct MainFieldsView: View {
 	
-	@Binding var systolicTextFieeld: String
-	@Binding var diastolicTextFieeld: String
-	@Binding var pulseTextFieeld: String
+	@StateObject var viewModel: AddNewMeasurementViewModel
 	
 	var body: some View {
 		HStack(alignment: .top, spacing: Constants.Spacing.largeSpacing) {
@@ -25,7 +23,10 @@ struct MainFieldsView: View {
 							.font(.system(size: Constants.FontSize.micro))
 							.foregroundStyle(.main.opacity(Constants.Opacity.big))
 						
-						TextFieldView(placeholder: "120", text: $systolicTextFieeld)
+						TextFieldView(viewModel: viewModel, placeholder: "120", text: $viewModel.systolicText)
+							.onChange(of: viewModel.systolicText) { newValue in
+								viewModel.systolicText = newValue.removingNonNumericCharacters()
+							}
 					}
 					
 					VStack(alignment: .leading, spacing: Constants.Spacing.smallSpacing) {
@@ -33,7 +34,10 @@ struct MainFieldsView: View {
 							.font(.system(size: Constants.FontSize.micro))
 							.foregroundStyle(.main.opacity(Constants.Opacity.big))
 						
-						TextFieldView(placeholder: "90", text: $diastolicTextFieeld)
+						TextFieldView(viewModel: viewModel, placeholder: "90", text: $viewModel.diastolicText)
+							.onChange(of: viewModel.diastolicText) { newValue in
+								viewModel.diastolicText = newValue.removingNonNumericCharacters()
+							}
 					}
 				}
 			}
@@ -45,8 +49,10 @@ struct MainFieldsView: View {
 				
 				Spacer()
 				
-				TextFieldView(placeholder: "70", text: $pulseTextFieeld)
-				
+				TextFieldView(viewModel: viewModel, placeholder: "70", text: $viewModel.pulseText)
+					.onChange(of: viewModel.pulseText) { newValue in
+						viewModel.pulseText = newValue.removingNonNumericCharacters()
+					}
 			}
 		}
 		.frame(maxHeight: Constants.FrameSize.mainFieldsViewHeight)

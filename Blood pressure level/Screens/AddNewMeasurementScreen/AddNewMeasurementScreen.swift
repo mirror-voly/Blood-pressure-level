@@ -9,14 +9,7 @@ import SwiftUI
 
 struct AddNewMeasurementScreen: View {
 	
-	@State var date = Date()
-	@State var systolicTextFieeld = ""
-	@State var diastolicTextFieeld = ""
-	@State var pulseTextFieeld = ""
-	@State var noteTextFieeld = ""
-	var cantBeSaved: Bool {
-		!systolicTextFieeld.isEmpty && !diastolicTextFieeld.isEmpty ? false : true 
-	}
+	@StateObject private var viewModel = AddNewMeasurementViewModel(dataStore: DataStore.shared)
 	
     var body: some View {
 		ZStack {
@@ -26,26 +19,26 @@ struct AddNewMeasurementScreen: View {
 				
 				AddNewHeaderView()
 
-				MainFieldsView(systolicTextFieeld: $systolicTextFieeld,
-							   diastolicTextFieeld: $diastolicTextFieeld,
-							   pulseTextFieeld: $pulseTextFieeld)
+				MainFieldsView(viewModel: viewModel)
 
-				DateFields(date: $date)
+				DateFields(viewModel: viewModel)
 				
 				VStack(alignment: .leading) {
 					Text("note".localized)
 						.font(.system(size: Constants.FontSize.regular))
 					
-					TextFieldView(placeholder: "describe_your_condition".localized, text: $noteTextFieeld)
+					TextFieldView(viewModel: viewModel, placeholder: "describe_your_condition".localized, text: $viewModel.noteTextFieeld)
 				}
 				
 				Spacer()
 				
-				AddNewButtonView(cantBeSaved: cantBeSaved)
+				AddNewButtonView(viewModel: viewModel)
 				
 			}
 			.padding()
 		}
+		.navigationBarBackButtonHidden()
+		.navigationBarTitleDisplayMode(.inline)
     }
 }
 
