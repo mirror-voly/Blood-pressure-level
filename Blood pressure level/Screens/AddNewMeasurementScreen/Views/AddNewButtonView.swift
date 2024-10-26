@@ -9,19 +9,18 @@ import SwiftUI
 
 struct AddNewButtonView: View {
 	
-	@Environment(\.dismiss) var dismiss
-	let cantBeSaved: Bool
+	@StateObject var viewModel: AddNewMeasurementViewModel
 	
     var body: some View {
 		Button {
-			dismiss()
+
 		} label: {
 			Text("save".localized)
 				.frame(maxWidth: .infinity)
 		}
-		.tint(cantBeSaved ? .blue.opacity(Constants.Opacity.regular) : .blue)
+		.tint(viewModel.cantBeSaved ? .blue.opacity(Constants.Opacity.regular) : .blue)
 		.buttonStyle(BorderedProminentButtonStyle())
 		.clipShape(RoundedRectangle(cornerRadius: Constants.Radius.small))
-		.allowsHitTesting(!cantBeSaved)
+		.allowsHitTesting(!viewModel.cantBeSaved)
     }
 }

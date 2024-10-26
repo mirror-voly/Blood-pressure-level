@@ -10,11 +10,13 @@ import SwiftUI
 @main
 struct Blood_pressure_levelApp: App {
     let persistenceController = PersistenceController.shared
-
+	let dataStore = DataStore.shared
+	
     var body: some Scene {
         WindowGroup {
 			PressureOverviewScreen()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+				.environmentObject(dataStore)
         }
     }
 }

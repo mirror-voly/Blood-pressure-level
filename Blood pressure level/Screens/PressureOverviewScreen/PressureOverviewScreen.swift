@@ -7,43 +7,39 @@
 
 import SwiftUI
 
-
 struct PressureOverviewScreen: View {
 	
-	@State var period: PresentationPeriod = .day
-	@State var tipIsActive = false
-	@State var addNewScreenIsPresented = false
+	@StateObject private var viewModel = PressureOverviewViewModel(dataStore: DataStore.shared)
 	
 	var body: some View {
-		ZStack {
-			BackgroundView(backgroundType: .mainScreen)
-			
-			VStack {
-				PresureOverviewHeaderView(addNewScreenIsPresented: $addNewScreenIsPresented)
-					.padding(.vertical)
+		NavigationStack {
+			ZStack {
+				BackgroundView(backgroundType: .mainScreen)
 				
-				VStack(spacing: Constants.Spacing.defaultSpacing) {
-					CustomSegmentContolView(period: $period)
-
-					PressureChartsView(addNewScreenIsPresented: $addNewScreenIsPresented)
-
-					PresureNoteView()
-
+				VStack {
+					PresureOverviewHeaderView(viewModel: viewModel)
+						.padding(.vertical)
+					
+					VStack(spacing: Constants.Spacing.defaultSpacing) {
+						CustomSegmentContolView(viewModel: viewModel)
+						
+						PressureChartsView(viewModel: viewModel)
+						
+						PresureNoteView(viewModel: viewModel)
+					}
+					
+					Spacer()
 				}
+				.padding(.horizontal)
 				
-				Spacer()
-
+				if viewModel.tipIsActive {
+					OverlayTip(viewModel: viewModel)
+				}
 			}
-			.padding(.horizontal)
-
-			if tipIsActive {
-				OverlayTip(tipIsActive: $tipIsActive)
+			.navigationDestination(isPresented: $viewModel.addNewScreenIsPresented) {
+				AddNewMeasurementScreen()
 			}
 		}
-		.fullScreenCover(isPresented: $addNewScreenIsPresented, content: { 
-			AddNewMeasurementScreen()
-		})
-
 	}
 }
 

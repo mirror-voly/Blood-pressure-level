@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import Charts
 
 struct PressureChartsView: View {
 	
-	@Binding var addNewScreenIsPresented: Bool
-
-    var body: some View {
+	@StateObject var viewModel: PressureOverviewViewModel
+	
+	var body: some View {
 		VStack(alignment: .leading, spacing: Constants.Spacing.defaultSpacing) {
 			HStack(content: {
 				Text("no_data".localized)
@@ -19,14 +20,14 @@ struct PressureChartsView: View {
 					.bold()
 				Spacer()
 			})
-
+			
 			HStack {
 				Text("today".localized)
 					.font(.system(size: Constants.FontSize.big))
 			}
-
+			
 			Divider()
-
+			
 			HStack(spacing: Constants.Spacing.defaultSpacing) {
 				Group {
 					Circle()
@@ -36,23 +37,26 @@ struct PressureChartsView: View {
 					
 					Circle()
 						.fill(.diastolic)
-
+					
 					Text("diastolic".localized)
 				}
 				.frame(height: Constants.FrameSize.chartLegendHeight)
 				.font(.system(size: Constants.FontSize.micro))
-
+				
 				Spacer()
 			}
 			
 			VStack {
+				Chart {
+					
+				}
 			}
 			.frame(maxWidth: .infinity, maxHeight: Constants.FrameSize.chartHeight)
 			
 			Spacer()
 			
 			Button(action: {
-				addNewScreenIsPresented = true
+				viewModel.addNewScreenIsPresented = true
 			}, label: {
 				Text("add_data".localized)
 					.font(.system(size: Constants.FontSize.micro))
@@ -67,16 +71,12 @@ struct PressureChartsView: View {
 							.stroke(.systolic, lineWidth: Constants.General.originalValue))
 			})
 			.frame(maxWidth: .infinity, alignment: .bottomTrailing)
-
+			
 		}
 		.padding(.horizontal)
 		.padding(.vertical, Constants.Padding.big)
 		.background(.scheme)
 		.frame(maxWidth: .infinity, maxHeight: Constants.FrameSize.wholeChartViewHeight )
 		.clipShape(RoundedRectangle(cornerRadius: Constants.Radius.big))
-    }
-}
-
-#Preview {
-	PressureChartsView(addNewScreenIsPresented: .constant(true))
+	}
 }

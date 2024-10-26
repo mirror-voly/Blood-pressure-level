@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TextFieldView: View {
 	
+	@StateObject var viewModel: AddNewMeasurementViewModel
 	let placeholder: String
 	@Binding var text: String
 	@State var isOnChange = false

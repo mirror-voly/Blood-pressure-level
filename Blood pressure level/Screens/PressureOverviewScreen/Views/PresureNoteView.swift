@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct PresureNoteView: View {
-    var body: some View {
+	
+	let viewModel: PressureOverviewViewModel
+	
+	var body: some View {
 		VStack(alignment: .leading, spacing: Constants.Spacing.smallSpacing, content: {
 			VStack(content: {
 				HStack(alignment: .top, spacing: Constants.Spacing.defaultSpacing) {
@@ -45,9 +48,5 @@ struct PresureNoteView: View {
 		})
 		.background(.scheme)
 		.clipShape(RoundedRectangle(cornerRadius: Constants.Radius.big))
-    }
-}
-
-#Preview {
-    PresureNoteView()
+	}
 }
