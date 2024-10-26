@@ -12,14 +12,37 @@ final class AddNewMeasurementViewModel: ObservableObject {
 	let dataStore: DataStore
 	let currentDate = Date()
 	let measurementID = UUID()
-	@Published var date = Date()
-	@Published var systolicText = ""
-	@Published var diastolicText = ""
-	@Published var pulseText = ""
-	@Published var noteTextFieeld = ""
 	
-	var cantBeSaved: Bool {
-		!systolicText.isEmpty && !diastolicText.isEmpty ? false : true 
+	@Published var date = Date() {
+		didSet {
+			checkIsMeasurementCanBeSaved()
+		}
+	}
+	@Published var systolicText = "" {
+		didSet {
+			checkIsMeasurementCanBeSaved()
+		}
+	}
+	@Published var diastolicText = "" {
+		didSet {
+			checkIsMeasurementCanBeSaved()
+		}
+	}
+	@Published var pulseText = "" {
+		didSet {
+			checkIsMeasurementCanBeSaved()
+		}
+	}
+	@Published var noteText = "" {
+		didSet {
+			checkIsMeasurementCanBeSaved()
+		}
+	}
+	
+	@Published private (set) var canNotBeSaved = true
+	
+	func checkIsMeasurementCanBeSaved() {
+		canNotBeSaved = !systolicText.isEmpty && !diastolicText.isEmpty ? false : true 
 	}
 	
 	func didChange(displayedComponents: DatePickerComponents) -> Bool {
@@ -40,8 +63,18 @@ final class AddNewMeasurementViewModel: ObservableObject {
 		return formattedDate
 	}
 	
-	func saveMeasurement() {
-//		let measurement = Measurement(id: measurementID, systolicLevel: systolicTextFieeld, diastolicLevel: <#T##Int#>, date: <#T##Date#>, pulse: <#T##Int?#>, note: <#T##String?#>)
+	func makeInt(_ text: String) -> Int? {
+		guard let number = Int(text) else { return nil }
+		return number
+	}
+	
+	func buttonAction() {
+		guard let systolicLevel = makeInt(systolicText), let diastolicLevel = makeInt(diastolicText) else { return }
+		let measurement = Measurement(id: measurementID, systolicLevel: systolicLevel, diastolicLevel: diastolicLevel, date: date, pulse: makeInt(pulseText), note: noteText)
+		
+		dataStore.addOrEditMeasurement(measurement)
+		
+		canNotBeSaved = true
 	}
 	
 	init(dataStore: DataStore) {

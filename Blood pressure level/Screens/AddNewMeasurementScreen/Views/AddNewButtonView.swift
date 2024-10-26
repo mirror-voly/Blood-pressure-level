@@ -13,14 +13,15 @@ struct AddNewButtonView: View {
 	
     var body: some View {
 		Button {
-
+			viewModel.buttonAction()
 		} label: {
 			Text("save".localized)
 				.frame(maxWidth: .infinity)
 		}
-		.tint(viewModel.cantBeSaved ? .blue.opacity(Constants.Opacity.regular) : .blue)
+		.tint(viewModel.canNotBeSaved ? .blue.opacity(Constants.Opacity.regular) : .blue)
+		.foregroundStyle(.scheme)
 		.buttonStyle(BorderedProminentButtonStyle())
 		.clipShape(RoundedRectangle(cornerRadius: Constants.Radius.small))
-		.allowsHitTesting(!viewModel.cantBeSaved)
+		.allowsHitTesting(!viewModel.canNotBeSaved)
     }
 }

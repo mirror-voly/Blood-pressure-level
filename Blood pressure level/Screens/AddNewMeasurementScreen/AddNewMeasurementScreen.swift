@@ -14,6 +14,9 @@ struct AddNewMeasurementScreen: View {
     var body: some View {
 		ZStack {
 			BackgroundView(backgroundType: .addNewScreen)
+				.onTapGesture {
+					hideKeyboard()
+				}
 			
 			VStack(spacing: Constants.Spacing.defaultSpacing) {
 				
@@ -27,7 +30,7 @@ struct AddNewMeasurementScreen: View {
 					Text("note".localized)
 						.font(.system(size: Constants.FontSize.regular))
 					
-					TextFieldView(viewModel: viewModel, placeholder: "describe_your_condition".localized, text: $viewModel.noteTextFieeld)
+					TextFieldView(viewModel: viewModel, placeholder: "describe_your_condition".localized, text: $viewModel.noteText)
 				}
 				
 				Spacer()
