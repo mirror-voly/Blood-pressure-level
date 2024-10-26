@@ -13,14 +13,14 @@ struct DateFields: View {
 	
     var body: some View {
 		HStack {
-			VStack(alignment: .leading)  {
+			VStack(alignment: .leading, spacing: 8)  {
 				Text("date_of_measurement".localized)
 					.font(.system(size: Constants.FontSize.regular))
 				
 				DateFieldView(viewModel: viewModel, displayedComponents: .date)
 			}
 			
-			VStack(alignment: .leading) {
+			VStack(alignment: .leading, spacing: 8) {
 				Text("time_of_measurement".localized)
 					.font(.system(size: Constants.FontSize.regular))
 				

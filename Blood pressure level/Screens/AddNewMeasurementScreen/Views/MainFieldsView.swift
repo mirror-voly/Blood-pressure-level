@@ -20,7 +20,7 @@ struct MainFieldsView: View {
 				HStack(spacing: Constants.Spacing.smallSpacing) {
 					VStack(alignment: .leading, spacing: Constants.Spacing.smallSpacing) {
 						Text("systolic".localized)
-							.font(.system(size: Constants.FontSize.micro))
+							.font(.system(size: Constants.FontSize.verySmall))
 							.foregroundStyle(.main.opacity(Constants.Opacity.big))
 						
 						TextFieldView(viewModel: viewModel, placeholder: "120", text: $viewModel.systolicText)
@@ -31,7 +31,7 @@ struct MainFieldsView: View {
 					
 					VStack(alignment: .leading, spacing: Constants.Spacing.smallSpacing) {
 						Text("diastolic".localized)
-							.font(.system(size: Constants.FontSize.micro))
+							.font(.system(size: Constants.FontSize.verySmall))
 							.foregroundStyle(.main.opacity(Constants.Opacity.big))
 						
 						TextFieldView(viewModel: viewModel, placeholder: "90", text: $viewModel.diastolicText)

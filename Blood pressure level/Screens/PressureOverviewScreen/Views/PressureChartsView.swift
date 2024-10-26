@@ -23,7 +23,8 @@ struct PressureChartsView: View {
 			
 			HStack {
 				Text("today".localized)
-					.font(.system(size: Constants.FontSize.big))
+					.foregroundStyle(.main.opacity(Constants.Opacity.regular))
+					.font(.system(size: Constants.FontSize.micro))
 			}
 			
 			Divider()
@@ -41,7 +42,7 @@ struct PressureChartsView: View {
 					Text("diastolic".localized)
 				}
 				.frame(height: Constants.FrameSize.chartLegendHeight)
-				.font(.system(size: Constants.FontSize.micro))
+				.font(.system(size: Constants.FontSize.verySmall))
 				
 				Spacer()
 			}
@@ -59,7 +60,7 @@ struct PressureChartsView: View {
 				viewModel.addNewScreenIsPresented = true
 			}, label: {
 				Text("add_data".localized)
-					.font(.system(size: Constants.FontSize.micro))
+					.font(.system(size: Constants.FontSize.verySmall))
 					.padding(.vertical, Constants.Padding.small)
 					.padding(.horizontal, Constants.Padding.regular)
 					.foregroundStyle(.systolic)

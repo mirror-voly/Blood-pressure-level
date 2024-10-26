@@ -31,7 +31,8 @@ enum Constants {
 		static let big: CGFloat = 18
 		static let regular: CGFloat = 16
 		static let small: CGFloat = 14
-		static let micro: CGFloat = 12
+		static let verySmall: CGFloat = 12
+		static let micro: CGFloat = 10
 	}
 	
 	enum Button {
