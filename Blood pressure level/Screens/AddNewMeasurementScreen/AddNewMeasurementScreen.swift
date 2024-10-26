@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddNewMeasurementScreen: View {
 	
-	@StateObject private var viewModel = AddNewMeasurementViewModel(dataStore: DataStore.shared)
+	@StateObject private var viewModel: AddNewMeasurementViewModel
 	
     var body: some View {
 		ZStack {
@@ -43,8 +43,11 @@ struct AddNewMeasurementScreen: View {
 		.navigationBarBackButtonHidden()
 		.navigationBarTitleDisplayMode(.inline)
     }
+	init(dataStore: DataStore) {
+		self._viewModel = StateObject(wrappedValue: AddNewMeasurementViewModel(dataStore: dataStore))
+	}
 }
 
 #Preview {
-    AddNewMeasurementScreen()
+	AddNewMeasurementScreen(dataStore: DataStore.shared)
 }

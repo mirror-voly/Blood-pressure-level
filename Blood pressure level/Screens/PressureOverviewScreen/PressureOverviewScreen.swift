@@ -9,7 +9,8 @@ import SwiftUI
 
 struct PressureOverviewScreen: View {
 	
-	@StateObject private var viewModel = PressureOverviewViewModel(dataStore: DataStore.shared)
+	let dataStore: DataStore
+	@StateObject private var viewModel: PressureOverviewViewModel
 	
 	var body: some View {
 		NavigationStack {
@@ -37,13 +38,18 @@ struct PressureOverviewScreen: View {
 				}
 			}
 			.navigationDestination(isPresented: $viewModel.addNewScreenIsPresented) {
-				AddNewMeasurementScreen()
+				AddNewMeasurementScreen(dataStore: dataStore)
 			}
 		}
+	}
+	
+	init(dataStore: DataStore) {
+		self.dataStore = dataStore
+		self._viewModel = StateObject(wrappedValue: PressureOverviewViewModel(dataStore: dataStore))
 	}
 }
 
 
 #Preview {
-    PressureOverviewScreen()
+	PressureOverviewScreen(dataStore: DataStore.shared)
 }
