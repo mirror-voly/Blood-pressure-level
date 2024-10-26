@@ -8,12 +8,12 @@
 import Foundation
 
 final class Measurement {
-	private let id: UUID
-	private let systolicLevel: Int
-	private let diastolicLevel: Int
-	private let date: Date
-	private let pulse: Int?
-	private let note: String?
+	let id: UUID
+	let systolicLevel: Int
+	let diastolicLevel: Int
+	let date: Date
+	let pulse: Int?
+	let note: String?
 
 	init(id: UUID, systolicLevel: Int, diastolicLevel: Int, date: Date, pulse: Int?, note: String?) {
 		self.id = id

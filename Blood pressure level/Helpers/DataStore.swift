@@ -10,7 +10,15 @@ import Foundation
 final class DataStore: ObservableObject {
 	static let shared = DataStore()
 	
-	@Published var measurements: [Measurement] = []
+	@Published private (set) var measurements: [Measurement] = []
+	
+	func addOrEditMeasurement(_ measurement: Measurement) {
+		if let index = measurements.firstIndex(where: { $0.id == measurement.id }) {
+			measurements[index] = measurement
+		} else {
+			measurements.append(measurement)
+		}
+	}
 	
 	private init() {}
 }
