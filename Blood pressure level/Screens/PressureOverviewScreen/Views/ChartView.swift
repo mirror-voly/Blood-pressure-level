@@ -11,41 +11,44 @@ import Charts
 struct ChartView: View {
 	
 	@StateObject var viewModel: PressureOverviewViewModel
-
 	
-    var body: some View {
+	var body: some View {
 		
-		let startOfDay = Calendar.current.startOfDay(for: Date())
-		let endOfDay = startOfDay.addingTimeInterval(86400)
-		
-		
-		Chart(viewModel.getMeasurementsForPresentationPeriod()) { measurement in
-			Plot {
-				LineMark(x: .value("Hour", measurement.date, unit: .hour), y: .value("SystolicLevel", measurement.systolicLevel))
+		Chart {
+			ForEach(viewModel.getMeasurementsForPresentationPeriod()) { measurement in
+				Plot {
+					LineMark(x: .value("Hour", measurement.date,
+									   unit: viewModel.calendarComponentForPeriod),
+							 y: .value("SystolicLevel", measurement.systolicLevel))
 					.foregroundStyle(by: .value("Pressure", "systolic"))
-				
-				LineMark(x: .value("Hour", measurement.date, unit: .hour), y: .value("SystolicLevel", measurement.diastolicLevel))
+					
+					LineMark(x: .value("Hour", measurement.date,
+									   unit: viewModel.calendarComponentForPeriod),
+							 y: .value("SystolicLevel", measurement.diastolicLevel))
 					.foregroundStyle(by: .value("Pressure", "diastolic"))
-			}
-			.interpolationMethod(.catmullRom)
-			.lineStyle(StrokeStyle(lineWidth: 4))
-		
-			
-			Plot {
-				PointMark(x: .value("Hour", measurement.date, unit: .hour), y: .value("SystolicLevel", measurement.systolicLevel))
-					.foregroundStyle(.systolic)
+				}
+				.interpolationMethod(.catmullRom)
+				.lineStyle(StrokeStyle(lineWidth: 4))
 				
-				PointMark(x: .value("Hour", measurement.date, unit: .hour), y: .value("DiastolicLevel", measurement.diastolicLevel))
+				
+				Plot {
+					PointMark(x: .value("Hour", measurement.date,
+										unit: viewModel.calendarComponentForPeriod), y: .value("SystolicLevel", measurement.systolicLevel))
+					.foregroundStyle(.systolic)
+					
+					PointMark(x: .value("Hour", measurement.date,
+										unit: viewModel.calendarComponentForPeriod),
+							  y: .value("DiastolicLevel", measurement.diastolicLevel))
 					.foregroundStyle(.diastolic)
+				}
+				.symbolSize(35)
 			}
-			.symbolSize(35)
-			
 			Plot {
 				RuleMark(y: .value("middle", 100))
 				
 				RuleMark(y: .value("top", 200))
 				
-				RuleMark(x: .value("startOfDay", startOfDay, unit: .minute))
+				RuleMark(x: .value("start", viewModel.timeInterval.startOfPeriod, unit: .minute))
 			}
 			.foregroundStyle(.gray.opacity(0.2))
 			.lineStyle(
@@ -57,7 +60,7 @@ struct ChartView: View {
 			)
 			
 			Plot {
-				RuleMark(x: .value("endOfDay", endOfDay, unit: .minute))
+				RuleMark(x: .value("end", viewModel.timeInterval.endOfPeriod, unit: .minute))
 				
 				RuleMark(y: .value("bottom", 0))	
 			}
@@ -71,10 +74,10 @@ struct ChartView: View {
 			
 			Plot {
 				RuleMark(y: .value("high", 150))
-					.foregroundStyle(.red.opacity(0.2))
+					.foregroundStyle(.red.opacity(0.5))
 				
 				RuleMark(y: .value("low", 50))
-					.foregroundStyle(.blue.opacity(0.2))
+					.foregroundStyle(.blue.opacity(0.5))
 			}
 			.lineStyle(
 				StrokeStyle(
@@ -89,23 +92,32 @@ struct ChartView: View {
 		.chartLegend(.hidden)
 		// MARK: - Chart axis
 		.chartYScale(domain: 0...200)
-		.chartYAxis { 
-			AxisMarks(values: [0, 50, 100, 150, 200])
+		.chartYAxis {
+			AxisMarks(values: [0, 50, 100, 150, 200]) { value in
+				if let number = value.as(Int.self) {
+					AxisValueLabel {
+						return Text("\(number)")
+							.foregroundStyle(
+								number == 50 ? .blue :
+									number == 150 ? .red :
+										.main.opacity(0.5)
+							)
+					}
+				}
+			}
 		}
-
+		
 		// MARK: Day X axis
-		.chartXScale(domain: startOfDay...endOfDay)
+		.chartXScale(domain: viewModel.timeInterval.startOfPeriod...viewModel.timeInterval.endOfPeriod)
 		.chartXAxis {
-			AxisMarks(values: .automatic) { value in
+			AxisMarks(values: viewModel.getAxisValues()) { value in
 				AxisValueLabel {
 					if let date = value.as(Date.self) {
-						let formatter = DateFormatter()
-						formatter.dateFormat = "H"
-						return Text(formatter.string(from: date))
+						return Text(viewModel.formatDate(for: date))
 					}
 					return Text("")
 				}
 			}
 		}
-    }
+	}
 }
