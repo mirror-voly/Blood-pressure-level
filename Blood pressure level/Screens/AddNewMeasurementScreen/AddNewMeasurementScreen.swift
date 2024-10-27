@@ -43,6 +43,7 @@ struct AddNewMeasurementScreen: View {
 		.navigationBarBackButtonHidden()
 		.navigationBarTitleDisplayMode(.inline)
     }
+
 	init(dataStore: DataStore) {
 		self._viewModel = StateObject(wrappedValue: AddNewMeasurementViewModel(dataStore: dataStore))
 	}

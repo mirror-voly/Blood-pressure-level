@@ -20,5 +20,15 @@ final class DataStore: ObservableObject {
 		}
 	}
 	
-	private init() {}
+	private init() {
+		
+		for i in 0...2 {
+			let randomNumber = (30...180).randomElement()
+			
+			
+			measurements.append(Measurement(id: UUID(), pressure: Pressure(systolicLevel: randomNumber! + 20, diastolicLevel: randomNumber!), date: Date().advanced(by: TimeInterval(integerLiteral: Int64(i*10000))), pulse: randomNumber, note: "oke"))
+		}
+			
+		
+	}
 }

@@ -56,7 +56,7 @@ final class AddNewMeasurementViewModel: ObservableObject {
 	
 	func buttonAction() {
 		guard let systolicLevel = makeInt(systolicText), let diastolicLevel = makeInt(diastolicText) else { return }
-		let measurement = Measurement(id: measurementID, systolicLevel: systolicLevel, diastolicLevel: diastolicLevel, date: date, pulse: makeInt(pulseText), note: noteText)
+		let measurement = Measurement(id: measurementID, pressure: Pressure(systolicLevel: systolicLevel, diastolicLevel: diastolicLevel), date: date, pulse: makeInt(pulseText), note: noteText)
 		
 		dataStore.addOrEditMeasurement(measurement)
 		
