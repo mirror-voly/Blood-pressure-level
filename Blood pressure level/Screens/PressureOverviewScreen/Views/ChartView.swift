@@ -30,7 +30,6 @@ struct ChartView: View {
 				.interpolationMethod(.catmullRom)
 				.lineStyle(StrokeStyle(lineWidth: 4))
 				
-				
 				Plot {
 					PointMark(x: .value("Hour", measurement.date,
 										unit: viewModel.calendarComponentForPeriod), y: .value("SystolicLevel", measurement.systolicLevel))
@@ -41,8 +40,22 @@ struct ChartView: View {
 							  y: .value("DiastolicLevel", measurement.diastolicLevel))
 					.foregroundStyle(.diastolic)
 				}
-				.symbolSize(35)
+				.symbolSize(40)
 			}
+			
+			ForEach(viewModel.measurementsWithNotes) { measurement in
+				PointMark(x: .value("Hour", measurement.date.addingTimeInterval(2000),
+									unit: .second),
+						  y: .value("Note", measurement.systolicLevel + 10))
+				.symbol { 
+					Image(systemName: "circle")
+						.resizable()
+						.bold()
+						.foregroundStyle(.blue)
+						.frame(width: 6, height: 6)
+				}
+			}
+			
 			Plot {
 				RuleMark(y: .value("middle", 100))
 				

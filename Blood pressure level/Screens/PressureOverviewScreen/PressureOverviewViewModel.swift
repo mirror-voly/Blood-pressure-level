@@ -31,6 +31,9 @@ final class PressureOverviewViewModel: ObservableObject {
 	var filteredMeasurementsForPresentationPeriod: [Measurement] {
 		getMeasurementsForPresentationPeriod()
 	}
+	var measurementsWithNotes: [Measurement] {
+		filteredMeasurementsForPresentationPeriod.filter({ $0.note != nil })
+	}
 	var timeInterval: (startOfPeriod: Date, endOfPeriod: Date) {
 		getTimeInterval()
 	}
@@ -71,9 +74,8 @@ final class PressureOverviewViewModel: ObservableObject {
 				}
 				
 			case .month:
-				if let startDate = calendar.date(from: calendar.dateComponents([.year, .month, .day], from: currentDate)) {
-					start = startDate
-					end = calendar.date(byAdding: .month, value: 1, to: start) ?? start
+				if let end = calendar.date(from: calendar.dateComponents([.year, .month, .day], from: currentDate)) {
+					start = calendar.date(byAdding: .month, value: -1, to: end) ?? end
 					return (startOfPeriod: start, endOfPeriod: end)
 				}
 		}
@@ -105,11 +107,11 @@ final class PressureOverviewViewModel: ObservableObject {
 	func getAxisValues() -> AxisMarkValues {
 		switch period {
 			case .day:
-				return .automatic(desiredCount: 5, roundLowerBound: true, roundUpperBound: true)
+				return .automatic(desiredCount: 5)
 			case .week:
 				return .automatic(desiredCount: 7)
 			case .month:
-				return .automatic(desiredCount: 7, roundLowerBound: true, roundUpperBound: true)
+				return .stride(by: .day, count: 5)
 		}
 	}
 

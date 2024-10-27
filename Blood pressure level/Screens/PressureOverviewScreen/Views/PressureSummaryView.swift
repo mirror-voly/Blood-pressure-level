@@ -97,6 +97,7 @@ struct PressureSummaryView: View {
 			}
 			
 			ChartView(viewModel: viewModel)
+				.frame(maxWidth: .infinity, maxHeight: 215)
 			
 			Button(action: {
 				viewModel.addNewScreenIsPresented = true
