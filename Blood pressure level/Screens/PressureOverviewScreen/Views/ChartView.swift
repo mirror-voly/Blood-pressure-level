@@ -15,7 +15,7 @@ struct ChartView: View {
 	var body: some View {
 		
 		Chart {
-			ForEach(viewModel.getMeasurementsForPresentationPeriod()) { measurement in
+			ForEach(viewModel.filteredMeasurementsForPresentationPeriod) { measurement in
 				Plot {
 					LineMark(x: .value("Hour", measurement.date,
 									   unit: viewModel.calendarComponentForPeriod),

@@ -13,17 +13,67 @@ struct PressureSummaryView: View {
 	
 	var body: some View {
 		VStack(alignment: .leading, spacing: Constants.Spacing.defaultSpacing) {
-			HStack(content: {
-				Text("no_data".localized)
-					.font(.system(size: Constants.FontSize.big))
-					.bold()
-				Spacer()
-			})
+			if let info = viewModel.minAndMaxLevelInfo {
+				VStack(alignment: .leading, spacing: 8, content: {
+					HStack(alignment: .center, content: {
+						Text("pressure".localized)
+							.font(.system(size: 12))
+							.foregroundStyle(.main.opacity(0.5))
+							.frame(width: 58, alignment: .leading)
+						
+						HStack(alignment: .bottom, content: {
+							Text(info.pressureInfo)
+								.font(.system(size: Constants.FontSize.big))
+								.bold()
+							
+							Text("мм рт. ст")
+								.font(.system(size: 12))
+								.foregroundStyle(.main.opacity(0.5))
+						})
+						Spacer()
+					})
+					
+					if let pulseInfo = info.pulseInfo {
+						HStack(alignment: .center, content: {
+							Text("pulse".localized)
+								.font(.system(size: 12))
+								.foregroundStyle(.main.opacity(0.5))
+								.frame(width: 58, alignment: .leading)
+							
+							HStack(alignment: .bottom, content: {
+								Text(pulseInfo)
+									.font(.system(size: Constants.FontSize.big))
+									.bold()
+								
+								Text("уд/мин")
+									.font(.system(size: 12))
+									.foregroundStyle(.main.opacity(0.5))
+							})
+							
+							Spacer()
+						})
+					}
+				})
+				.frame(maxHeight: 34)
+				
+				
+			} else {
+				HStack(content: {
+					Text("no_data".localized)
+						.font(.system(size: Constants.FontSize.big))
+						.bold()
+				})
+			}
 			
 			HStack {
-				Text("today".localized)
-					.foregroundStyle(.main.opacity(Constants.Opacity.regular))
-					.font(.system(size: Constants.FontSize.micro))
+				if viewModel.period != .day {
+					Text(viewModel.periodInfo.capitalized)
+						.font(.system(size: Constants.FontSize.micro))
+				} else {
+					Text("today".localized)
+						.font(.system(size: Constants.FontSize.micro))
+				}
+				
 			}
 			
 			Divider()
@@ -48,8 +98,6 @@ struct PressureSummaryView: View {
 			
 			ChartView(viewModel: viewModel)
 			
-			Spacer()
-			
 			Button(action: {
 				viewModel.addNewScreenIsPresented = true
 			}, label: {
@@ -71,7 +119,6 @@ struct PressureSummaryView: View {
 		.padding(.horizontal)
 		.padding(.vertical, Constants.Padding.big)
 		.background(.scheme)
-		.frame(maxWidth: .infinity)
 		.clipShape(RoundedRectangle(cornerRadius: Constants.Radius.big))
 	}
 }

@@ -19,7 +19,6 @@ struct PressureOverviewScreen: View {
 				
 				VStack {
 					PresureOverviewHeaderView(viewModel: viewModel)
-						.padding(.vertical)
 					
 					VStack(spacing: Constants.Spacing.defaultSpacing) {
 						CustomSegmentContolView(viewModel: viewModel)
