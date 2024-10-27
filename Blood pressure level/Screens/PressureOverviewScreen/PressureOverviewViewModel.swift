@@ -34,6 +34,11 @@ final class PressureOverviewViewModel: ObservableObject {
 	var measurementsWithNotes: [Measurement] {
 		filteredMeasurementsForPresentationPeriod.filter({ $0.note != nil })
 	}
+	var firstNoteInfo: (time: String, text: String) {
+		guard let first = measurementsWithNotes.first, let note = first.note else { return ("","")}
+		formatter.dateFormat = "d.MM H:mm"
+		return (formatter.string(from: first.date), note)
+	}
 	var timeInterval: (startOfPeriod: Date, endOfPeriod: Date) {
 		getTimeInterval()
 	}
@@ -65,6 +70,7 @@ final class PressureOverviewViewModel: ObservableObject {
 				start = calendar.startOfDay(for: currentDate)
 				end = start.addingTimeInterval(86400)
 				return (startOfPeriod: start, endOfPeriod: end)
+				
 			case .week:
 				if let startDate = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: currentDate)) {
 					start = startDate

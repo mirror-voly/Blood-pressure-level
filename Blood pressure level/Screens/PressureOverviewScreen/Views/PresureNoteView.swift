@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PresureNoteView: View {
 	
-	let viewModel: PressureOverviewViewModel
+	@StateObject var viewModel: PressureOverviewViewModel
 	
 	var body: some View {
 		VStack(alignment: .leading, spacing: Constants.Spacing.smallSpacing, content: {
@@ -22,20 +22,35 @@ struct PresureNoteView: View {
 					
 					Spacer()
 					
+					
 					Button(action: {
 						
 					}, label: {
-						Image(systemName: "plus")
+						Image(systemName: viewModel.measurementsWithNotes.isEmpty ? "plus" : "chevron.right")
 							.font(.system(size: Constants.FontSize.large))
 							.fontWeight(.light)
 							.foregroundStyle(.main.opacity(Constants.Opacity.regular))
 					})
 				}
-				.frame(maxHeight: Constants.FrameSize.presureNoteViewHearerHeight)
+				.frame(maxHeight: Constants.FrameSize.presureNoteViewHeaderHeight)
 				
-				Divider()
-				
-				VStack(alignment: .leading) {
+				if viewModel.measurementsWithNotes.count == 1 {
+						Divider()
+						
+					VStack(alignment: .leading, spacing: 0) {
+							Text(viewModel.firstNoteInfo.time)
+								.font(.system(size: Constants.FontSize.verySmall))
+								.foregroundStyle(.main.opacity(0.3))
+							
+							Text(viewModel.firstNoteInfo.text)
+								.font(.system(size: Constants.FontSize.small))
+								.foregroundStyle(.main)
+								.frame(maxWidth: .infinity, alignment: .leading)
+								.padding(.vertical, Constants.Padding.micro)
+						}
+						
+				} else if viewModel.measurementsWithNotes.count == 0 {
+					Divider()
 					Text("describe_your_condition".localized)
 						.font(.system(size: Constants.FontSize.small))
 						.foregroundStyle(.secondaryGrayDark)

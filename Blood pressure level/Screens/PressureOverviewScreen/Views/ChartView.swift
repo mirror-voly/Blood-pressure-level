@@ -44,15 +44,17 @@ struct ChartView: View {
 			}
 			
 			ForEach(viewModel.measurementsWithNotes) { measurement in
-				PointMark(x: .value("Hour", measurement.date.addingTimeInterval(2000),
+				PointMark(x: .value("Hour", measurement.date,
 									unit: .second),
-						  y: .value("Note", measurement.systolicLevel + 10))
+						  y: .value("Note", measurement.systolicLevel))
 				.symbol { 
 					Image(systemName: "circle")
 						.resizable()
 						.bold()
 						.foregroundStyle(.blue)
 						.frame(width: 6, height: 6)
+						.padding(.leading, 10)
+						.padding(.bottom, 20)
 				}
 			}
 			

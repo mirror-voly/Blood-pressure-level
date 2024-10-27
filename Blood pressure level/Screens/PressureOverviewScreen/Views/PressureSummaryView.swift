@@ -63,6 +63,7 @@ struct PressureSummaryView: View {
 						.font(.system(size: Constants.FontSize.big))
 						.bold()
 				})
+				.frame(maxHeight: 34)
 			}
 			
 			HStack {
