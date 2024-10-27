@@ -21,7 +21,9 @@ final class PressureOverviewViewModel: ObservableObject {
 	@Published var period: PresentationPeriod = .day
 	@Published var tipIsActive = false
 	@Published var addNewScreenIsPresented = false
-
+	var filteredMeasurementsForPresentationPeriod: [Measurement] {
+		getMeasurementsForPresentationPeriod()
+	}
 	var timeInterval: (startOfPeriod: Date, endOfPeriod: Date) {
 		getTimeInterval()
 	}
@@ -37,11 +39,11 @@ final class PressureOverviewViewModel: ObservableObject {
 		}
 	}
 	
-	func sortByDate(measurements: [Measurement]) -> [Measurement] {
+	private func sortByDate(measurements: [Measurement]) -> [Measurement] {
 		measurements.sorted(by: { $0.date > $1.date	})
 	}
 	
-	func getTimeInterval() -> (startOfPeriod: Date, endOfPeriod: Date) {
+	private func getTimeInterval() -> (startOfPeriod: Date, endOfPeriod: Date) {
 		let start: Date
 		let end: Date
 		
@@ -60,7 +62,7 @@ final class PressureOverviewViewModel: ObservableObject {
 		return (startOfPeriod: start, endOfPeriod: end)
 	}
 
-	func getMeasurementsForPresentationPeriod() -> [Measurement] {
+	private func getMeasurementsForPresentationPeriod() -> [Measurement] {
 		let (startOfPeriod, endOfPeriod) = getTimeInterval()
 		
 		let filtered = dataStore.measurements.filter { measurement in

@@ -6,27 +6,31 @@
 //
 
 import SwiftUI
-import Combine
+
 
 final class AddNewMeasurementViewModel: ObservableObject {
 	
 	let dataStore: DataStore
 	let currentDate = Date()
 	let measurementID = UUID()
-	private var cancellables = Set<AnyCancellable>()
 	
-	@Published var systolicText = ""
-	@Published var diastolicText = ""
-	@Published var pulseText = ""
-	@Published var noteText = ""
-	@Published private (set) var canNotBeSaved = true
-	@Published var date = Date() {
-		didSet {
-			checkIsMeasurementCanBeSaved()
-		}
+	@Published var systolicText = "" {
+		didSet { checkIsMeasurementCanBeSaved() }
 	}
-	
-	
+	@Published var diastolicText = "" {
+		didSet { checkIsMeasurementCanBeSaved() }
+	}
+	@Published var pulseText = "" {
+		didSet { checkIsMeasurementCanBeSaved() }
+	}
+	@Published var noteText = "" {
+		didSet { checkIsMeasurementCanBeSaved() }
+	}
+	@Published var date = Date() {
+		didSet { checkIsMeasurementCanBeSaved() }
+	}
+	@Published private (set) var canNotBeSaved = true
+	//MARK: - Functions
 	private func checkIsMeasurementCanBeSaved() {
 		canNotBeSaved = !systolicText.isEmpty && !diastolicText.isEmpty ? false : true 
 	}
@@ -65,17 +69,5 @@ final class AddNewMeasurementViewModel: ObservableObject {
 	
 	init(dataStore: DataStore) {
 		self.dataStore = dataStore
-		
-		Publishers.MergeMany(
-				 $systolicText.removeDuplicates(),
-				 $diastolicText.removeDuplicates(),
-				 $pulseText.removeDuplicates(),
-				 $noteText.removeDuplicates()
-			 )
-			 .sink { [weak self] _ in
-				 self?.checkIsMeasurementCanBeSaved()
-			 }
-			 .store(in: &cancellables)
-		 }
-	
+	}
 }

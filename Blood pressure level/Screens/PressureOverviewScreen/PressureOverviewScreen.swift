@@ -34,6 +34,7 @@ struct PressureOverviewScreen: View {
 				.padding(.horizontal)
 				
 				if viewModel.tipIsActive {
+					//TODO: Need to highlight button too
 					OverlayTip(viewModel: viewModel)
 				}
 			}
