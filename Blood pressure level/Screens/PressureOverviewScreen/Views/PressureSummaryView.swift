@@ -6,9 +6,8 @@
 //
 
 import SwiftUI
-import Charts
 
-struct PressureChartsView: View {
+struct PressureSummaryView: View {
 	
 	@StateObject var viewModel: PressureOverviewViewModel
 	
@@ -47,38 +46,7 @@ struct PressureChartsView: View {
 				Spacer()
 			}
 			
-			Chart {
-				ForEach(viewModel.dataStore.measurements) { measurement in
-					LineMark(x: .value("Hour", measurement.date, unit: .hour), y: .value("SystolicLevel", measurement.pressure.systolicLevel))
-						.foregroundStyle(.systolic.opacity(0.2))
-					
-					PointMark(x: .value("Hour", measurement.date, unit: .hour), y: .value("SystolicLevel", measurement.pressure.systolicLevel))
-						.foregroundStyle(.systolic)
-				}
-				RuleMark(y: .value("high", 150))
-					.foregroundStyle(.red.opacity(0.3))
-				
-				RuleMark(y: .value("low", 50))
-					.foregroundStyle(.blue.opacity(0.3))
-			}			
-			// MARK: - Chart legends
-			.chartYAxis(content: { 
-				AxisMarks(values: [0, 50, 100, 150, 200])
-			})
-			// MARK: Day legend
-			.chartXScale(domain: Calendar.current.startOfDay(for: Date())...Calendar.current.startOfDay(for: Date()).addingTimeInterval(86400))
-			.chartXAxis {
-				AxisMarks { value in
-					AxisValueLabel {
-						if let date = value.as(Date.self) {
-							let formatter = DateFormatter()
-							formatter.dateFormat = "H"
-							return Text(formatter.string(from: date))
-						}
-						return Text("")
-					}
-				}
-			}
+			ChartView(viewModel: viewModel)
 			
 			Spacer()
 			

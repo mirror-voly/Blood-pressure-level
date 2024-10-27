@@ -24,7 +24,7 @@ struct PressureOverviewScreen: View {
 					VStack(spacing: Constants.Spacing.defaultSpacing) {
 						CustomSegmentContolView(viewModel: viewModel)
 						
-						PressureChartsView(viewModel: viewModel)
+						PressureSummaryView(viewModel: viewModel)
 						
 						PresureNoteView(viewModel: viewModel)
 					}
