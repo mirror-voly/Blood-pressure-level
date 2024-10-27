@@ -42,10 +42,22 @@ final class PressureOverviewViewModel: ObservableObject {
 	var timeInterval: (startOfPeriod: Date, endOfPeriod: Date) {
 		getTimeInterval()
 	}
-	var minAndMaxLevelInfo: (pressureInfo: String, pulseInfo: String?)? {
-		getMinAndMaxLevelInfo()
+	var minAndMaxPressureLevelInfo: String? {
+		guard let info = getMinAndMaxPressureLevel() else { return nil }
+		if let diastolicMin = info.diastolic.min, let systolicMin = info.systolic.min {
+			return "\(info.diastolic.max) - \(info.systolic.max) / \(diastolicMin) - \(systolicMin)"
+		} else {
+			return "\(info.diastolic.max) - \(info.systolic.max)"
+		}
 	}
-
+	var minAndMaxPulseLevelInfo: String? {
+		guard let pulse = getMinAndMaxPulseLevel() else { return nil }
+		if let min = pulse.min, min != pulse.max {
+			return "\(pulse.max) - \(min)"
+		} else {
+			return "\(pulse.max)"
+		}
+	}
 	var calendarComponentForPeriod: Calendar.Component {
 		switch period {
 			case .day:
@@ -56,7 +68,7 @@ final class PressureOverviewViewModel: ObservableObject {
 					.day
 		}
 	}
-	
+	//MARK: Functions
 	private func sortByDate(measurements: [Measurement]) -> [Measurement] {
 		measurements.sorted(by: { $0.date > $1.date	})
 	}
@@ -121,38 +133,54 @@ final class PressureOverviewViewModel: ObservableObject {
 		}
 	}
 
-	func getMinAndMaxLevelInfo() -> (pressureInfo: String, pulseInfo: String?)? {
+	func getMinAndMaxPressureLevel() -> (systolic: (max: Int, min: Int?), diastolic: (max: Int, min: Int?))? {
 		guard !filteredMeasurementsForPresentationPeriod.isEmpty else { return nil }
 		
-		let pressureInfo: String
-		let pulseInfo: String?
+		let systolic: (Int, Int?)
+		let diastolic: (Int, Int?)
 		
 		switch filteredMeasurementsForPresentationPeriod.count {
 		case 1:
 			let first = filteredMeasurementsForPresentationPeriod[0]
-			pressureInfo = "\(first.systolicLevel) - \(first.diastolicLevel)"
-			pulseInfo = first.pulse.map { String($0) }
+				systolic = (first.systolicLevel, nil)
+				diastolic = (first.diastolicLevel, nil)
 		case let count where count > 1:
 			let systolicLevels = filteredMeasurementsForPresentationPeriod.map { $0.systolicLevel }
-			let diastolicLevels = filteredMeasurementsForPresentationPeriod.compactMap { $0.diastolicLevel }
+			let diastolicLevels = filteredMeasurementsForPresentationPeriod.map { $0.diastolicLevel }
 			guard let maxSystolic = systolicLevels.max(),
 				  let minSystolic = systolicLevels.min(),
 				  let maxDiastolic = diastolicLevels.max(),
 				  let minDiastolic = diastolicLevels.min() else {
 				return nil
 			}
-			pressureInfo = "\(maxSystolic) - \(maxDiastolic) / \(minSystolic) - \(minDiastolic)"
-			let pulses = filteredMeasurementsForPresentationPeriod.compactMap { $0.pulse }
-			guard let biggestPulse = pulses.max(), let smallestPulse = pulses.min() else {
-				pulseInfo = nil
-				break
-			}
-			pulseInfo = (smallestPulse != biggestPulse) ? "\(smallestPulse)-\(biggestPulse)" : "\(biggestPulse)"
+				systolic = (maxSystolic, minSystolic)
+				diastolic = (maxDiastolic, minDiastolic)
 		default:
 			return nil
 		}
-		
-		return (pressureInfo, pulseInfo)
+		return (systolic, diastolic)
+	}
+	
+	func getMinAndMaxPulseLevel() -> (max: Int, min: Int?)? {
+		guard !filteredMeasurementsForPresentationPeriod.isEmpty else { return nil }
+		let pulseInfo: (Int, Int?)?
+		switch filteredMeasurementsForPresentationPeriod.count {
+			case 1:
+				let first = filteredMeasurementsForPresentationPeriod[0]
+				if let pulse = first.pulse.map({ Int($0) }) {
+					pulseInfo = (pulse, nil)
+				} else {
+					pulseInfo = nil
+				}
+			case let count where count > 1:
+				let pulses = filteredMeasurementsForPresentationPeriod.compactMap { $0.pulse }
+				guard let biggestPulse = pulses.max(), let smallestPulse = pulses.min() else { return nil }
+				pulseInfo = (smallestPulse, biggestPulse)
+			default:
+				return nil
+		}
+
+		return pulseInfo
 	}
 	
 	init(dataStore: DataStore) {

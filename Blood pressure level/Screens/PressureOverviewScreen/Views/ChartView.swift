@@ -53,7 +53,7 @@ struct ChartView: View {
 						.bold()
 						.foregroundStyle(.blue)
 						.frame(width: 6, height: 6)
-						.padding(.leading, 10)
+						.padding(.leading, 20)
 						.padding(.bottom, 20)
 				}
 			}

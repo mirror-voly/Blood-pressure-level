@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		516CACAA2CCE3CA400762B0A /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516CACA92CCE3CA400762B0A /* ChartView.swift */; };
+		516CACAC2CCEF21400762B0A /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516CACAB2CCEF21400762B0A /* NoteView.swift */; };
 		516E7E9C2CCB6CE400741283 /* View+Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516E7E9B2CCB6CE400741283 /* View+Placeholder.swift */; };
 		516E7E9E2CCB736600741283 /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516E7E9D2CCB736600741283 /* TextFieldView.swift */; };
 		516E7EA02CCB77C600741283 /* DateFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516E7E9F2CCB77C600741283 /* DateFieldView.swift */; };
@@ -46,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		516CACA92CCE3CA400762B0A /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		516CACAB2CCEF21400762B0A /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
 		516E7E9B2CCB6CE400741283 /* View+Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Placeholder.swift"; sourceTree = "<group>"; };
 		516E7E9D2CCB736600741283 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
 		516E7E9F2CCB77C600741283 /* DateFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFieldView.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				5191C6282CCA1E8F00AD3403 /* PressureSummaryView.swift */,
 				516CACA92CCE3CA400762B0A /* ChartView.swift */,
 				5191C62A2CCA1EFB00AD3403 /* PresureNoteView.swift */,
+				516CACAB2CCEF21400762B0A /* NoteView.swift */,
 				5191C6322CCA693E00AD3403 /* OverlayTip.swift */,
 			);
 			path = Views;
@@ -333,6 +336,7 @@
 				517014F02CC8E1850058BC9F /* PressureOverviewScreen.swift in Sources */,
 				5191C6292CCA1E8F00AD3403 /* PressureSummaryView.swift in Sources */,
 				517738072CCD1421003CEC44 /* String+RemoveNotNumber.swift in Sources */,
+				516CACAC2CCEF21400762B0A /* NoteView.swift in Sources */,
 				516E7EA42CCB99EF00741283 /* AddNewButtonView.swift in Sources */,
 				516E7E9C2CCB6CE400741283 /* View+Placeholder.swift in Sources */,
 				5191C6332CCA693E00AD3403 /* OverlayTip.swift in Sources */,

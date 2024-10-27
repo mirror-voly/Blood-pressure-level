@@ -13,7 +13,7 @@ struct PressureSummaryView: View {
 	
 	var body: some View {
 		VStack(alignment: .leading, spacing: Constants.Spacing.defaultSpacing) {
-			if let info = viewModel.minAndMaxLevelInfo {
+			if let info = viewModel.minAndMaxPressureLevelInfo {
 				VStack(alignment: .leading, spacing: 8, content: {
 					HStack(alignment: .center, content: {
 						Text("pressure".localized)
@@ -22,7 +22,7 @@ struct PressureSummaryView: View {
 							.frame(width: 58, alignment: .leading)
 						
 						HStack(alignment: .bottom, content: {
-							Text(info.pressureInfo)
+							Text(info)
 								.font(.system(size: Constants.FontSize.big))
 								.bold()
 							
@@ -33,7 +33,7 @@ struct PressureSummaryView: View {
 						Spacer()
 					})
 					
-					if let pulseInfo = info.pulseInfo {
+					if let pulseInfo = viewModel.minAndMaxPulseLevelInfo {
 						HStack(alignment: .center, content: {
 							Text("pulse".localized)
 								.font(.system(size: 12))
