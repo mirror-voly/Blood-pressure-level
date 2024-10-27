@@ -26,7 +26,7 @@ struct PressureSummaryView: View {
 								.font(.system(size: Constants.FontSize.big))
 								.bold()
 							
-							Text("мм рт. ст")
+							Text("mmHg".localized)
 								.font(.system(size: 12))
 								.foregroundStyle(.main.opacity(0.5))
 						})
@@ -45,7 +45,7 @@ struct PressureSummaryView: View {
 									.font(.system(size: Constants.FontSize.big))
 									.bold()
 								
-								Text("уд/мин")
+								Text("bpm".localized)
 									.font(.system(size: 12))
 									.foregroundStyle(.main.opacity(0.5))
 							})

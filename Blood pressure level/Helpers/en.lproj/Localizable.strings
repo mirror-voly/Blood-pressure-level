@@ -25,3 +25,6 @@
 "day"= "Day";
 "week" = "Week";
 "month" = "Month";
+
+"mmHg" = "mmHg";
+"bpm" = "bpm";
