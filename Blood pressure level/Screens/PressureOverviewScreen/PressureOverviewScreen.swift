@@ -19,12 +19,12 @@ struct PressureOverviewScreen: View {
 				
 				VStack {
 					PresureOverviewHeaderView(viewModel: viewModel)
-						.padding(.vertical)
+						.padding(.bottom)
 					
 					VStack(spacing: Constants.Spacing.defaultSpacing) {
 						CustomSegmentContolView(viewModel: viewModel)
 						
-						PressureChartsView(viewModel: viewModel)
+						PressureSummaryView(viewModel: viewModel)
 						
 						PresureNoteView(viewModel: viewModel)
 					}
@@ -34,6 +34,7 @@ struct PressureOverviewScreen: View {
 				.padding(.horizontal)
 				
 				if viewModel.tipIsActive {
+					//TODO: Need to highlight button too
 					OverlayTip(viewModel: viewModel)
 				}
 			}

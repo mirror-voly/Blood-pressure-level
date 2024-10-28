@@ -82,9 +82,7 @@ enum Constants {
 	
 	enum FrameSize {
 		static let chartLegendHeight: CGFloat = 8
-		static let chartHeight: CGFloat = 215
-		static let wholeChartViewHeight: CGFloat = 397
-		static let presureNoteViewHearerHeight: CGFloat = 24
+		static let presureNoteViewHeaderHeight: CGFloat = 24
 		static let tipButtonSize: CGFloat = 21
 		static let tipBaseWidth: CGFloat = 311
 		static let tipBaseHeight: CGFloat = 180

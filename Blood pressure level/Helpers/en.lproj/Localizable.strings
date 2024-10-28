@@ -25,3 +25,9 @@
 "day"= "Day";
 "week" = "Week";
 "month" = "Month";
+
+"mmHg" = "mmHg";
+"bpm" = "bpm";
+
+"there_are_notes" = "there are notes";
+"no_notes"  = "no notes";
