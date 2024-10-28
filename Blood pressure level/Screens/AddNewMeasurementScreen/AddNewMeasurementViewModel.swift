@@ -10,9 +10,9 @@ import SwiftUI
 
 final class AddNewMeasurementViewModel: ObservableObject {
 	
-	let dataStore: DataStore
+	private let dataStore: DataStore
+	private let measurementID = UUID()
 	let currentDate = Date()
-	let measurementID = UUID()
 	
 	@Published var systolicText = "" {
 		didSet { checkIsMeasurementCanBeSaved() }

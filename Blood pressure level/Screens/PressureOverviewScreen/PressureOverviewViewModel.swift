@@ -21,7 +21,7 @@ final class PressureOverviewViewModel: ObservableObject {
 	@Published var addNewScreenIsPresented = false
 	@Published var selectedMessurment: Measurement?
 	
-	let dataStore: DataStore
+	private let dataStore: DataStore
 	let formattedDate: String
 	private let formatter = DateFormatter()
 	private let calendar = Calendar.current

@@ -9,14 +9,18 @@ import SwiftUI
 
 struct PressureOverviewScreen: View {
 	
-	let dataStore: DataStore
+	@EnvironmentObject var dataStore: DataStore
+	@Environment(\.managedObjectContext) var managedObjectContext
+	@FetchRequest(sortDescriptors: []) var measurementData: FetchedResults<MeasurementData>
 	@StateObject private var viewModel: PressureOverviewViewModel
 	
 	var body: some View {
 		NavigationStack {
 			ZStack {
 				BackgroundView(backgroundType: .mainScreen)
-				
+					.onAppear(perform: {
+						print(measurementData.count)
+					})
 				VStack {
 					PresureOverviewHeaderView(viewModel: viewModel)
 						.padding(.bottom)
@@ -45,7 +49,6 @@ struct PressureOverviewScreen: View {
 	}
 	
 	init(dataStore: DataStore) {
-		self.dataStore = dataStore
 		self._viewModel = StateObject(wrappedValue: PressureOverviewViewModel(dataStore: dataStore))
 	}
 }
