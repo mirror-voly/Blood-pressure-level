@@ -56,7 +56,6 @@ struct PressureSummaryView: View {
 				})
 				.frame(maxHeight: 34)
 				
-				
 			} else {
 				HStack(content: {
 					Text("no_data".localized)

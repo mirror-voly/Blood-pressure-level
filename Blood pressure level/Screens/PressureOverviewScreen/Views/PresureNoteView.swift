@@ -14,29 +14,13 @@ struct PresureNoteView: View {
 	var body: some View {
 		VStack(alignment: .leading, spacing: Constants.Spacing.smallSpacing) {
 			VStack {
-				HStack(alignment: .top, spacing: Constants.Spacing.defaultSpacing) {
-					Image("note")
-					Text("notes".localized)
-						.font(.system(size: Constants.FontSize.regular))
-						.bold()
-					
-					Spacer()
-					
-					Button(action: {
-						viewModel.addNewScreenIsPresented = true
-					}) {
-						Image(systemName: viewModel.measurementsWithNotes.isEmpty ? "plus" : "chevron.right")
-							.font(.system(size: Constants.FontSize.large))
-							.fontWeight(.light)
-							.foregroundStyle(.main.opacity(Constants.Opacity.regular))
-					}
-				}
-				.frame(maxHeight: Constants.FrameSize.presureNoteViewHeaderHeight)
+				PresureNoteHeader(viewModel: viewModel)
 				
-				if viewModel.measurementsWithNotes.count == 1 {
+				if let note = viewModel.noteForPresent {
 					Divider()
 					
-					NoteView(noteInfo: viewModel.firstNoteInfo)
+					NoteView(noteInfo: note)
+					
 					
 				} else if viewModel.measurementsWithNotes.isEmpty {
 					Divider()

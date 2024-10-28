@@ -27,6 +27,10 @@ final class PressureOverviewViewModel: ObservableObject {
 	private let calendar = Calendar.current
 	private let currentDate: Date
 	
+	var noteForPresent: (time: String, text: String)? {
+		guard measurementsWithNotes.count == 1 || selectedMessurment?.note != nil else { return nil }
+		return getNoteInfo(measurement: selectedMessurment?.note != nil ? selectedMessurment : measurementsWithNotes.first)
+	}
 	var periodInfo: String {
 		let date = getTimeInterval() 
 		let start = date.startOfPeriod.formatted(.dateTime.month().day())
@@ -38,11 +42,6 @@ final class PressureOverviewViewModel: ObservableObject {
 	}
 	var measurementsWithNotes: [Measurement] {
 		filteredMeasurementsForPresentationPeriod.filter({ $0.note != nil })
-	}
-	var firstNoteInfo: (time: String, text: String) {
-		guard let first = measurementsWithNotes.first, let note = first.note else { return ("","")}
-		formatter.dateFormat = "d.MM H:mm"
-		return (formatter.string(from: first.date), note)
 	}
 	var timeInterval: (startOfPeriod: Date, endOfPeriod: Date) {
 		getTimeInterval()
@@ -184,6 +183,7 @@ final class PressureOverviewViewModel: ObservableObject {
 		default:
 			return nil
 		}
+		
 		return (systolic, diastolic)
 	}
 	
@@ -214,6 +214,12 @@ final class PressureOverviewViewModel: ObservableObject {
 			return measurement.date >= xValue.addingTimeInterval(-shift) && measurement.date <= xValue.addingTimeInterval(shift)
 		})
 		selectedMessurment = measurement ?? nil
+	}
+	
+	func getNoteInfo(measurement: Measurement?) -> (time: String, text: String)? {
+		guard let measurement = measurement, let note = measurement.note else { return nil }
+		formatter.dateFormat = "d.MM H:mm"
+		return (formatter.string(from: measurement.date), note)
 	}
 	
 	init(dataStore: DataStore) {
