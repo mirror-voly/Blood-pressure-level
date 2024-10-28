@@ -122,5 +122,10 @@ struct PressureSummaryView: View {
 		.padding(.vertical, Constants.Padding.big)
 		.background(.scheme)
 		.clipShape(RoundedRectangle(cornerRadius: Constants.Radius.big))
+		
+		.overlay { 
+			OverlaySelectionPresenter(viewModel: viewModel)
+				.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+		}
 	}
 }

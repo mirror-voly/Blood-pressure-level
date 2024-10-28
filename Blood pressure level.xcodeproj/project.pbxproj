@@ -33,6 +33,7 @@
 		517015012CC92C0F0058BC9F /* PresentationPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517015002CC92C0F0058BC9F /* PresentationPeriod.swift */; };
 		517015052CC930520058BC9F /* CustomSegmentContolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517015042CC930520058BC9F /* CustomSegmentContolView.swift */; };
 		5170150A2CC93A5C0058BC9F /* PresureOverviewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517015092CC93A5C0058BC9F /* PresureOverviewHeaderView.swift */; };
+		517064BD2CCFA1F600641620 /* OverlaySelectionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517064BC2CCFA1F600641620 /* OverlaySelectionPresenter.swift */; };
 		517738032CCD0332003CEC44 /* AddNewMeasurementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517738022CCD0332003CEC44 /* AddNewMeasurementViewModel.swift */; };
 		517738052CCD0843003CEC44 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517738042CCD0843003CEC44 /* DataStore.swift */; };
 		517738072CCD1421003CEC44 /* String+RemoveNotNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517738062CCD1421003CEC44 /* String+RemoveNotNumber.swift */; };
@@ -72,6 +73,7 @@
 		517015002CC92C0F0058BC9F /* PresentationPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationPeriod.swift; sourceTree = "<group>"; };
 		517015042CC930520058BC9F /* CustomSegmentContolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentContolView.swift; sourceTree = "<group>"; };
 		517015092CC93A5C0058BC9F /* PresureOverviewHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresureOverviewHeaderView.swift; sourceTree = "<group>"; };
+		517064BC2CCFA1F600641620 /* OverlaySelectionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlaySelectionPresenter.swift; sourceTree = "<group>"; };
 		517738022CCD0332003CEC44 /* AddNewMeasurementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewMeasurementViewModel.swift; sourceTree = "<group>"; };
 		517738042CCD0843003CEC44 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		517738062CCD1421003CEC44 /* String+RemoveNotNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+RemoveNotNumber.swift"; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 				5191C62A2CCA1EFB00AD3403 /* PresureNoteView.swift */,
 				516CACAB2CCEF21400762B0A /* NoteView.swift */,
 				5191C6322CCA693E00AD3403 /* OverlayTip.swift */,
+				517064BC2CCFA1F600641620 /* OverlaySelectionPresenter.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -347,6 +350,7 @@
 				516E7EAC2CCBBB9400741283 /* MainFieldsView.swift in Sources */,
 				516CACAA2CCE3CA400762B0A /* ChartView.swift in Sources */,
 				516E7EAA2CCB9D0400741283 /* Constants.swift in Sources */,
+				517064BD2CCFA1F600641620 /* OverlaySelectionPresenter.swift in Sources */,
 				5170150A2CC93A5C0058BC9F /* PresureOverviewHeaderView.swift in Sources */,
 				516E7EC12CCBDC8600741283 /* PressureOverviewViewModel.swift in Sources */,
 				5191C62B2CCA1EFB00AD3403 /* PresureNoteView.swift in Sources */,

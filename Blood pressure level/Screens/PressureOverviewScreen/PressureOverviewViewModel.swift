@@ -12,9 +12,14 @@ import Charts
 
 final class PressureOverviewViewModel: ObservableObject {
 	
-	@Published var period: PresentationPeriod = .day
+	@Published var period: PresentationPeriod = .day {
+		didSet {
+			selectedMessurment = nil
+		}
+	}
 	@Published var tipIsActive = false
 	@Published var addNewScreenIsPresented = false
+	@Published var selectedMessurment: Measurement?
 	
 	let dataStore: DataStore
 	let formattedDate: String
@@ -89,7 +94,6 @@ final class PressureOverviewViewModel: ObservableObject {
 				let averageDiastolic = group.map { $0.diastolicLevel }.reduce(0, +) / group.count
 				let averagePulse = group.compactMap { $0.pulse }.reduce(0, +) / group.count
 				
-				// Создаем новое измерение с усредненными значениями
 				let averagedMeasurement = Measurement(systolicLevel: averageSystolic, diastolicLevel: averageDiastolic, id: UUID(), date: group[0].date, pulse: averagePulse, note: nil)
 				
 				averagedMeasurements.append(averagedMeasurement)
@@ -100,7 +104,6 @@ final class PressureOverviewViewModel: ObservableObject {
 		return sortedMeasurements
 	}
 
-	
 	func getTimeInterval() -> (startOfPeriod: Date, endOfPeriod: Date) {
 		let start: Date
 		let end: Date
@@ -128,7 +131,6 @@ final class PressureOverviewViewModel: ObservableObject {
 		
 		return (startOfPeriod: currentDate, endOfPeriod: currentDate)
 	}
-
 
 	private func getMeasurementsForPresentationPeriod() -> [Measurement] {
 		let (startOfPeriod, endOfPeriod) = getTimeInterval()
@@ -207,8 +209,14 @@ final class PressureOverviewViewModel: ObservableObject {
 			default:
 				return nil
 		}
-
 		return pulseInfo
+	}
+	
+	func finnSelection(xValue: Date) {
+		let measurement = filteredMeasurementsForPresentationPeriod.first(where: { measurement in
+			return measurement.date >= xValue.addingTimeInterval(-1800) && measurement.date <= xValue.addingTimeInterval(1800)
+		})
+		selectedMessurment = measurement ?? nil
 	}
 	
 	init(dataStore: DataStore) {
