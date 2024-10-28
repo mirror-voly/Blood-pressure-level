@@ -11,6 +11,7 @@ struct TextFieldView: View {
 	
 	@StateObject var viewModel: AddNewMeasurementViewModel
 	let placeholder: String
+	let keyboardType: UIKeyboardType
 	@Binding var text: String
 	@State var isOnChange = false
 	
@@ -19,6 +20,7 @@ struct TextFieldView: View {
 				  text: $text, onEditingChanged: { edit in
 			isOnChange = edit
 		})
+		.keyboardType(keyboardType)
 		.font(.system(size: Constants.FontSize.big))
 		.padding()
 		.background(Color.scheme)

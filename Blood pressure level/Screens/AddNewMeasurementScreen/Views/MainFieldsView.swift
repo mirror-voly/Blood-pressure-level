@@ -25,6 +25,7 @@ struct MainFieldsView: View {
 						
 						TextFieldView(viewModel: viewModel,
 									  placeholder: Constants.Placeholder.systolicPlaceholder,
+									  keyboardType: .decimalPad,
 									  text: $viewModel.systolicText)
 						.onChange(of: viewModel.systolicText) { newValue in
 							viewModel.systolicText = newValue.removingNonNumericCharacters()
@@ -38,6 +39,7 @@ struct MainFieldsView: View {
 						
 						TextFieldView(viewModel: viewModel,
 									  placeholder: Constants.Placeholder.diastolicPlaceholder,
+									  keyboardType: .decimalPad,
 									  text: $viewModel.diastolicText)
 						.onChange(of: viewModel.diastolicText) { newValue in
 							viewModel.diastolicText = newValue.removingNonNumericCharacters()
@@ -55,6 +57,7 @@ struct MainFieldsView: View {
 				
 				TextFieldView(viewModel: viewModel,
 							  placeholder: Constants.Placeholder.pulsePlaceholder,
+							  keyboardType: .decimalPad,
 							  text: $viewModel.pulseText)
 				.onChange(of: viewModel.pulseText) { newValue in
 					viewModel.pulseText = newValue.removingNonNumericCharacters()

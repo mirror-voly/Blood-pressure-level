@@ -28,11 +28,6 @@ struct AddNewHeaderView: View {
 				.font(.system(size: Constants.FontSize.big))
 				.bold()
 				.frame(maxWidth: .infinity, alignment: .center)
-			
 		}
     }
-}
-
-#Preview {
-    AddNewHeaderView()
 }

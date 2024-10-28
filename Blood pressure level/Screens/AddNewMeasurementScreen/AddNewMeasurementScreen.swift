@@ -26,12 +26,7 @@ struct AddNewMeasurementScreen: View {
 
 				DateFields(viewModel: viewModel)
 				
-				VStack(alignment: .leading) {
-					Text("note".localized)
-						.font(.system(size: Constants.FontSize.regular))
-					
-					TextFieldView(viewModel: viewModel, placeholder: "describe_your_condition".localized, text: $viewModel.noteText)
-				}
+				NoteFieldView(viewModel: viewModel)
 				
 				Spacer()
 				

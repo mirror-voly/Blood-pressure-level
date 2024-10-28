@@ -50,6 +50,7 @@
 		51934F702CD04791003349F2 /* SelectedMeasurementsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51934F6F2CD04791003349F2 /* SelectedMeasurementsInfo.swift */; };
 		51934F732CD080A9003349F2 /* RxRelay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51934F722CD080A9003349F2 /* RxRelay.swift */; };
 		51934F752CD0817E003349F2 /* SubscriptionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51934F742CD0817E003349F2 /* SubscriptionsManager.swift */; };
+		51C95D982CD0538B0054B405 /* NoteFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C95D972CD0538B0054B405 /* NoteFieldView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -97,6 +98,7 @@
 		51934F722CD080A9003349F2 /* RxRelay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxRelay.swift; sourceTree = "<group>"; };
 		51934F742CD0817E003349F2 /* SubscriptionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsManager.swift; sourceTree = "<group>"; };
 		51934F762CD08317003349F2 /* LICENSE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
+		51C95D972CD0538B0054B405 /* NoteFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteFieldView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,10 +149,11 @@
 			children = (
 				516E7EA12CCB990400741283 /* AddNewHeaderView.swift */,
 				516E7EAB2CCBBB9400741283 /* MainFieldsView.swift */,
-				516E7E9D2CCB736600741283 /* TextFieldView.swift */,
 				516E7EAD2CCBBCCD00741283 /* DateFields.swift */,
-				516E7EA32CCB99EF00741283 /* AddNewButtonView.swift */,
+				51C95D972CD0538B0054B405 /* NoteFieldView.swift */,
+				516E7E9D2CCB736600741283 /* TextFieldView.swift */,
 				516E7E9F2CCB77C600741283 /* DateFieldView.swift */,
+				516E7EA32CCB99EF00741283 /* AddNewButtonView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -383,6 +386,7 @@
 				517014F72CC8E1860058BC9F /* Persistence.swift in Sources */,
 				5191C6372CCA7A6F00AD3403 /* AddNewMeasurementScreen.swift in Sources */,
 				517014F02CC8E1850058BC9F /* PressureOverviewScreen.swift in Sources */,
+				51C95D982CD0538B0054B405 /* NoteFieldView.swift in Sources */,
 				5191C6292CCA1E8F00AD3403 /* PressureSummaryView.swift in Sources */,
 				517738072CCD1421003CEC44 /* String+RemoveNotNumber.swift in Sources */,
 				516CACAC2CCEF21400762B0A /* NoteView.swift in Sources */,
