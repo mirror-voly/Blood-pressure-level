@@ -10,9 +10,9 @@ import SwiftUI
 
 final class AddNewMeasurementViewModel: ObservableObject {
 	
-	let dataStore: DataStore
+	private let dataStore: DataStore
+	private let measurementID = UUID()
 	let currentDate = Date()
-	let measurementID = UUID()
 	
 	@Published var systolicText = "" {
 		didSet { checkIsMeasurementCanBeSaved() }
@@ -60,7 +60,7 @@ final class AddNewMeasurementViewModel: ObservableObject {
 	
 	func buttonAction() {
 		guard let systolicLevel = makeInt(systolicText), let diastolicLevel = makeInt(diastolicText) else { return }
-		let measurement = Measurement(systolicLevel: systolicLevel, diastolicLevel: diastolicLevel, id: measurementID, date: date, pulse: makeInt(pulseText), note: noteText)
+		let measurement = Measurement(systolicLevel: systolicLevel, diastolicLevel: diastolicLevel, id: measurementID, date: date, pulse: makeInt(pulseText), note: noteText == "" ? nil : noteText)
 		
 		dataStore.addOrEditMeasurement(measurement)
 		

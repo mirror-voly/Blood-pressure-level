@@ -21,7 +21,7 @@ final class PressureOverviewViewModel: ObservableObject {
 	@Published var addNewScreenIsPresented = false
 	@Published var selectedMessurment: Measurement?
 	
-	let dataStore: DataStore
+	private let dataStore: DataStore
 	let formattedDate: String
 	private let formatter = DateFormatter()
 	private let calendar = Calendar.current
@@ -90,7 +90,7 @@ final class PressureOverviewViewModel: ObservableObject {
 				let averageDiastolic = group.map { $0.diastolicLevel }.reduce(0, +) / group.count
 				let averagePulse = group.compactMap { $0.pulse }.reduce(0, +) / group.count
 				let notes = group.compactMap { $0.note }
-				let averagedMeasurement = Measurement(systolicLevel: averageSystolic, diastolicLevel: averageDiastolic, id: UUID(), date: group[0].date, pulse: averagePulse, note: notes.first)
+				let averagedMeasurement = Measurement(systolicLevel: averageSystolic, diastolicLevel: averageDiastolic, id: UUID(), date: group[0].date, pulse: averagePulse == 0 ? nil : averagePulse, note: notes.first)
 				
 				averagedMeasurements.append(averagedMeasurement)
 			}
@@ -193,7 +193,7 @@ final class PressureOverviewViewModel: ObservableObject {
 		switch filteredMeasurementsForPresentationPeriod.count {
 			case 1:
 				let first = filteredMeasurementsForPresentationPeriod[0]
-				if let pulse = first.pulse.map({ Int($0) }) {
+				if let pulse = first.pulse {
 					pulseInfo = (pulse, nil)
 				} else {
 					pulseInfo = nil
