@@ -80,27 +80,23 @@ final class PressureOverviewViewModel: ObservableObject {
 	
 	private func sortAndAverageMeasurements(measurements: [Measurement]) -> [Measurement] {
 		var groupedMeasurements: [Date: [Measurement]] = [:]
-		
+		var averagedMeasurements: [Measurement] = []
 		for measurement in measurements {
 			let dateKey = Calendar.current.startOfDay(for: measurement.date)
 			groupedMeasurements[dateKey, default: []].append(measurement)
 		}
-		
-		var averagedMeasurements: [Measurement] = []
-		
 		for (_, group) in groupedMeasurements {
 			if !group.isEmpty {
 				let averageSystolic = group.map { $0.systolicLevel }.reduce(0, +) / group.count
 				let averageDiastolic = group.map { $0.diastolicLevel }.reduce(0, +) / group.count
 				let averagePulse = group.compactMap { $0.pulse }.reduce(0, +) / group.count
-				
-				let averagedMeasurement = Measurement(systolicLevel: averageSystolic, diastolicLevel: averageDiastolic, id: UUID(), date: group[0].date, pulse: averagePulse, note: nil)
+				let notes = group.compactMap { $0.note }
+				let averagedMeasurement = Measurement(systolicLevel: averageSystolic, diastolicLevel: averageDiastolic, id: UUID(), date: group[0].date, pulse: averagePulse, note: notes.first)
 				
 				averagedMeasurements.append(averagedMeasurement)
 			}
 		}
 		let sortedMeasurements = sortByDate(measurements: averagedMeasurements)
-		
 		return sortedMeasurements
 	}
 
@@ -213,8 +209,9 @@ final class PressureOverviewViewModel: ObservableObject {
 	}
 	
 	func finnSelection(xValue: Date) {
+		let shift: Double = period == .day ? 1800 : 43200
 		let measurement = filteredMeasurementsForPresentationPeriod.first(where: { measurement in
-			return measurement.date >= xValue.addingTimeInterval(-1800) && measurement.date <= xValue.addingTimeInterval(1800)
+			return measurement.date >= xValue.addingTimeInterval(-shift) && measurement.date <= xValue.addingTimeInterval(shift)
 		})
 		selectedMessurment = measurement ?? nil
 	}
