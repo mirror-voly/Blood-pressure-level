@@ -5,22 +5,38 @@
 //  Created by mix on 26.10.2024.
 //
 
-import Foundation
+import SwiftUI
 import CoreData
 
 final class DataStore: ObservableObject {
+	
 	static let shared = DataStore()
-	weak var context: NSManagedObjectContext?
 	
-	@Published private (set) var measurements: [Measurement] = [
-		Measurement(systolicLevel: 170,
-					diastolicLevel: 120,
-					id: UUID(),
-					date: Date().advanced(by: TimeInterval(integerLiteral: Int64(10*18000))),
-					pulse: 55,
-					note: "oke")
-	]
+	@Published private (set) var measurements: [Measurement] = []
+	var fetchedResult: FetchedResults<MeasurementData>? {
+		didSet {
+			updateFetch()
+		}
+	}
 	
+	private func updateFetch() {
+		guard let fetchedResult = fetchedResult else { return }
+		var measurements: [Measurement] = []
+		
+		for result in fetchedResult {
+			let measurement = Measurement(
+				systolicLevel: Int(result.systolicLevel),
+				diastolicLevel: Int(result.diastolicLevel),
+				id: result.id ?? UUID(),
+				date: result.date ?? Date(),
+				pulse: result.pulse == 0 ? nil : Int(result.pulse),
+				note: result.note == "" ? nil : result.note
+			)
+			measurements.append(measurement)
+		}
+		self.measurements = measurements
+	}
+
 	func addOrEditMeasurement(_ measurement: Measurement) {
 		if let index = measurements.firstIndex(where: { $0.id == measurement.id }) {
 			measurements[index] = measurement
@@ -30,7 +46,5 @@ final class DataStore: ObservableObject {
 		PersistenceController.convertAndSaveAllMeasurements(measurement: measurements)
 	}
 	
-	private init() {
-
-	}
+	private init() {}
 }

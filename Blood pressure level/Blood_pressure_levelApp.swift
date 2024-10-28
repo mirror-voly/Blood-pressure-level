@@ -17,9 +17,6 @@ struct Blood_pressure_levelApp: App {
 			PressureOverviewScreen(dataStore: dataStore)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
 				.environmentObject(dataStore)
-				.onAppear {
-					dataStore.context = persistenceController.container.viewContext
-				}
         }
     }
 }

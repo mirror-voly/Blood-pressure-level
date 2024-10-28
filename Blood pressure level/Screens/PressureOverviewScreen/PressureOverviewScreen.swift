@@ -18,9 +18,6 @@ struct PressureOverviewScreen: View {
 		NavigationStack {
 			ZStack {
 				BackgroundView(backgroundType: .mainScreen)
-					.onAppear(perform: {
-						print(measurementData.count)
-					})
 				VStack {
 					PresureOverviewHeaderView(viewModel: viewModel)
 						.padding(.bottom)
@@ -46,8 +43,10 @@ struct PressureOverviewScreen: View {
 				AddNewMeasurementScreen(dataStore: dataStore)
 			}
 		}
+		.onAppear(perform: {
+			dataStore.fetchedResult = measurementData
+		})
 	}
-	
 	init(dataStore: DataStore) {
 		self._viewModel = StateObject(wrappedValue: PressureOverviewViewModel(dataStore: dataStore))
 	}
