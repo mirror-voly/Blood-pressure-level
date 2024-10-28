@@ -166,7 +166,6 @@
 				516E7EA52CCB9B0E00741283 /* Screens */,
 				5191C62F2CCA410600AD3403 /* Helpers */,
 				517014F12CC8E1860058BC9F /* Assets.xcassets */,
-				517015082CC939E80058BC9F /* CoreData */,
 				517014F82CC8E1860058BC9F /* Blood_pressure_level.xcdatamodeld */,
 				517014F32CC8E1860058BC9F /* Preview Content */,
 			);
@@ -201,14 +200,6 @@
 			path = PressureOverviewScreen;
 			sourceTree = "<group>";
 		};
-		517015082CC939E80058BC9F /* CoreData */ = {
-			isa = PBXGroup;
-			children = (
-				517014F62CC8E1860058BC9F /* Persistence.swift */,
-			);
-			path = CoreData;
-			sourceTree = "<group>";
-		};
 		5191C62C2CCA301300AD3403 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -228,7 +219,7 @@
 		5191C62F2CCA410600AD3403 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				517738042CCD0843003CEC44 /* DataStore.swift */,
+				51934F6E2CD015C9003349F2 /* Memory */,
 				5191C62D2CCA308500AD3403 /* BackgroundView.swift */,
 				5191C6342CCA782300AD3403 /* Triangle.swift */,
 				517015062CC939900058BC9F /* Enums */,
@@ -246,6 +237,15 @@
 				517738022CCD0332003CEC44 /* AddNewMeasurementViewModel.swift */,
 			);
 			path = AddNewMeasurementScreen;
+			sourceTree = "<group>";
+		};
+		51934F6E2CD015C9003349F2 /* Memory */ = {
+			isa = PBXGroup;
+			children = (
+				517738042CCD0843003CEC44 /* DataStore.swift */,
+				517014F62CC8E1860058BC9F /* Persistence.swift */,
+			);
+			path = Memory;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

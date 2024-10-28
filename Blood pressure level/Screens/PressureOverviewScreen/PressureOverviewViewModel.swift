@@ -49,15 +49,15 @@ final class PressureOverviewViewModel: ObservableObject {
 	var minAndMaxPressureLevelInfo: String? {
 		guard let info = getMinAndMaxPressureLevel() else { return nil }
 		if let diastolicMin = info.diastolic.min, let systolicMin = info.systolic.min {
-			return "\(info.diastolic.max) - \(info.systolic.max) / \(diastolicMin) - \(systolicMin)"
+			return "\(systolicMin) - \(info.systolic.max) / \(diastolicMin) - \(info.diastolic.max)"
 		} else {
-			return "\(info.diastolic.max) - \(info.systolic.max)"
+			return "\(info.systolic.max) / \(info.diastolic.max)"
 		}
 	}
 	var minAndMaxPulseLevelInfo: String? {
 		guard let pulse = getMinAndMaxPulseLevel() else { return nil }
 		if let min = pulse.min, min != pulse.max {
-			return "\(pulse.max) - \(min)"
+			return "\(min) - \(pulse.max)"
 		} else {
 			return "\(pulse.max)"
 		}
@@ -73,59 +73,34 @@ final class PressureOverviewViewModel: ObservableObject {
 		}
 	}
 	//MARK: Functions
-	private func sortByDate(measurements: [Measurement]) -> [Measurement] {
+	private func sortByTime(measurements: [Measurement]) -> [Measurement] {
 		measurements.sorted(by: { $0.date > $1.date	})
 	}
 	
-	private func sortAndAverageMeasurements(measurements: [Measurement]) -> [Measurement] {
+	private func sortAndMakeAverageMeasurements(measurements: [Measurement]) -> [Measurement] {
 		var groupedMeasurements: [Date: [Measurement]] = [:]
 		var averagedMeasurements: [Measurement] = []
 		for measurement in measurements {
 			let dateKey = Calendar.current.startOfDay(for: measurement.date)
 			groupedMeasurements[dateKey, default: []].append(measurement)
 		}
+		
 		for (_, group) in groupedMeasurements {
 			if !group.isEmpty {
 				let averageSystolic = group.map { $0.systolicLevel }.reduce(0, +) / group.count
 				let averageDiastolic = group.map { $0.diastolicLevel }.reduce(0, +) / group.count
-				let averagePulse = group.compactMap { $0.pulse }.reduce(0, +) / group.count
+				let pulseCount = group.compactMap { $0.pulse }.count
+				let averagePulse = group.compactMap { $0.pulse }.reduce(0, +) / pulseCount
 				let notes = group.compactMap { $0.note }
 				let averagedMeasurement = Measurement(systolicLevel: averageSystolic, diastolicLevel: averageDiastolic, id: UUID(), date: group[0].date, pulse: averagePulse == 0 ? nil : averagePulse, note: notes.first)
-				
 				averagedMeasurements.append(averagedMeasurement)
 			}
 		}
-		let sortedMeasurements = sortByDate(measurements: averagedMeasurements)
+		let sortedMeasurements = sortByTime(measurements: averagedMeasurements)
 		return sortedMeasurements
 	}
 
-	func getTimeInterval() -> (startOfPeriod: Date, endOfPeriod: Date) {
-		let start: Date
-		let end: Date
-		
-		switch period {
-			case .day:
-				start = calendar.startOfDay(for: currentDate)
-				end = start.addingTimeInterval(86400)
-				return (startOfPeriod: start, endOfPeriod: end)
-				
-			case .week:
-				if let startDate = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: currentDate)) {
-					start = startDate
-					let days = calendar.date(byAdding: .day, value: 6, to: start) ?? start
-					end = days.addingTimeInterval(86399)
-					return (startOfPeriod: start, endOfPeriod: end)
-				}
-				
-			case .month:
-				if let end = calendar.date(from: calendar.dateComponents([.year, .month, .day], from: currentDate)) {
-					start = calendar.date(byAdding: .day, value: -30, to: end) ?? end
-					return (startOfPeriod: start, endOfPeriod: end)
-				}
-		}
-		
-		return (startOfPeriod: currentDate, endOfPeriod: currentDate)
-	}
+	
 
 	private func getMeasurementsForPresentationPeriod() -> [Measurement] {
 		let (startOfPeriod, endOfPeriod) = getTimeInterval()
@@ -134,18 +109,10 @@ final class PressureOverviewViewModel: ObservableObject {
 			return measurement.date >= startOfPeriod && measurement.date < endOfPeriod
 		}
 		
-		return period == .day ? sortByDate(measurements: filtered) : sortAndAverageMeasurements(measurements: filtered)
+		return period == .day ? sortByTime(measurements: filtered) : sortAndMakeAverageMeasurements(measurements: filtered)
 	}
 
-	func formatDate(for date: Date) -> String {
-		switch period {
-		case .day:
-			formatter.dateFormat = "H"
-		case .week, .month:
-			formatter.dateFormat = "d.MM"
-		}
-		return formatter.string(from: date)
-	}
+	
 	
 	func getAxisValues() -> AxisMarkValues {
 		switch period {
@@ -208,18 +175,56 @@ final class PressureOverviewViewModel: ObservableObject {
 		return pulseInfo
 	}
 	
-	func finnSelection(xValue: Date) {
+	func findAndSetSelection(xValue: Date) {
 		let shift: Double = period == .day ? 1800 : 43200
 		let measurement = filteredMeasurementsForPresentationPeriod.first(where: { measurement in
 			return measurement.date >= xValue.addingTimeInterval(-shift) && measurement.date <= xValue.addingTimeInterval(shift)
 		})
-		selectedMessurment = measurement ?? nil
+		selectedMessurment = measurement
 	}
 	
 	func getNoteInfo(measurement: Measurement?) -> (time: String, text: String)? {
 		guard let measurement = measurement, let note = measurement.note else { return nil }
 		formatter.dateFormat = "d.MM H:mm"
 		return (formatter.string(from: measurement.date), note)
+	}
+	
+	func formatDate(for date: Date) -> String {
+		switch period {
+		case .day:
+			formatter.dateFormat = "H"
+		case .week, .month:
+			formatter.dateFormat = "d.MM"
+		}
+		return formatter.string(from: date)
+	}
+	
+	func getTimeInterval() -> (startOfPeriod: Date, endOfPeriod: Date) {
+		let start: Date
+		let end: Date
+		
+		switch period {
+			case .day:
+				start = calendar.startOfDay(for: currentDate)
+				end = start.addingTimeInterval(86400)
+				return (startOfPeriod: start, endOfPeriod: end)
+				
+			case .week:
+				if let startDate = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: currentDate)) {
+					start = startDate
+					let days = calendar.date(byAdding: .day, value: 6, to: start) ?? start
+					end = days.addingTimeInterval(86399)
+					return (startOfPeriod: start, endOfPeriod: end)
+				}
+				
+			case .month:
+				if let end = calendar.date(from: calendar.dateComponents([.year, .month, .day], from: currentDate)) {
+					start = calendar.date(byAdding: .day, value: -30, to: end) ?? end
+					return (startOfPeriod: start, endOfPeriod: end)
+				}
+		}
+		
+		return (startOfPeriod: currentDate, endOfPeriod: currentDate)
 	}
 	
 	init(dataStore: DataStore) {

@@ -18,45 +18,45 @@ struct ChartView: View {
 			// MARK: - Chart data placement
 			ForEach(viewModel.filteredMeasurementsForPresentationPeriod) { measurement in
 				Plot {
-					LineMark(x: .value("Hour", measurement.date,
+					LineMark(x: .value("hour", measurement.date,
 									   unit: viewModel.calendarComponentForPeriod),
-							 y: .value("SystolicLevel", measurement.systolicLevel))
+							 y: .value("systolicLevel", measurement.systolicLevel))
 					.foregroundStyle(by: .value("Pressure", "systolic"))
 					
-					LineMark(x: .value("Hour", measurement.date,
+					LineMark(x: .value("hour", measurement.date,
 									   unit: viewModel.calendarComponentForPeriod),
-							 y: .value("SystolicLevel", measurement.diastolicLevel))
-					.foregroundStyle(by: .value("Pressure", "diastolic"))
+							 y: .value("systolicLevel", measurement.diastolicLevel))
+					.foregroundStyle(by: .value("pressure", "diastolic"))
 				}
 				.interpolationMethod(.catmullRom)
 				.lineStyle(StrokeStyle(lineWidth: 4))
 				
 				Plot {
-					PointMark(x: .value("Hour", measurement.date,
-										unit: viewModel.calendarComponentForPeriod), y: .value("SystolicLevel", measurement.systolicLevel))
+					PointMark(x: .value("hour", measurement.date,
+										unit: viewModel.calendarComponentForPeriod), y: .value("systolicLevel", measurement.systolicLevel))
 					.foregroundStyle(.systolic)
 					
 					
-					PointMark(x: .value("Hour", measurement.date,
+					PointMark(x: .value("hour", measurement.date,
 										unit: viewModel.calendarComponentForPeriod),
-							  y: .value("DiastolicLevel", measurement.diastolicLevel))
+							  y: .value("diastolicLevel", measurement.diastolicLevel))
 					.foregroundStyle(.diastolic)
 				}
 				.symbolSize(40)
 			}
 			
 			ForEach(viewModel.measurementsWithNotes) { measurement in
-				PointMark(x: .value("Hour", measurement.date,
+				PointMark(x: .value("hour", measurement.date,
 									unit: .second),
-						  y: .value("Note", measurement.systolicLevel))
+						  y: .value("note", measurement.systolicLevel))
 				.symbol {
 					Image(systemName: "circle")
 						.resizable()
 						.bold()
 						.foregroundStyle(.blue)
 						.frame(width: 6, height: 6)
-						.padding(.leading, 20)
-						.padding(.bottom, 20)
+						.padding(.leading, 10)
+						.padding(.bottom, 10)
 				}
 			}
 			// MARK: - Chart lines
@@ -120,7 +120,7 @@ struct ChartView: View {
 								
 								guard let xValue = chart.value(atX: xCurrent, as: Date.self) else { return }
 
-								viewModel.finnSelection(xValue: xValue)
+								viewModel.findAndSetSelection(xValue: xValue)
 							}
 					)
 			}

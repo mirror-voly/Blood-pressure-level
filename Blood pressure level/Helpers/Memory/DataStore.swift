@@ -40,10 +40,12 @@ final class DataStore: ObservableObject {
 	func addOrEditMeasurement(_ measurement: Measurement) {
 		if let index = measurements.firstIndex(where: { $0.id == measurement.id }) {
 			measurements[index] = measurement
+			PersistenceController.convertAndEdit(measurement) 
 		} else {
 			measurements.append(measurement)
+			PersistenceController.convertAndSave(measurement)
 		}
-		PersistenceController.convertAndSaveAllMeasurements(measurement: measurements)
+		
 	}
 	
 	private init() {}
