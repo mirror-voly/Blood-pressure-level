@@ -73,6 +73,34 @@ final class PressureOverviewViewModel: ObservableObject {
 		measurements.sorted(by: { $0.date > $1.date	})
 	}
 	
+	private func sortAndAverageMeasurements(measurements: [Measurement]) -> [Measurement] {
+		var groupedMeasurements: [Date: [Measurement]] = [:]
+		
+		for measurement in measurements {
+			let dateKey = Calendar.current.startOfDay(for: measurement.date)
+			groupedMeasurements[dateKey, default: []].append(measurement)
+		}
+		
+		var averagedMeasurements: [Measurement] = []
+		
+		for (_, group) in groupedMeasurements {
+			if !group.isEmpty {
+				let averageSystolic = group.map { $0.systolicLevel }.reduce(0, +) / group.count
+				let averageDiastolic = group.map { $0.diastolicLevel }.reduce(0, +) / group.count
+				let averagePulse = group.compactMap { $0.pulse }.reduce(0, +) / group.count
+				
+				// Создаем новое измерение с усредненными значениями
+				let averagedMeasurement = Measurement(systolicLevel: averageSystolic, diastolicLevel: averageDiastolic, id: UUID(), date: group[0].date, pulse: averagePulse, note: nil)
+				
+				averagedMeasurements.append(averagedMeasurement)
+			}
+		}
+		let sortedMeasurements = sortByDate(measurements: averagedMeasurements)
+		
+		return sortedMeasurements
+	}
+
+	
 	func getTimeInterval() -> (startOfPeriod: Date, endOfPeriod: Date) {
 		let start: Date
 		let end: Date
@@ -93,7 +121,7 @@ final class PressureOverviewViewModel: ObservableObject {
 				
 			case .month:
 				if let end = calendar.date(from: calendar.dateComponents([.year, .month, .day], from: currentDate)) {
-					start = calendar.date(byAdding: .month, value: -1, to: end) ?? end
+					start = calendar.date(byAdding: .day, value: -30, to: end) ?? end
 					return (startOfPeriod: start, endOfPeriod: end)
 				}
 		}
@@ -109,7 +137,7 @@ final class PressureOverviewViewModel: ObservableObject {
 			return measurement.date >= startOfPeriod && measurement.date < endOfPeriod
 		}
 		
-		return sortByDate(measurements: filtered)
+		return period == .day ? sortByDate(measurements: filtered) : sortAndAverageMeasurements(measurements: filtered)
 	}
 
 	func formatDate(for date: Date) -> String {
