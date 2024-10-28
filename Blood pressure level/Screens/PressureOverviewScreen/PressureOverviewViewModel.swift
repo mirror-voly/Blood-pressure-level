@@ -31,14 +31,17 @@ final class PressureOverviewViewModel: ObservableObject {
 		let end = date.endOfPeriod.formatted(.dateTime.month().day())
 		return "\(start)-\(end)"
 	}
-	var filteredMeasurementsForPresentationPeriod: [Measurement] {
+	private var filteredMeasurementsForPresentationPeriod: [Measurement] {
 		getMeasurementsForPresentationPeriod()
 	}
 	var chartAverageMeasurements: [Measurement] {
-		period != .day ? sortAndMakeAverageMeasurements(measurements: filteredMeasurementsForPresentationPeriod) : filteredMeasurementsForPresentationPeriod
+		period != .day ? sortAndMakeAverageMeasurements(filteredMeasurementsForPresentationPeriod) : filteredMeasurementsForPresentationPeriod
 	}
 	var measurementsWithNotes: [Measurement] {
-		filteredMeasurementsForPresentationPeriod.filter({ $0.note != nil })
+		let filterNotes = filteredMeasurementsForPresentationPeriod.filter({ $0.note != nil })
+		
+		return period != .day ? findAverageNote(filterNotes) : filterNotes
+		
 	}
 	var timeInterval: (startOfPeriod: Date, endOfPeriod: Date) {
 		getTimeInterval()
@@ -74,7 +77,7 @@ final class PressureOverviewViewModel: ObservableObject {
 		measurements.sorted(by: { $0.date > $1.date	})
 	}
 	
-	private func sortAndMakeAverageMeasurements(measurements: [Measurement]) -> [Measurement] {
+	private func sortAndMakeAverageMeasurements(_ measurements: [Measurement]) -> [Measurement] {
 		var groupedMeasurements: [Date: [Measurement]] = [:]
 		var averagedMeasurements: [Measurement] = []
 		for measurement in measurements {
@@ -86,7 +89,6 @@ final class PressureOverviewViewModel: ObservableObject {
 			if !group.isEmpty {
 				let averageSystolic = group.map { $0.systolicLevel }.reduce(0, +) / group.count
 				let averageDiastolic = group.map { $0.diastolicLevel }.reduce(0, +) / group.count
-
 				let averagedMeasurement = Measurement(systolicLevel: averageSystolic, diastolicLevel: averageDiastolic, id: UUID(), date: group[0].date, pulse: nil, note: nil)
 				averagedMeasurements.append(averagedMeasurement)
 			}
@@ -94,8 +96,15 @@ final class PressureOverviewViewModel: ObservableObject {
 		let sortedMeasurements = sortByTime(measurements: averagedMeasurements)
 		return sortedMeasurements
 	}
-
 	
+	func findAverageNote(_ filterNotes: [Measurement]) -> [Measurement] {
+		let chartDates = Set(chartAverageMeasurements.map { Calendar.current.startOfDay(for: $0.date) })
+		
+		return filterNotes.compactMap { item in
+			let itemDate = Calendar.current.startOfDay(for: item.date)
+			return chartDates.contains(itemDate) ? chartAverageMeasurements.first(where: { Calendar.current.startOfDay(for: $0.date) == itemDate }) : nil
+		}
+	}
 
 	private func getMeasurementsForPresentationPeriod() -> [Measurement] {
 		let (startOfPeriod, endOfPeriod) = getTimeInterval()

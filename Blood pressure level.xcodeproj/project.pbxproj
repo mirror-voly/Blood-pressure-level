@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		511830C22CD12CED00DF918A /* NoteList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511830C12CD12CED00DF918A /* NoteList.swift */; };
+		511830C42CD12D5100DF918A /* NoteEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511830C32CD12D5100DF918A /* NoteEmptyStateView.swift */; };
 		516CACAA2CCE3CA400762B0A /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516CACA92CCE3CA400762B0A /* ChartView.swift */; };
 		516CACAC2CCEF21400762B0A /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516CACAB2CCEF21400762B0A /* NoteView.swift */; };
 		516E7E9C2CCB6CE400741283 /* View+Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516E7E9B2CCB6CE400741283 /* View+Placeholder.swift */; };
@@ -51,6 +53,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		511830C12CD12CED00DF918A /* NoteList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteList.swift; sourceTree = "<group>"; };
+		511830C32CD12D5100DF918A /* NoteEmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEmptyStateView.swift; sourceTree = "<group>"; };
 		516CACA92CCE3CA400762B0A /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		516CACAB2CCEF21400762B0A /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
 		516E7E9B2CCB6CE400741283 /* View+Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Placeholder.swift"; sourceTree = "<group>"; };
@@ -113,7 +117,9 @@
 			children = (
 				5191C62A2CCA1EFB00AD3403 /* PresureNoteView.swift */,
 				517064BE2CCFC65500641620 /* PresureNoteHeader.swift */,
+				511830C12CD12CED00DF918A /* NoteList.swift */,
 				516CACAB2CCEF21400762B0A /* NoteView.swift */,
+				511830C32CD12D5100DF918A /* NoteEmptyStateView.swift */,
 			);
 			path = Note;
 			sourceTree = "<group>";
@@ -365,6 +371,7 @@
 			files = (
 				5191C62E2CCA308500AD3403 /* BackgroundView.swift in Sources */,
 				516E7EA22CCB990400741283 /* AddNewHeaderView.swift in Sources */,
+				511830C22CD12CED00DF918A /* NoteList.swift in Sources */,
 				517738032CCD0332003CEC44 /* AddNewMeasurementViewModel.swift in Sources */,
 				516E7EB72CCBCED300741283 /* Measurement.swift in Sources */,
 				516E7EAE2CCBBCCD00741283 /* DateFields.swift in Sources */,
@@ -384,6 +391,7 @@
 				5191C6332CCA693E00AD3403 /* OverlayTip.swift in Sources */,
 				517014EE2CC8E1850058BC9F /* Blood_pressure_levelApp.swift in Sources */,
 				516E7EA02CCB77C600741283 /* DateFieldView.swift in Sources */,
+				511830C42CD12D5100DF918A /* NoteEmptyStateView.swift in Sources */,
 				516E7EB32CCBBFE000741283 /* String+Localized.swift in Sources */,
 				516E7E9E2CCB736600741283 /* TextFieldView.swift in Sources */,
 				516E7EAC2CCBBB9400741283 /* MainFieldsView.swift in Sources */,

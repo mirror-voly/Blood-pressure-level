@@ -17,9 +17,9 @@ struct PresureNoteView: View {
 				PresureNoteHeader(viewModel: viewModel)
 				
 				if viewModel.measurementsWithNotes.isEmpty {
-					emptyStateView()
+					NoteEmptyStateView(viewModel: viewModel)
 				} else {
-					notesView()
+					NoteList(viewModel: viewModel)
 				}
 			}
 			.padding()	
@@ -27,36 +27,5 @@ struct PresureNoteView: View {
 		.background(.scheme)
 		.clipShape(RoundedRectangle(cornerRadius: Constants.Radius.big))
 		.frame(maxHeight: Constants.FrameSize.presureNoteViewMaxHeight, alignment: .top)
-	}
-}
-
-extension PresureNoteView {
-	@ViewBuilder
-	func notesView() -> some View {
-		if let note = viewModel.selectedMessurment?.note, !note.isEmpty {
-			ScrollView {
-				ForEach(note, id: \.?.time) { noteInfo in
-					if let noteInfo = noteInfo {
-						NoteView(noteInfo: noteInfo)
-					}
-				}
-			}
-		} else if viewModel.measurementsWithNotes.count == 1, let noteInfo = viewModel.getNoteInfo() {
-			ScrollView {
-				NoteView(noteInfo: noteInfo)
-			}
-		}
-	}
-
-	func emptyStateView() -> some View {
-		Group {
-			Divider()
-			
-			Text("describe_your_condition".localized)
-				.font(.system(size: Constants.FontSize.small))
-				.foregroundStyle(.secondaryGrayDark)
-				.frame(maxWidth: .infinity, alignment: .leading)
-				.padding(.vertical, Constants.Padding.micro)
-		}
 	}
 }

@@ -44,10 +44,10 @@ struct ChartView: View {
 				}
 				.symbolSize(Constants.Chart.symbolSize)
 			}
-			
+			// MARK: - Chart note icons
 			ForEach(viewModel.measurementsWithNotes) { measurement in
 				PointMark(x: .value("hour", measurement.date,
-									unit: .second),
+									unit: viewModel.calendarComponentForPeriod),
 						  y: .value("systolicLevel", measurement.systolicLevel))
 				.symbol {
 					Image(systemName: "circle")
@@ -119,7 +119,7 @@ struct ChartView: View {
 								let xCurrent = value.location.x - start
 								
 								guard let xValue = chart.value(atX: xCurrent, as: Date.self) else { return }
-
+								
 								viewModel.findAndSetSelection(xValue: xValue)
 							}
 					)
