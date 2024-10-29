@@ -190,7 +190,7 @@ final class PressureOverviewViewModel: ObservableObject {
 		let diastolicLevelMin = diastolicLevels.min()
 		let pulseMax = pulses.max()
 		let pulseMin = pulses.min()
-		let date = firstMeasurement.date.formatted(.dateTime.year().month().day()).localizedCapitalized
+		let date = firstMeasurement.date
 		let notesInfo = notes.map { getNoteInfo(measurement: $0) }
 		
 		let info = SelectedMeasurementsInfo(systolicLevelsMax: systolicLevelsMax,
@@ -202,6 +202,10 @@ final class PressureOverviewViewModel: ObservableObject {
 											note: notesInfo,
 											date: date)
 		return info
+	}
+	
+	func getDateText(date: Date, formatStyle: PresentationPeriod) -> String {
+		DatePrepare.formatDate(date: date, formatStyle: formatStyle)
 	}
 	
 	func findAndSetSelection(xValue: Date) {

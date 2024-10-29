@@ -18,4 +18,12 @@ final class DatePrepare {
 		}
 		return formattedDate
 	}
+	
+	static func formatDate(date: Date, formatStyle: PresentationPeriod) -> String {
+		if formatStyle == .day {
+			date.formatted(.dateTime.hour().minute()).localizedCapitalized
+		} else {
+			date.formatted(.dateTime.year().month().day()).localizedCapitalized
+		}
+	}
 }

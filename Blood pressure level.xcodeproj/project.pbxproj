@@ -52,6 +52,9 @@
 		51934F752CD0817E003349F2 /* SubscriptionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51934F742CD0817E003349F2 /* SubscriptionsManager.swift */; };
 		51C95D982CD0538B0054B405 /* NoteFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C95D972CD0538B0054B405 /* NoteFieldView.swift */; };
 		51C95D9A2CD05A050054B405 /* DatePrepare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C95D992CD05A050054B405 /* DatePrepare.swift */; };
+		51C95D9C2CD060B90054B405 /* BigOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C95D9B2CD060B90054B405 /* BigOverlayView.swift */; };
+		51C95D9E2CD0617D0054B405 /* NoteOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C95D9D2CD0617D0054B405 /* NoteOverlayView.swift */; };
+		51C95DA02CD063120054B405 /* SmallOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C95D9F2CD063120054B405 /* SmallOverlayView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -101,6 +104,9 @@
 		51934F762CD08317003349F2 /* LICENSE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
 		51C95D972CD0538B0054B405 /* NoteFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteFieldView.swift; sourceTree = "<group>"; };
 		51C95D992CD05A050054B405 /* DatePrepare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePrepare.swift; sourceTree = "<group>"; };
+		51C95D9B2CD060B90054B405 /* BigOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigOverlayView.swift; sourceTree = "<group>"; };
+		51C95D9D2CD0617D0054B405 /* NoteOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteOverlayView.swift; sourceTree = "<group>"; };
+		51C95D9F2CD063120054B405 /* SmallOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallOverlayView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +139,9 @@
 			children = (
 				5191C6322CCA693E00AD3403 /* OverlayTip.swift */,
 				517064BC2CCFA1F600641620 /* OverlaySelectionPresenter.swift */,
+				51C95D9B2CD060B90054B405 /* BigOverlayView.swift */,
+				51C95D9F2CD063120054B405 /* SmallOverlayView.swift */,
+				51C95D9D2CD0617D0054B405 /* NoteOverlayView.swift */,
 			);
 			path = Overlay;
 			sourceTree = "<group>";
@@ -247,6 +256,7 @@
 				5191C6282CCA1E8F00AD3403 /* PressureSummaryView.swift */,
 				516CACA92CCE3CA400762B0A /* ChartView.swift */,
 				511830BF2CD12BCB00DF918A /* Note */,
+				511830C02CD12BDF00DF918A /* Overlay */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -258,7 +268,6 @@
 				5191C62D2CCA308500AD3403 /* BackgroundView.swift */,
 				5191C6342CCA782300AD3403 /* Triangle.swift */,
 				51C95D992CD05A050054B405 /* DatePrepare.swift */,
-				511830C02CD12BDF00DF918A /* Overlay */,
 				517015062CC939900058BC9F /* Enums */,
 				516E7EB52CCBC2BF00741283 /* Extentions */,
 				516E7EAF2CCBBF7700741283 /* Localizable.strings */,
@@ -383,10 +392,13 @@
 				516E7EAE2CCBBCCD00741283 /* DateFields.swift in Sources */,
 				517738092CCD40E7003CEC44 /* View+HideKeyboard.swift in Sources */,
 				5191C6352CCA782300AD3403 /* Triangle.swift in Sources */,
+				51C95DA02CD063120054B405 /* SmallOverlayView.swift in Sources */,
 				517014FA2CC8E1860058BC9F /* Blood_pressure_level.xcdatamodeld in Sources */,
+				51C95D9C2CD060B90054B405 /* BigOverlayView.swift in Sources */,
 				517738052CCD0843003CEC44 /* DataStore.swift in Sources */,
 				517015012CC92C0F0058BC9F /* PresentationPeriod.swift in Sources */,
 				517014F72CC8E1860058BC9F /* Persistence.swift in Sources */,
+				51C95D9E2CD0617D0054B405 /* NoteOverlayView.swift in Sources */,
 				5191C6372CCA7A6F00AD3403 /* AddNewMeasurementScreen.swift in Sources */,
 				517014F02CC8E1850058BC9F /* PressureOverviewScreen.swift in Sources */,
 				51C95D982CD0538B0054B405 /* NoteFieldView.swift in Sources */,

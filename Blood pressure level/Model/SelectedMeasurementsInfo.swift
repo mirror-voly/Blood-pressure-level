@@ -15,9 +15,9 @@ final class SelectedMeasurementsInfo {
 	let pulseMax: Int?
 	let pulseMin: Int?
 	let note: [(time: String, text: String)?]
-	let date: String
+	let date: Date
 	
-	init(systolicLevelsMax: Int, systolicLevelsMin: Int?, diastolicLevelMax: Int, diastolicLevelMin: Int?, pulseMax: Int?, pulseMin: Int?, note: [(time: String, text: String)?], date: String) {
+	init(systolicLevelsMax: Int, systolicLevelsMin: Int?, diastolicLevelMax: Int, diastolicLevelMin: Int?, pulseMax: Int?, pulseMin: Int?, note: [(time: String, text: String)?], date: Date) {
 		self.systolicLevelsMax = systolicLevelsMax
 		self.systolicLevelsMin = systolicLevelsMin
 		self.diastolicLevelMax = diastolicLevelMax
