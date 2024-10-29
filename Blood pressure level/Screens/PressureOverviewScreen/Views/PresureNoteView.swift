@@ -17,24 +17,23 @@ struct PresureNoteView: View {
 				PresureNoteHeader(viewModel: viewModel)
 				
 				if let note = viewModel.selectedMessurment?.note {
-					ScrollView { 
-						ForEach(note, id: \.?.time) { noteInfo in
-							
-							Divider()
-							
-							if let noteInfo = noteInfo {
-								NoteView(noteInfo: noteInfo)
+					if !note.isEmpty {
+						ScrollView { 
+							ForEach(note, id: \.?.time) { noteInfo in
+								
+								if let noteInfo = noteInfo {
+									NoteView(noteInfo: noteInfo)
+								}
+								
 							}
-							
 						}
 					}
+				}
+					else if viewModel.measurementsWithNotes.count == 1 {
 					
-	
-				} else if viewModel.measurementsWithNotes.count == 1 {
 					if let noteInfo = viewModel.getNoteInfo() {
 						NoteView(noteInfo: noteInfo)
 					}
-					
 				} else if viewModel.measurementsWithNotes.isEmpty {
 					Divider()
 					

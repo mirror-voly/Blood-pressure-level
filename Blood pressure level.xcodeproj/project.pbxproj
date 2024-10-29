@@ -46,6 +46,8 @@
 		5191C6352CCA782300AD3403 /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5191C6342CCA782300AD3403 /* Triangle.swift */; };
 		5191C6372CCA7A6F00AD3403 /* AddNewMeasurementScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5191C6362CCA7A6F00AD3403 /* AddNewMeasurementScreen.swift */; };
 		51934F702CD04791003349F2 /* SelectedMeasurementsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51934F6F2CD04791003349F2 /* SelectedMeasurementsInfo.swift */; };
+		51934F732CD080A9003349F2 /* RxRelay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51934F722CD080A9003349F2 /* RxRelay.swift */; };
+		51934F752CD0817E003349F2 /* SubscriptionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51934F742CD0817E003349F2 /* SubscriptionsManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,6 +90,9 @@
 		5191C6342CCA782300AD3403 /* Triangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Triangle.swift; sourceTree = "<group>"; };
 		5191C6362CCA7A6F00AD3403 /* AddNewMeasurementScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewMeasurementScreen.swift; sourceTree = "<group>"; };
 		51934F6F2CD04791003349F2 /* SelectedMeasurementsInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedMeasurementsInfo.swift; sourceTree = "<group>"; };
+		51934F722CD080A9003349F2 /* RxRelay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxRelay.swift; sourceTree = "<group>"; };
+		51934F742CD0817E003349F2 /* SubscriptionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsManager.swift; sourceTree = "<group>"; };
+		51934F762CD08317003349F2 /* LICENSE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +175,7 @@
 				5191C62F2CCA410600AD3403 /* Helpers */,
 				517014F12CC8E1860058BC9F /* Assets.xcassets */,
 				517014F82CC8E1860058BC9F /* Blood_pressure_level.xcdatamodeld */,
+				51934F762CD08317003349F2 /* LICENSE.md */,
 				517014F32CC8E1860058BC9F /* Preview Content */,
 			);
 			path = "Blood pressure level";
@@ -228,6 +234,7 @@
 				517015062CC939900058BC9F /* Enums */,
 				516E7EB52CCBC2BF00741283 /* Extentions */,
 				516E7EAF2CCBBF7700741283 /* Localizable.strings */,
+				51934F782CD08496003349F2 /* RxSwift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -249,6 +256,15 @@
 				517014F62CC8E1860058BC9F /* Persistence.swift */,
 			);
 			path = Memory;
+			sourceTree = "<group>";
+		};
+		51934F782CD08496003349F2 /* RxSwift */ = {
+			isa = PBXGroup;
+			children = (
+				51934F722CD080A9003349F2 /* RxRelay.swift */,
+				51934F742CD0817E003349F2 /* SubscriptionsManager.swift */,
+			);
+			path = RxSwift;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -357,11 +373,13 @@
 				516E7EAC2CCBBB9400741283 /* MainFieldsView.swift in Sources */,
 				516CACAA2CCE3CA400762B0A /* ChartView.swift in Sources */,
 				516E7EAA2CCB9D0400741283 /* Constants.swift in Sources */,
+				51934F732CD080A9003349F2 /* RxRelay.swift in Sources */,
 				517064BD2CCFA1F600641620 /* OverlaySelectionPresenter.swift in Sources */,
 				5170150A2CC93A5C0058BC9F /* PresureOverviewHeaderView.swift in Sources */,
 				516E7EC12CCBDC8600741283 /* PressureOverviewViewModel.swift in Sources */,
 				5191C62B2CCA1EFB00AD3403 /* PresureNoteView.swift in Sources */,
 				517064BF2CCFC65500641620 /* PresureNoteHeader.swift in Sources */,
+				51934F752CD0817E003349F2 /* SubscriptionsManager.swift in Sources */,
 				517015052CC930520058BC9F /* CustomSegmentContolView.swift in Sources */,
 				516E7EA82CCB9B6100741283 /* BackgroundType.swift in Sources */,
 				51934F702CD04791003349F2 /* SelectedMeasurementsInfo.swift in Sources */,

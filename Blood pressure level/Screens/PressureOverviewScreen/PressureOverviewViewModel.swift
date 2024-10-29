@@ -7,8 +7,6 @@
 
 import SwiftUI
 import Charts
-//import RxSwift
-//import RxCocoa
 
 final class PressureOverviewViewModel: ObservableObject {
 	
@@ -27,11 +25,6 @@ final class PressureOverviewViewModel: ObservableObject {
 	private let formatter = DateFormatter()
 	private let calendar = Calendar.current
 	private let currentDate: Date
-//	
-//	var noteForPresent: (time: String, text: String)? {
-//		guard measurementsWithNotes.count == 1 || selectedMessurment?.note != nil else { return nil }
-//		return getNoteInfo(measurement: selectedMessurment?.note != nil ? selectedMessurment : measurementsWithNotes.first)
-//	}
 	var periodInfo: String {
 		let date = getTimeInterval() 
 		let start = date.startOfPeriod.formatted(.dateTime.month().day())
@@ -260,10 +253,23 @@ final class PressureOverviewViewModel: ObservableObject {
 		return (startOfPeriod: currentDate, endOfPeriod: currentDate)
 	}
 	
+	func startTimer() {
+		let dispatchWorkItemON = DispatchWorkItem { 
+			guard self.dataStore.measurements.isEmpty else { return }
+			self.tipIsActive = true
+		}
+		let dispatchWorkItemOff = DispatchWorkItem {
+			self.tipIsActive = false
+		}
+		DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: dispatchWorkItemON)
+		DispatchQueue.main.asyncAfter(deadline: .now() + 15, execute: dispatchWorkItemOff)
+	}
+	
 	init(dataStore: DataStore) {
 		self.dataStore = dataStore
 		self.formattedDate = Date.now.formatted(.dateTime.month().year())
 		self.currentDate = Date()
+		startTimer() 
 	}
 	
 }

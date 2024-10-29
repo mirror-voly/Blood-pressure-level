@@ -12,6 +12,8 @@ struct NoteView: View {
 	let noteInfo: (time: String, text: String)
 	
 	var body: some View {
+		
+		Divider()
 		VStack(alignment: .leading, spacing: 0) {
 			Text(noteInfo.time)
 				.font(.system(size: Constants.FontSize.verySmall))
