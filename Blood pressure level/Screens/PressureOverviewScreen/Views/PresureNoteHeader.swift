@@ -21,10 +21,15 @@ struct PresureNoteHeader: View {
 			Spacer()
 			
 			Button(action: {
-				viewModel.addNewScreenIsPresented = true
+				if viewModel.measurementsWithNotes.isEmpty {
+					viewModel.addNewScreenIsPresented = true	
+				} else {
+					viewModel.isNoteViewOpened.toggle()
+				}
 			}) {
 				Image(systemName: viewModel.measurementsWithNotes.isEmpty ? "plus" : "chevron.right")
-					.font(.system(size: Constants.FontSize.large))
+					.rotationEffect(Angle(degrees: viewModel.isNoteViewOpened ? 90 : 0))
+					.font(.system(size: Constants.FontSize.regular))
 					.fontWeight(.light)
 					.foregroundStyle(.main.opacity(Constants.Opacity.regular))
 			}

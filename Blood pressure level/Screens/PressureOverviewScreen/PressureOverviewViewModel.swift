@@ -19,6 +19,7 @@ final class PressureOverviewViewModel: ObservableObject {
 	}
 	@Published var tipIsActive = false
 	@Published var addNewScreenIsPresented = false
+	@Published var isNoteViewOpened = false
 	@Published var selectedMessurment: SelectedMeasurementsInfo?
 	
 	private let dataStore: DataStore
