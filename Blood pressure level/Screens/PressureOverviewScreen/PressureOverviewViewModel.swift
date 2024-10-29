@@ -19,18 +19,18 @@ final class PressureOverviewViewModel: ObservableObject {
 	}
 	@Published var tipIsActive = false
 	@Published var addNewScreenIsPresented = false
-	@Published var selectedMessurment: Measurement?
+	@Published var selectedMessurment: SelectedMeasurementsInfo?
 	
 	private let dataStore: DataStore
 	let formattedDate: String
 	private let formatter = DateFormatter()
 	private let calendar = Calendar.current
 	private let currentDate: Date
-	
-	var noteForPresent: (time: String, text: String)? {
-		guard measurementsWithNotes.count == 1 || selectedMessurment?.note != nil else { return nil }
-		return getNoteInfo(measurement: selectedMessurment?.note != nil ? selectedMessurment : measurementsWithNotes.first)
-	}
+//	
+//	var noteForPresent: (time: String, text: String)? {
+//		guard measurementsWithNotes.count == 1 || selectedMessurment?.note != nil else { return nil }
+//		return getNoteInfo(measurement: selectedMessurment?.note != nil ? selectedMessurment : measurementsWithNotes.first)
+//	}
 	var periodInfo: String {
 		let date = getTimeInterval() 
 		let start = date.startOfPeriod.formatted(.dateTime.month().day())
@@ -39,6 +39,9 @@ final class PressureOverviewViewModel: ObservableObject {
 	}
 	var filteredMeasurementsForPresentationPeriod: [Measurement] {
 		getMeasurementsForPresentationPeriod()
+	}
+	var chartAverageMeasurements: [Measurement] {
+		period != .day ? sortAndMakeAverageMeasurements(measurements: filteredMeasurementsForPresentationPeriod) : filteredMeasurementsForPresentationPeriod
 	}
 	var measurementsWithNotes: [Measurement] {
 		filteredMeasurementsForPresentationPeriod.filter({ $0.note != nil })
@@ -89,10 +92,8 @@ final class PressureOverviewViewModel: ObservableObject {
 			if !group.isEmpty {
 				let averageSystolic = group.map { $0.systolicLevel }.reduce(0, +) / group.count
 				let averageDiastolic = group.map { $0.diastolicLevel }.reduce(0, +) / group.count
-				let pulseCount = group.compactMap { $0.pulse }.count
-				let averagePulse = group.compactMap { $0.pulse }.reduce(0, +) / pulseCount
-				let notes = group.compactMap { $0.note }
-				let averagedMeasurement = Measurement(systolicLevel: averageSystolic, diastolicLevel: averageDiastolic, id: UUID(), date: group[0].date, pulse: averagePulse == 0 ? nil : averagePulse, note: notes.first)
+
+				let averagedMeasurement = Measurement(systolicLevel: averageSystolic, diastolicLevel: averageDiastolic, id: UUID(), date: group[0].date, pulse: nil, note: nil)
 				averagedMeasurements.append(averagedMeasurement)
 			}
 		}
@@ -109,10 +110,8 @@ final class PressureOverviewViewModel: ObservableObject {
 			return measurement.date >= startOfPeriod && measurement.date < endOfPeriod
 		}
 		
-		return period == .day ? sortByTime(measurements: filtered) : sortAndMakeAverageMeasurements(measurements: filtered)
+		return sortByTime(measurements: filtered)
 	}
-
-	
 	
 	func getAxisValues() -> AxisMarkValues {
 		switch period {
@@ -168,23 +167,56 @@ final class PressureOverviewViewModel: ObservableObject {
 			case let count where count > 1:
 				let pulses = filteredMeasurementsForPresentationPeriod.compactMap { $0.pulse }
 				guard let biggestPulse = pulses.max(), let smallestPulse = pulses.min() else { return nil }
-				pulseInfo = (smallestPulse, biggestPulse)
+				pulseInfo = (max: biggestPulse, min: smallestPulse)
 			default:
 				return nil
 		}
 		return pulseInfo
 	}
 	
+	func makeSelectedInfo(measurements: [Measurement]) -> SelectedMeasurementsInfo? {
+		guard let firstMeasurement = measurements.first else { return nil }
+		let systolicLevels = measurements.map { $0.systolicLevel }
+		let diastolicLevels = measurements.map { $0.diastolicLevel }
+		let pulses = measurements.compactMap { $0.pulse }
+		let notes = measurements.filter({ $0.note != nil })
+		
+		guard let systolicLevelsMax = systolicLevels.max(), let diastolicLevelMax = diastolicLevels.max() else { return nil }
+		
+		let	systolicLevelsMin = systolicLevels.min()
+		let diastolicLevelMin = diastolicLevels.min()
+		let pulseMax = pulses.max()
+		let pulseMin = pulses.min()
+		let date = firstMeasurement.date.formatted(.dateTime.year().month().day()).localizedCapitalized
+		let notesInfo = notes.map { getNoteInfo(measurement: $0) }
+		
+		let info = SelectedMeasurementsInfo(systolicLevelsMax: systolicLevelsMax,
+											systolicLevelsMin: systolicLevelsMin == systolicLevelsMax ? nil : systolicLevelsMin,
+											diastolicLevelMax: diastolicLevelMax,
+											diastolicLevelMin: diastolicLevelMin == diastolicLevelMax ? nil : systolicLevelsMin,
+											pulseMax: pulseMax,
+											pulseMin: pulseMax == pulseMin ? nil : pulseMin,
+											note: notesInfo,
+											date: date)
+		return info
+	}
+	
 	func findAndSetSelection(xValue: Date) {
 		let shift: Double = period == .day ? 1800 : 43200
-		let measurement = filteredMeasurementsForPresentationPeriod.first(where: { measurement in
+		let measurements = filteredMeasurementsForPresentationPeriod.filter({ measurement in
 			return measurement.date >= xValue.addingTimeInterval(-shift) && measurement.date <= xValue.addingTimeInterval(shift)
 		})
-		selectedMessurment = measurement
+		selectedMessurment = makeSelectedInfo(measurements: measurements)
 	}
 	
 	func getNoteInfo(measurement: Measurement?) -> (time: String, text: String)? {
 		guard let measurement = measurement, let note = measurement.note else { return nil }
+		formatter.dateFormat = "d.MM H:mm"
+		return (formatter.string(from: measurement.date), note)
+	}
+	
+	func getNoteInfo() -> (time: String, text: String)? {
+		guard let measurement = measurementsWithNotes.first, let note = measurement.note else { return nil }
 		formatter.dateFormat = "d.MM H:mm"
 		return (formatter.string(from: measurement.date), note)
 	}

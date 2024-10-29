@@ -16,11 +16,24 @@ struct PresureNoteView: View {
 			VStack {
 				PresureNoteHeader(viewModel: viewModel)
 				
-				if let note = viewModel.noteForPresent {
-					Divider()
+				if let note = viewModel.selectedMessurment?.note {
+					ScrollView { 
+						ForEach(note, id: \.?.time) { noteInfo in
+							
+							Divider()
+							
+							if let noteInfo = noteInfo {
+								NoteView(noteInfo: noteInfo)
+							}
+							
+						}
+					}
 					
-					NoteView(noteInfo: note)
-					
+	
+				} else if viewModel.measurementsWithNotes.count == 1 {
+					if let noteInfo = viewModel.getNoteInfo() {
+						NoteView(noteInfo: noteInfo)
+					}
 					
 				} else if viewModel.measurementsWithNotes.isEmpty {
 					Divider()
@@ -36,5 +49,6 @@ struct PresureNoteView: View {
 		}
 		.background(.scheme)
 		.clipShape(RoundedRectangle(cornerRadius: Constants.Radius.big))
+		.frame(maxHeight: 120, alignment: .top)
 	}
 }

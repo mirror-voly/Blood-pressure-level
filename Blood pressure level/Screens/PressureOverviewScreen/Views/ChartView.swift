@@ -16,7 +16,7 @@ struct ChartView: View {
 		
 		Chart {
 			// MARK: - Chart data placement
-			ForEach(viewModel.filteredMeasurementsForPresentationPeriod) { measurement in
+			ForEach(viewModel.chartAverageMeasurements) { measurement in
 				Plot {
 					LineMark(x: .value("hour", measurement.date,
 									   unit: viewModel.calendarComponentForPeriod),
@@ -48,15 +48,14 @@ struct ChartView: View {
 			ForEach(viewModel.measurementsWithNotes) { measurement in
 				PointMark(x: .value("hour", measurement.date,
 									unit: .second),
-						  y: .value("note", measurement.systolicLevel))
+						  y: .value("systolicLevel", measurement.systolicLevel))
 				.symbol {
 					Image(systemName: "circle")
 						.resizable()
 						.bold()
 						.foregroundStyle(.blue)
 						.frame(width: 6, height: 6)
-						.padding(.leading, 10)
-						.padding(.bottom, 10)
+						.offset(x: 10, y: -10)
 				}
 			}
 			// MARK: - Chart lines

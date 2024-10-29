@@ -22,7 +22,13 @@ struct OverlaySelectionPresenter: View {
 								.foregroundStyle(.main.opacity(0.5))
 								.frame(width: 58, alignment: .leading)
 							
-							Text("\(selectedMessurment.systolicLevel)")
+							Group {
+								if let systolicLevelsMin = selectedMessurment.systolicLevelsMin {
+									Text("\(systolicLevelsMin) - \(selectedMessurment.systolicLevelsMax)")
+								} else {
+									Text("\(selectedMessurment.systolicLevelsMax)")
+								}
+							}
 								.font(.system(size: Constants.FontSize.big))
 								.bold()
 							
@@ -32,13 +38,19 @@ struct OverlaySelectionPresenter: View {
 						})
 						
 						VStack(alignment: .leading, content: {
-							if let pulse = selectedMessurment.pulse {
+							if let pulseMax = selectedMessurment.pulseMax {
 								Text("pulse".localized)
 									.font(.system(size: 12))
 									.foregroundStyle(.main.opacity(0.5))
 									.frame(width: 58, alignment: .leading)
 								
-								Text("\(pulse)")
+								Group {
+									if let pulseMin = selectedMessurment.pulseMin {
+											Text("\(pulseMin) - \(pulseMax)")
+									} else {
+											Text("\(pulseMax)")
+									}
+								}
 									.font(.system(size: Constants.FontSize.big))
 									.bold()
 								
@@ -56,7 +68,13 @@ struct OverlaySelectionPresenter: View {
 								.foregroundStyle(.main.opacity(0.5))
 								.frame(width: 58, alignment: .leading)
 							
-							Text("\(selectedMessurment.diastolicLevel)")
+							Group {
+								if let diastolicLevelMin = selectedMessurment.diastolicLevelMin {
+									Text("\(diastolicLevelMin) - \(selectedMessurment.diastolicLevelMax)")
+								} else {
+									Text("\(selectedMessurment.diastolicLevelMax)")
+								}
+							}
 								.font(.system(size: Constants.FontSize.big))
 								.bold()
 							
@@ -69,11 +87,11 @@ struct OverlaySelectionPresenter: View {
 						
 						VStack(alignment: .leading, content: {
 	
-							Text("\(selectedMessurment.date.formatted(.dateTime.year().month().day()))".localizedCapitalized)
+							Text(selectedMessurment.date)
 								.font(.system(size: Constants.FontSize.micro))
 							
 							HStack {
-								let note = selectedMessurment.note
+								let note = selectedMessurment.note.first
 								
 								if note != nil {
 									Image(systemName: "circle")

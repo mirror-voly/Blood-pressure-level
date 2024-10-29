@@ -45,6 +45,7 @@
 		5191C6332CCA693E00AD3403 /* OverlayTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5191C6322CCA693E00AD3403 /* OverlayTip.swift */; };
 		5191C6352CCA782300AD3403 /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5191C6342CCA782300AD3403 /* Triangle.swift */; };
 		5191C6372CCA7A6F00AD3403 /* AddNewMeasurementScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5191C6362CCA7A6F00AD3403 /* AddNewMeasurementScreen.swift */; };
+		51934F702CD04791003349F2 /* SelectedMeasurementsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51934F6F2CD04791003349F2 /* SelectedMeasurementsInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +87,7 @@
 		5191C6322CCA693E00AD3403 /* OverlayTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayTip.swift; sourceTree = "<group>"; };
 		5191C6342CCA782300AD3403 /* Triangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Triangle.swift; sourceTree = "<group>"; };
 		5191C6362CCA7A6F00AD3403 /* AddNewMeasurementScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewMeasurementScreen.swift; sourceTree = "<group>"; };
+		51934F6F2CD04791003349F2 /* SelectedMeasurementsInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedMeasurementsInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				516E7EB62CCBCED300741283 /* Measurement.swift */,
+				51934F6F2CD04791003349F2 /* SelectedMeasurementsInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 			mainGroup = 517014E12CC8E1850058BC9F;
 			packageReferences = (
 				516E7EBB2CCBDC4E00741283 /* XCLocalSwiftPackageReference "../../RxSwift-main" */,
+				51934F712CD04953003349F2 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
 			);
 			productRefGroup = 517014EB2CC8E1850058BC9F /* Products */;
 			projectDirPath = "";
@@ -360,6 +364,7 @@
 				517064BF2CCFC65500641620 /* PresureNoteHeader.swift in Sources */,
 				517015052CC930520058BC9F /* CustomSegmentContolView.swift in Sources */,
 				516E7EA82CCB9B6100741283 /* BackgroundType.swift in Sources */,
+				51934F702CD04791003349F2 /* SelectedMeasurementsInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -596,6 +601,17 @@
 			relativePath = "../../RxSwift-main";
 		};
 /* End XCLocalSwiftPackageReference section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		51934F712CD04953003349F2 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SimplyDanny/SwiftLintPlugins";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.57.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		516E7EBC2CCBDC4E00741283 /* RxCocoa */ = {
