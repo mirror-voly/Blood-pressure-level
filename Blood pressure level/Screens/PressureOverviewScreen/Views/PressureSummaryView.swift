@@ -12,14 +12,15 @@ struct PressureSummaryView: View {
 	@StateObject var viewModel: PressureOverviewViewModel
 	
 	var body: some View {
-		VStack(alignment: .leading, spacing: Constants.Spacing.defaultSpacing) {
-			if let info = viewModel.minAndMaxPressureLevelInfo {
-				VStack(alignment: .leading, spacing: 8, content: {
+		VStack(alignment: .leading, spacing: Constants.Spacing.regular) {
+			
+			VStack(alignment: .leading, spacing: Constants.Spacing.small, content: {
+				if let info = viewModel.minAndMaxPressureLevelInfo {
 					HStack(alignment: .center, content: {
 						Text("pressure".localized)
-							.font(.system(size: 12))
-							.foregroundStyle(.main.opacity(0.5))
-							.frame(width: 58, alignment: .leading)
+							.font(.system(size: Constants.FontSize.verySmall))
+							.foregroundStyle(.main.opacity(Constants.Opacity.big))
+							.frame(width: Constants.FrameSize.textItemWidth, alignment: .leading)
 						
 						HStack(alignment: .bottom, content: {
 							Text(info)
@@ -27,8 +28,8 @@ struct PressureSummaryView: View {
 								.bold()
 							
 							Text("mmHg".localized)
-								.font(.system(size: 12))
-								.foregroundStyle(.main.opacity(0.5))
+								.font(.system(size: Constants.FontSize.verySmall))
+								.foregroundStyle(.main.opacity(Constants.Opacity.big))
 						})
 						Spacer()
 					})
@@ -36,9 +37,9 @@ struct PressureSummaryView: View {
 					if let pulseInfo = viewModel.minAndMaxPulseLevelInfo {
 						HStack(alignment: .center, content: {
 							Text("pulse".localized)
-								.font(.system(size: 12))
-								.foregroundStyle(.main.opacity(0.5))
-								.frame(width: 58, alignment: .leading)
+								.font(.system(size: Constants.FontSize.verySmall))
+								.foregroundStyle(.main.opacity(Constants.Opacity.big))
+								.frame(width: Constants.FrameSize.textItemWidth, alignment: .leading)
 							
 							HStack(alignment: .bottom, content: {
 								Text(pulseInfo)
@@ -46,24 +47,21 @@ struct PressureSummaryView: View {
 									.bold()
 								
 								Text("bpm".localized)
-									.font(.system(size: 12))
-									.foregroundStyle(.main.opacity(0.5))
+									.font(.system(size: Constants.FontSize.verySmall))
+									.foregroundStyle(.main.opacity(Constants.Opacity.big))
 							})
 							
 							Spacer()
 						})
 					}
-				})
-				.frame(maxHeight: 34)
-				
-			} else {
-				HStack(content: {
+				} else {
 					Text("no_data".localized)
 						.font(.system(size: Constants.FontSize.big))
 						.bold()
-				})
-				.frame(maxHeight: 34)
-			}
+					
+				}
+			})
+			.frame(maxHeight: Constants.FrameSize.summaryMaxHeight)
 			
 			HStack {
 				if viewModel.period != .day {
@@ -78,7 +76,7 @@ struct PressureSummaryView: View {
 			
 			Divider()
 			
-			HStack(spacing: Constants.Spacing.defaultSpacing) {
+			HStack(spacing: Constants.Spacing.regular) {
 				Group {
 					Circle()
 						.fill(.systolic)
@@ -90,14 +88,14 @@ struct PressureSummaryView: View {
 					
 					Text("diastolic".localized)
 				}
-				.frame(height: Constants.FrameSize.chartLegendHeight)
+				.frame(height: Constants.Chart.chartLegendHeight)
 				.font(.system(size: Constants.FontSize.verySmall))
 				
 				Spacer()
 			}
 			
 			ChartView(viewModel: viewModel)
-				.frame(maxWidth: .infinity, maxHeight: 215)
+				.frame(maxWidth: .infinity, maxHeight: Constants.Chart.maxHeight)
 			
 			Button(action: {
 				viewModel.addNewScreenIsPresented = true

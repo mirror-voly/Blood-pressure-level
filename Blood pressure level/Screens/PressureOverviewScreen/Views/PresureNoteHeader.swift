@@ -11,8 +11,8 @@ struct PresureNoteHeader: View {
 	
 	@StateObject var viewModel: PressureOverviewViewModel
 	
-    var body: some View {
-		HStack(alignment: .top, spacing: Constants.Spacing.defaultSpacing) {
+	var body: some View {
+		HStack(alignment: .top, spacing: Constants.Spacing.regular) {
 			Image("note")
 			Text("notes".localized)
 				.font(.system(size: Constants.FontSize.regular))
@@ -28,12 +28,12 @@ struct PresureNoteHeader: View {
 				}
 			}) {
 				Image(systemName: viewModel.measurementsWithNotes.isEmpty ? "plus" : "chevron.right")
-					.rotationEffect(Angle(degrees: viewModel.isNoteViewOpened ? 90 : 0))
+					.rotationEffect(Angle(degrees: viewModel.isNoteViewOpened ? Constants.General.rotationAngle : .zero))
 					.font(.system(size: Constants.FontSize.regular))
 					.fontWeight(.light)
 					.foregroundStyle(.main.opacity(Constants.Opacity.regular))
 			}
 		}
 		.frame(maxHeight: Constants.FrameSize.presureNoteViewHeaderHeight)
-    }
+	}
 }

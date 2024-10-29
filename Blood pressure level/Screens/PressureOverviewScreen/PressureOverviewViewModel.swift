@@ -196,7 +196,7 @@ final class PressureOverviewViewModel: ObservableObject {
 	}
 	
 	func findAndSetSelection(xValue: Date) {
-		let shift: Double = period == .day ? 1800 : 43200
+		let shift: Double = period == .day ? Constants.Time.halfanHour : Constants.Time.halfADay
 		let measurements = filteredMeasurementsForPresentationPeriod.filter({ measurement in
 			return measurement.date >= xValue.addingTimeInterval(-shift) && measurement.date <= xValue.addingTimeInterval(shift)
 		})

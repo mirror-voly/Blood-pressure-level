@@ -12,6 +12,7 @@ enum Constants {
 	enum General {
 		static let originalValue: CGFloat = 1
 		static let emptyString: String = ""
+		static let rotationAngle: CGFloat = 90
 	}
 	
 	enum Background {
@@ -50,9 +51,11 @@ enum Constants {
 	}
 	
 	enum Spacing {
-		static let largeSpacing: CGFloat = 24
-		static let defaultSpacing: CGFloat = 16
-		static let smallSpacing: CGFloat = 8
+		static let big: CGFloat = 24
+		static let regular: CGFloat = 16
+		static let small: CGFloat = 8
+		static let verySmall: CGFloat = 4
+		static let non: CGFloat = 0
 	}
 	
 	enum SegmentedControl {
@@ -66,6 +69,7 @@ enum Constants {
 		static let big: CGFloat = 24
 		static let regular: CGFloat = 16
 		static let small: CGFloat = 14
+		static let verySmall: CGFloat = 8
 	}
 	
 	enum Padding {
@@ -78,10 +82,36 @@ enum Constants {
 	enum Opacity {
 		static let big: CGFloat = 0.5
 		static let regular: CGFloat = 0.3
+		static let small: CGFloat = 0.2
+	}
+	
+	enum Chart {
+		static let maxHeight: CGFloat = 215
+		static let chartLegendHeight: CGFloat = 8
+		static let symbolSize: CGFloat = 40
+		
+		static let lineDash: CGFloat = 5
+		static let curveLineWidth: CGFloat = 4
+		
+		static let topLine: Int = 200
+		static let middleLine: Int = 100
+		static let zeroLine: Int = 0
+		
+		static let highLine: Int = 150
+		static let lowLine: Int = 50
+		
+		
+		static let offset: CGFloat = 10
+		static let scaleDomain: ClosedRange<Int> = 0...200
+		static let chartYAxisMarks: [Int] = [0, 50, 100, 150, 200]
+	}
+	
+	enum Time {
+		static let halfanHour: CGFloat = 1800
+		static let halfADay: CGFloat = 43200
 	}
 	
 	enum FrameSize {
-		static let chartLegendHeight: CGFloat = 8
 		static let presureNoteViewHeaderHeight: CGFloat = 24
 		static let tipButtonSize: CGFloat = 21
 		static let tipBaseWidth: CGFloat = 311
@@ -89,9 +119,15 @@ enum Constants {
 		static let tipTriangleSize: CGFloat = 16
 		static let tipTriangleRotation: CGFloat = 180
 		static let tipTriangleFrameWidth: CGFloat = 250
+		static let presureNoteViewMaxHeight: CGFloat = 120
 		
 		static let mainFieldsViewHeight: CGFloat = 90
 		static let pressureFieldsViewWidth: CGFloat = 214
+		
+		static let textItemWidth: CGFloat = 58
+		static let overlaySelectionFrameMaxHeight: CGFloat = 142
+		static let overlaySelectionNoteIconSize: CGFloat = 7
+		static let summaryMaxHeight: CGFloat = 34
 	}
 	
 }

@@ -30,7 +30,7 @@ final class DataStore: ObservableObject {
 				id: result.id ?? UUID(),
 				date: result.date ?? Date(),
 				pulse: result.pulse == 0 ? nil : Int(result.pulse),
-				note: result.note == "" ? nil : result.note
+				note: result.note == Constants.General.emptyString ? nil : result.note
 			)
 			measurements.append(measurement)
 		}

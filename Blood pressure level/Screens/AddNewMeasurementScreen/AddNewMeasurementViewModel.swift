@@ -14,16 +14,16 @@ final class AddNewMeasurementViewModel: ObservableObject {
 	private let measurementID = UUID()
 	let currentDate = Date()
 	
-	@Published var systolicText = "" {
+	@Published var systolicText = Constants.General.emptyString {
 		didSet { checkIsMeasurementCanBeSaved() }
 	}
-	@Published var diastolicText = "" {
+	@Published var diastolicText = Constants.General.emptyString  {
 		didSet { checkIsMeasurementCanBeSaved() }
 	}
-	@Published var pulseText = "" {
+	@Published var pulseText = Constants.General.emptyString  {
 		didSet { checkIsMeasurementCanBeSaved() }
 	}
-	@Published var noteText = "" {
+	@Published var noteText = Constants.General.emptyString  {
 		didSet { checkIsMeasurementCanBeSaved() }
 	}
 	@Published var date = Date() {
@@ -60,8 +60,8 @@ final class AddNewMeasurementViewModel: ObservableObject {
 	
 	func buttonAction() {
 		guard let systolicLevel = makeInt(systolicText), let diastolicLevel = makeInt(diastolicText) else { return }
-		let thirtyMinutesBefore = date.addingTimeInterval(-1800)
-		let thirtyMinutesAfter = date.addingTimeInterval(1800)
+		let thirtyMinutesBefore = date.addingTimeInterval(-Constants.Time.halfanHour)
+		let thirtyMinutesAfter = date.addingTimeInterval(Constants.Time.halfanHour)
 		let measurement: Measurement
 		let hourIsOccupied = dataStore.measurements.first(where: { measurement in
 			return measurement.date >= thirtyMinutesBefore && measurement.date <= thirtyMinutesAfter

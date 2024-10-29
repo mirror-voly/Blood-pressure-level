@@ -14,10 +14,11 @@ struct NoteView: View {
 	var body: some View {
 		
 		Divider()
-		VStack(alignment: .leading, spacing: 0) {
+		
+		VStack(alignment: .leading, spacing: Constants.Spacing.non) {
 			Text(noteInfo.time)
 				.font(.system(size: Constants.FontSize.verySmall))
-				.foregroundStyle(.main.opacity(0.3))
+				.foregroundStyle(.main.opacity(Constants.Opacity.regular))
 			
 			Text(noteInfo.text)
 				.font(.system(size: Constants.FontSize.small))

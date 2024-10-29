@@ -13,7 +13,7 @@ struct PresureOverviewHeaderView: View {
 	@StateObject var viewModel: PressureOverviewViewModel
 	
 	var body: some View {
-		VStack(alignment: .center, spacing: Constants.Spacing.defaultSpacing) {
+		VStack(alignment: .center, spacing: Constants.Spacing.regular) {
 			HStack(alignment: .center, content: {
 				Image("logo")
 					.renderingMode(.template)

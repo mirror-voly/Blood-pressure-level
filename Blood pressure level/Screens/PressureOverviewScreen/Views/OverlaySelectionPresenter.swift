@@ -13,34 +13,33 @@ struct OverlaySelectionPresenter: View {
 	
 	var body: some View {
 		if let selectedMessurment = viewModel.selectedMessurment {
-			
+
 			if let systolicLevelsMin = selectedMessurment.systolicLevelsMin {
 				VStack(spacing: .zero, content: {
-					HStack(alignment: .top, spacing: Constants.Spacing.defaultSpacing) {
-						VStack(alignment: .leading, spacing: 16, content: {
+					HStack(alignment: .top, spacing: Constants.Spacing.regular) {
+						VStack(alignment: .leading, spacing: Constants.Spacing.regular, content: {
+							
 							VStack(alignment: .leading, content: {
 								Text("systolic".localized)
-									.font(.system(size: 12))
-									.foregroundStyle(.main.opacity(0.5))
-									.frame(width: 58, alignment: .leading)
-								
+									.font(.system(size: Constants.FontSize.verySmall))
+									.foregroundStyle(.main.opacity(Constants.Opacity.big))
+									.frame(width: Constants.FrameSize.textItemWidth, alignment: .leading)
 								
 								Text("\(systolicLevelsMin) - \(selectedMessurment.systolicLevelsMax)")
 									.font(.system(size: Constants.FontSize.big))
 									.bold()
 								
-								
 								Text("mmHg".localized)
-									.font(.system(size: 12))
-									.foregroundStyle(.main.opacity(0.5))
+									.font(.system(size: Constants.FontSize.verySmall))
+									.foregroundStyle(.main.opacity(Constants.Opacity.big))
 							})
 							
 							VStack(alignment: .leading, content: {
 								if let pulseMax = selectedMessurment.pulseMax {
 									Text("pulse".localized)
-										.font(.system(size: 12))
-										.foregroundStyle(.main.opacity(0.5))
-										.frame(width: 58, alignment: .leading)
+										.font(.system(size: Constants.FontSize.verySmall))
+										.foregroundStyle(.main.opacity(Constants.Opacity.big))
+										.frame(width: Constants.FrameSize.textItemWidth, alignment: .leading)
 									
 									Group {
 										if let pulseMin = selectedMessurment.pulseMin {
@@ -53,18 +52,18 @@ struct OverlaySelectionPresenter: View {
 									.bold()
 									
 									Text("bpm".localized)
-										.font(.system(size: 12))
-										.foregroundStyle(.main.opacity(0.5))
+										.font(.system(size: Constants.FontSize.verySmall))
+										.foregroundStyle(.main.opacity(Constants.Opacity.big))
 								}
 							})
 						})
 						
-						VStack(alignment: .leading, spacing: 16, content: {
+						VStack(alignment: .leading, spacing: Constants.Spacing.regular, content: {
 							VStack(alignment: .leading, content: {
 								Text("diastolic".localized)
-									.font(.system(size: 12))
-									.foregroundStyle(.main.opacity(0.5))
-									.frame(width: 58, alignment: .leading)
+									.font(.system(size: Constants.FontSize.verySmall))
+									.foregroundStyle(.main.opacity(Constants.Opacity.big))
+									.frame(width: Constants.FrameSize.textItemWidth, alignment: .leading)
 								
 								Group {
 									if let diastolicLevelMin = selectedMessurment.diastolicLevelMin {
@@ -77,55 +76,41 @@ struct OverlaySelectionPresenter: View {
 								.bold()
 								
 								Text("mmHg".localized)
-									.font(.system(size: 12))
-									.foregroundStyle(.main.opacity(0.5))
+									.font(.system(size: Constants.FontSize.verySmall))
+									.foregroundStyle(.main.opacity(Constants.Opacity.big))
 							})
 							
 							Spacer()
 							
 							VStack(alignment: .leading, content: {
-								
 								Text(selectedMessurment.date)
 									.font(.system(size: Constants.FontSize.micro))
 								
-								HStack {
-									let note = selectedMessurment.note.first
-									
-									if note != nil {
-										Image(systemName: "circle")
-											.resizable()
-											.bold()
-											.foregroundStyle(.blue)
-											.frame(width: 6, height: 6)
-									}
-									
-									Text(note != nil ? "there_are_notes".localized : "no_notes".localized)
-										.font(.system(size: 12))
-										.foregroundStyle(.main.opacity(0.5))
+								if selectedMessurment.note.first != nil {
+									noteView
 								}
-								.frame(height: 7)
 							})
+							
 						})
 					}
 					.padding()
 					.background(.backgroundMain)
 					.clipShape(RoundedRectangle(cornerRadius: Constants.Radius.regular))
 					.overlay(
-						RoundedRectangle(cornerRadius: 8)
+						RoundedRectangle(cornerRadius: Constants.Radius.verySmall)
 							.stroke(.overlayBorder, lineWidth: Constants.General.originalValue)
 					)
 				})
-				.frame(maxHeight: 142)
-			}
-			else {
-				VStack(alignment: .center, spacing: 8, content: {
-					HStack(alignment: .top, spacing: Constants.Spacing.defaultSpacing) {
+				.frame(maxHeight: Constants.FrameSize.overlaySelectionFrameMaxHeight)
+			} else {
+				VStack(alignment: .center, spacing: Constants.Spacing.small, content: {
+					HStack(alignment: .top, spacing: Constants.Spacing.regular) {
 						
-						VStack(alignment: .leading, spacing: 16, content: {
+						VStack(alignment: .leading, spacing: Constants.Spacing.regular, content: {
 							VStack(alignment: .leading, content: {
 								Text("pressure".localized)
-									.font(.system(size: 12))
-									.foregroundStyle(.main.opacity(0.5))
+									.font(.system(size: Constants.FontSize.verySmall))
+									.foregroundStyle(.main.opacity(Constants.Opacity.big))
 								
 								Text("\(selectedMessurment.systolicLevelsMax) / \(selectedMessurment.diastolicLevelMax)")
 									.font(.system(size: Constants.FontSize.big))
@@ -133,57 +118,67 @@ struct OverlaySelectionPresenter: View {
 								
 								
 								Text("mmHg".localized)
-									.font(.system(size: 12))
-									.foregroundStyle(.main.opacity(0.5))
+									.font(.system(size: Constants.FontSize.verySmall))
+									.foregroundStyle(.main.opacity(Constants.Opacity.big))
 							})
 						})
 						
 						if let pulseMax = selectedMessurment.pulseMax {
 							VStack(alignment: .leading, content: {
 								Text("pulse".localized)
-									.font(.system(size: 12))
-									.foregroundStyle(.main.opacity(0.5))
+									.font(.system(size: Constants.FontSize.verySmall))
+									.foregroundStyle(.main.opacity(Constants.Opacity.big))
 								
 								Text("\(pulseMax)")
 									.font(.system(size: Constants.FontSize.big))
 									.bold()
 								
 								Text("bpm".localized)
-									.font(.system(size: 12))
-									.foregroundStyle(.main.opacity(0.5))
+									.font(.system(size: Constants.FontSize.verySmall))
+									.foregroundStyle(.main.opacity(Constants.Opacity.big))
 							})
 						}
 					}
-					VStack(alignment: .center, spacing: 4) {
+
+					VStack(alignment: .center, spacing: Constants.Spacing.verySmall) {
+						// TODO: Change for "Today"
 						Text(selectedMessurment.date)
 							.font(.system(size: Constants.FontSize.micro))
 						
 						if selectedMessurment.note.first != nil {
-							HStack {
-								Image(systemName: "circle")
-									.resizable()
-									.bold()
-									.foregroundStyle(.blue)
-									.frame(width: 6, height: 6)
-								
-								Text("there_are_notes".localized)
-									.font(.system(size: 12))
-									.foregroundStyle(.main.opacity(0.5))
-							}
+							noteView
 						}
 					}
 					
 				})
-				.padding(.vertical)
-				.padding(.horizontal, 20)
+				.padding()
 				.background(.backgroundMain)
 				.clipShape(RoundedRectangle(cornerRadius: Constants.Radius.regular))
 				.overlay(
-					RoundedRectangle(cornerRadius: 8)
+					RoundedRectangle(cornerRadius: Constants.Radius.verySmall)
 						.stroke(.overlayBorder, lineWidth: Constants.General.originalValue)
 				)
-				
+				.frame(maxHeight: Constants.FrameSize.overlaySelectionFrameMaxHeight)
 			}
 		}
+	}
+}
+
+
+extension OverlaySelectionPresenter {
+	var noteView: some View {
+		HStack {
+			Image(systemName: "circle")
+				.resizable()
+				.bold()
+				.foregroundStyle(.blue)
+				.frame(width: Constants.FrameSize.overlaySelectionNoteIconSize,
+					   height: Constants.FrameSize.overlaySelectionNoteIconSize)
+			
+			Text("there_are_notes".localized)
+				.font(.system(size: Constants.FontSize.verySmall))
+				.foregroundStyle(.main.opacity(Constants.Opacity.big))
+		}
+		.frame(height: Constants.FrameSize.overlaySelectionNoteIconSize)
 	}
 }

@@ -18,7 +18,7 @@ struct AddNewMeasurementScreen: View {
 					hideKeyboard()
 				}
 			
-			VStack(spacing: Constants.Spacing.defaultSpacing) {
+			VStack(spacing: Constants.Spacing.regular) {
 				
 				AddNewHeaderView()
 

@@ -32,7 +32,7 @@ struct OverlayTip: View {
 					})
 					.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
 					
-					VStack(spacing: Constants.Spacing.defaultSpacing) {
+					VStack(spacing: Constants.Spacing.regular) {
 						Image("camera")
 						
 						Text("add_data".localized)

@@ -29,7 +29,7 @@ struct ChartView: View {
 					.foregroundStyle(by: .value("pressure", "diastolic"))
 				}
 				.interpolationMethod(.catmullRom)
-				.lineStyle(StrokeStyle(lineWidth: 4))
+				.lineStyle(StrokeStyle(lineWidth: Constants.Chart.curveLineWidth))
 				
 				Plot {
 					PointMark(x: .value("hour", measurement.date,
@@ -42,7 +42,7 @@ struct ChartView: View {
 							  y: .value("diastolicLevel", measurement.diastolicLevel))
 					.foregroundStyle(.diastolic)
 				}
-				.symbolSize(40)
+				.symbolSize(Constants.Chart.symbolSize)
 			}
 			
 			ForEach(viewModel.measurementsWithNotes) { measurement in
@@ -54,57 +54,58 @@ struct ChartView: View {
 						.resizable()
 						.bold()
 						.foregroundStyle(.blue)
-						.frame(width: 6, height: 6)
-						.offset(x: 10, y: -10)
+						.frame(width: Constants.FrameSize.overlaySelectionNoteIconSize,
+							   height: Constants.FrameSize.overlaySelectionNoteIconSize)
+						.offset(x: Constants.Chart.offset, y: -Constants.Chart.offset)
 				}
 			}
 			// MARK: - Chart lines
 			Plot {
-				RuleMark(y: .value("middle", 100))
+				RuleMark(y: .value("middle", Constants.Chart.middleLine))
 				
-				RuleMark(y: .value("top", 200))
+				RuleMark(y: .value("top", Constants.Chart.topLine))
 				
 				RuleMark(x: .value("start", viewModel.timeInterval.startOfPeriod, unit: .minute))
 			}
-			.foregroundStyle(.gray.opacity(0.2))
+			.foregroundStyle(.gray.opacity(Constants.Opacity.small))
 			.lineStyle(
 				StrokeStyle(
-					lineWidth: 1,
+					lineWidth: Constants.General.originalValue,
 					lineCap: .round,
-					dash: [5, 5]
+					dash: [Constants.Chart.lineDash, Constants.Chart.lineDash]
 				)
 			)
 			
 			Plot {
 				RuleMark(x: .value("end", viewModel.timeInterval.endOfPeriod, unit: .minute))
 				
-				RuleMark(y: .value("bottom", 0))	
+				RuleMark(y: .value("bottom", Constants.Chart.zeroLine))	
 			}
 			.foregroundStyle(.black)
 			.lineStyle(
 				StrokeStyle(
-					lineWidth: 1,
+					lineWidth: Constants.General.originalValue,
 					lineCap: .round
 				)
 			)
 			
 			Plot {
-				RuleMark(y: .value("high", 150))
-					.foregroundStyle(.red.opacity(0.5))
+				RuleMark(y: .value("high", Constants.Chart.highLine))
+					.foregroundStyle(.red.opacity(Constants.Opacity.big))
 				
-				RuleMark(y: .value("low", 50))
-					.foregroundStyle(.blue.opacity(0.5))
+				RuleMark(y: .value("low", Constants.Chart.highLine))
+					.foregroundStyle(.blue.opacity(Constants.Opacity.big))
 			}
 			.lineStyle(
 				StrokeStyle(
-					lineWidth: 1,
+					lineWidth: Constants.General.originalValue,
 					lineCap: .round,
-					dash: [5, 5]
+					dash: [Constants.Chart.lineDash, Constants.Chart.lineDash]
 				)
 			) 
 		}
-		.chartForegroundStyleScale(["systolic": .systolic.opacity(0.2),
-									"diastolic": .diastolic.opacity(0.2)])
+		.chartForegroundStyleScale(["systolic": .systolic.opacity(Constants.Opacity.small),
+									"diastolic": .diastolic.opacity(Constants.Opacity.small)])
 		// MARK: - Selection
 		.chartOverlay { chart in
 			GeometryReader { geo in
@@ -112,7 +113,7 @@ struct ChartView: View {
 					.fill(Color.clear)
 					.contentShape(Rectangle())
 					.gesture(
-						DragGesture(minimumDistance: 0)
+						DragGesture(minimumDistance: .zero)
 							.onEnded { value in
 								let start = geo[chart.plotAreaFrame].origin.x
 								let xCurrent = value.location.x - start
@@ -127,23 +128,23 @@ struct ChartView: View {
 
 		.chartLegend(.hidden)
 		// MARK: - Chart axis
-		.chartYScale(domain: 0...200)
+		.chartYScale(domain: Constants.Chart.scaleDomain)
 		.chartYAxis {
-			AxisMarks(values: [0, 50, 100, 150, 200]) { value in
+			AxisMarks(values: Constants.Chart.chartYAxisMarks) { value in
 				if let number = value.as(Int.self) {
 					AxisValueLabel {
 						return Text("\(number)")
 							.foregroundStyle(
-								number == 50 ? .blue :
-									number == 150 ? .red :
-										.main.opacity(0.5)
+								number == Constants.Chart.lowLine ? .blue :
+									number == Constants.Chart.highLine ? .red :
+										.main.opacity(Constants.Opacity.big)
 							)
 					}
 				}
 			}
 		}
 		
-		// MARK: Day X axis
+//		 MARK: Day X axis
 		.chartXScale(domain: viewModel.timeInterval.startOfPeriod...viewModel.timeInterval.endOfPeriod)
 		.chartXAxis {
 			AxisMarks(values: viewModel.getAxisValues()) { value in
@@ -151,7 +152,7 @@ struct ChartView: View {
 					if let date = value.as(Date.self) {
 						return Text(viewModel.formatDate(for: date))
 					}
-					return Text("")
+					return Text(Constants.General.emptyString)
 				}
 			}
 		}

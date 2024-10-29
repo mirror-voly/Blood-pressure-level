@@ -12,28 +12,25 @@ struct PresureNoteView: View {
 	@StateObject var viewModel: PressureOverviewViewModel
 	
 	var body: some View {
-		VStack(alignment: .leading, spacing: Constants.Spacing.smallSpacing) {
+		VStack(alignment: .leading, spacing: Constants.Spacing.small) {
 			VStack {
 				PresureNoteHeader(viewModel: viewModel)
 				
 				if let note = viewModel.selectedMessurment?.note {
 					if !note.isEmpty {
-						ScrollView { 
+						ScrollView {
 							ForEach(note, id: \.?.time) { noteInfo in
-								
 								if let noteInfo = noteInfo {
 									NoteView(noteInfo: noteInfo)
 								}
-								
 							}
 						}
 					}
-				}
-					else if viewModel.measurementsWithNotes.count == 1 {
-					
+				} else if viewModel.measurementsWithNotes.count == 1 {
 					if let noteInfo = viewModel.getNoteInfo() {
 						NoteView(noteInfo: noteInfo)
 					}
+					
 				} else if viewModel.measurementsWithNotes.isEmpty {
 					Divider()
 					
@@ -48,6 +45,6 @@ struct PresureNoteView: View {
 		}
 		.background(.scheme)
 		.clipShape(RoundedRectangle(cornerRadius: Constants.Radius.big))
-		.frame(maxHeight: 120, alignment: .top)
+		.frame(maxHeight: Constants.FrameSize.presureNoteViewMaxHeight, alignment: .top)
 	}
 }
