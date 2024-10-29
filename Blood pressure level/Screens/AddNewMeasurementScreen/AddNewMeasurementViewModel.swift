@@ -11,6 +11,7 @@ import SwiftUI
 final class AddNewMeasurementViewModel: ObservableObject {
 	
 	private let dataStore: DataStore
+	private let datePrepare: DatePrepare
 	private let measurementID = UUID()
 	let currentDate = Date()
 	
@@ -35,7 +36,11 @@ final class AddNewMeasurementViewModel: ObservableObject {
 		canNotBeSaved = !systolicText.isEmpty && !diastolicText.isEmpty ? false : true 
 	}
 	
-	func didChange(displayedComponents: DatePickerComponents) -> Bool {
+	func getDateText(displayedComponents: DatePickerComponents) -> String {
+		datePrepare.getFormatedDate(date: date, displayedComponents: displayedComponents)
+	}
+	
+	func datePickerSeparatedChangeChecker(_ displayedComponents: DatePickerComponents) -> Bool {
 		if displayedComponents == .hourAndMinute {
 			return date.formatted(.dateTime.hour().minute()) != currentDate.formatted(.dateTime.hour().minute())
 		} else {
@@ -43,57 +48,37 @@ final class AddNewMeasurementViewModel: ObservableObject {
 		}
 	}
 	
-	func takeDate(displayedComponents: DatePickerComponents) -> String {
-		let formattedDate: String
-		if displayedComponents == .hourAndMinute {
-			formattedDate = date.formatted(.dateTime.hour().minute())
-		} else {
-			formattedDate = date.formatted(date: .numeric, time: .omitted)
-		}
-		return formattedDate
-	}
-	
-	private func makeInt(_ text: String) -> Int? {
-		guard let number = Int(text) else { return nil }
-		return number
-	}
-	
-	func buttonAction() {
-		guard let systolicLevel = makeInt(systolicText), let diastolicLevel = makeInt(diastolicText) else { return }
+	private func checkEditOrAddByTimeInterval() -> UUID? {
 		let thirtyMinutesBefore = date.addingTimeInterval(-Constants.Time.halfanHour)
 		let thirtyMinutesAfter = date.addingTimeInterval(Constants.Time.halfanHour)
-		let measurement: Measurement
-		let hourIsOccupied = dataStore.measurements.first(where: { measurement in
-			return measurement.date >= thirtyMinutesBefore && measurement.date <= thirtyMinutesAfter
-		})
-		if let id = hourIsOccupied?.id {
-			measurement = Measurement(
-				systolicLevel: systolicLevel,
-				diastolicLevel: diastolicLevel,
-				id: id,
-				date: date,
-				pulse: makeInt(pulseText),
-				note: noteText.isEmpty ? nil : noteText
-			)
-		} else {
-			measurement = Measurement(
+		
+		guard let measurement = dataStore.measurements.first(where: { measurement in
+			measurement.date >= thirtyMinutesBefore && measurement.date <= thirtyMinutesAfter
+		}) else {
+			return nil
+		}
+		return measurement.id
+	}
+
+	func buttonAction() {
+		guard let systolicLevel = Int(systolicText), let diastolicLevel = Int(diastolicText) else { return }
+		let measurementID = checkEditOrAddByTimeInterval() ?? measurementID
+		
+		let measurement = Measurement(
 				systolicLevel: systolicLevel,
 				diastolicLevel: diastolicLevel,
 				id: measurementID,
 				date: date,
-				pulse: makeInt(pulseText),
+				pulse: Int(pulseText),
 				note: noteText.isEmpty ? nil : noteText
-				)
-		}
-		
-		
+			)
 		dataStore.addOrEditMeasurement(measurement)
-		
 		canNotBeSaved = true
 	}
 
 	
-	init(dataStore: DataStore) {
+	init(dataStore: DataStore, datePrepare: DatePrepare) {
 		self.dataStore = dataStore
+		self.datePrepare = datePrepare
 	}
 }

@@ -51,6 +51,7 @@
 		51934F732CD080A9003349F2 /* RxRelay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51934F722CD080A9003349F2 /* RxRelay.swift */; };
 		51934F752CD0817E003349F2 /* SubscriptionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51934F742CD0817E003349F2 /* SubscriptionsManager.swift */; };
 		51C95D982CD0538B0054B405 /* NoteFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C95D972CD0538B0054B405 /* NoteFieldView.swift */; };
+		51C95D9A2CD05A050054B405 /* DatePrepare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C95D992CD05A050054B405 /* DatePrepare.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,6 +100,7 @@
 		51934F742CD0817E003349F2 /* SubscriptionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsManager.swift; sourceTree = "<group>"; };
 		51934F762CD08317003349F2 /* LICENSE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
 		51C95D972CD0538B0054B405 /* NoteFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteFieldView.swift; sourceTree = "<group>"; };
+		51C95D992CD05A050054B405 /* DatePrepare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePrepare.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -255,6 +257,7 @@
 				51934F6E2CD015C9003349F2 /* Memory */,
 				5191C62D2CCA308500AD3403 /* BackgroundView.swift */,
 				5191C6342CCA782300AD3403 /* Triangle.swift */,
+				51C95D992CD05A050054B405 /* DatePrepare.swift */,
 				511830C02CD12BDF00DF918A /* Overlay */,
 				517015062CC939900058BC9F /* Enums */,
 				516E7EB52CCBC2BF00741283 /* Extentions */,
@@ -405,6 +408,7 @@
 				517064BD2CCFA1F600641620 /* OverlaySelectionPresenter.swift in Sources */,
 				5170150A2CC93A5C0058BC9F /* PresureOverviewHeaderView.swift in Sources */,
 				516E7EC12CCBDC8600741283 /* PressureOverviewViewModel.swift in Sources */,
+				51C95D9A2CD05A050054B405 /* DatePrepare.swift in Sources */,
 				5191C62B2CCA1EFB00AD3403 /* PresureNoteView.swift in Sources */,
 				517064BF2CCFC65500641620 /* PresureNoteHeader.swift in Sources */,
 				51934F752CD0817E003349F2 /* SubscriptionsManager.swift in Sources */,

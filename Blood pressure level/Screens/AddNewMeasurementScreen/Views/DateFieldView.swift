@@ -21,10 +21,10 @@ struct DateFieldView: View {
 			.datePickerStyle(.compact)
 			.fixedSize()
 
-			Text(viewModel.takeDate(displayedComponents: displayedComponents))
+			Text(viewModel.getDateText(displayedComponents: displayedComponents))
 				.font(.system(size: Constants.FontSize.big))
 				.padding()
-				.foregroundStyle(viewModel.didChange(displayedComponents: displayedComponents) ? .main : .secondaryGrayDark)
+				.foregroundStyle(viewModel.datePickerSeparatedChangeChecker(displayedComponents) ? .main : .secondaryGrayDark)
 				.frame(maxWidth: .infinity, alignment: .leading)
 				.background(Color.scheme)
 				.clipShape(RoundedRectangle(cornerRadius: Constants.Radius.small))

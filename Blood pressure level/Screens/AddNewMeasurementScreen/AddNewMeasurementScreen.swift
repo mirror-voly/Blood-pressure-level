@@ -40,7 +40,7 @@ struct AddNewMeasurementScreen: View {
     }
 
 	init(dataStore: DataStore) {
-		self._viewModel = StateObject(wrappedValue: AddNewMeasurementViewModel(dataStore: dataStore))
+		self._viewModel = StateObject(wrappedValue: AddNewMeasurementViewModel(dataStore: dataStore, datePrepare: DatePrepare()))
 	}
 }
 
