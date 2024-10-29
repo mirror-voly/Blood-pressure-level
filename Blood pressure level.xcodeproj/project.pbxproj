@@ -108,6 +108,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		511830BF2CD12BCB00DF918A /* Note */ = {
+			isa = PBXGroup;
+			children = (
+				5191C62A2CCA1EFB00AD3403 /* PresureNoteView.swift */,
+				517064BE2CCFC65500641620 /* PresureNoteHeader.swift */,
+				516CACAB2CCEF21400762B0A /* NoteView.swift */,
+			);
+			path = Note;
+			sourceTree = "<group>";
+		};
+		511830C02CD12BDF00DF918A /* Overlay */ = {
+			isa = PBXGroup;
+			children = (
+				5191C6322CCA693E00AD3403 /* OverlayTip.swift */,
+				517064BC2CCFA1F600641620 /* OverlaySelectionPresenter.swift */,
+			);
+			path = Overlay;
+			sourceTree = "<group>";
+		};
 		516E7EA52CCB9B0E00741283 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
@@ -216,11 +235,7 @@
 				517015042CC930520058BC9F /* CustomSegmentContolView.swift */,
 				5191C6282CCA1E8F00AD3403 /* PressureSummaryView.swift */,
 				516CACA92CCE3CA400762B0A /* ChartView.swift */,
-				5191C62A2CCA1EFB00AD3403 /* PresureNoteView.swift */,
-				517064BE2CCFC65500641620 /* PresureNoteHeader.swift */,
-				516CACAB2CCEF21400762B0A /* NoteView.swift */,
-				5191C6322CCA693E00AD3403 /* OverlayTip.swift */,
-				517064BC2CCFA1F600641620 /* OverlaySelectionPresenter.swift */,
+				511830BF2CD12BCB00DF918A /* Note */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -231,6 +246,7 @@
 				51934F6E2CD015C9003349F2 /* Memory */,
 				5191C62D2CCA308500AD3403 /* BackgroundView.swift */,
 				5191C6342CCA782300AD3403 /* Triangle.swift */,
+				511830C02CD12BDF00DF918A /* Overlay */,
 				517015062CC939900058BC9F /* Enums */,
 				516E7EB52CCBC2BF00741283 /* Extentions */,
 				516E7EAF2CCBBF7700741283 /* Localizable.strings */,

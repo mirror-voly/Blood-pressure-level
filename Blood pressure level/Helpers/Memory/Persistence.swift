@@ -46,9 +46,8 @@ struct PersistenceController {
 				if let pulse = measurement.pulse {
 					measurementToEdit.pulse = Int64(pulse)
 				}
-				if let note = measurement.note {
-					measurementToEdit.note = note
-				}
+				let note = measurement.note 
+				measurementToEdit.note = note
 				try context.save()
 			}
 		} catch {
