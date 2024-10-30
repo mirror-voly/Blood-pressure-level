@@ -19,9 +19,7 @@ struct OverlayTip: View {
 			VStack(spacing: .zero, content: {
 				ZStack {
 					Button(action: {
-						withAnimation { 
-							viewModel.tipIsActive = false
-						}
+						viewModel.tipIsActive = false
 					}, label: {
 						Image(systemName: "xmark.circle.fill")
 							.resizable()

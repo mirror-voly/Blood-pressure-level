@@ -249,7 +249,8 @@ final class PressureOverviewViewModel: ObservableObject {
 				return (startOfPeriod: start, endOfPeriod: end)
 				
 			case .week:
-				if let startDate = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: currentDate)) {
+				if let startDate = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear],
+																			   from: currentDate)) {
 					start = startDate
 					let days = calendar.date(byAdding: .day, value: 6, to: start) ?? start
 					end = days.addingTimeInterval(86399)
@@ -257,7 +258,8 @@ final class PressureOverviewViewModel: ObservableObject {
 				}
 				
 			case .month:
-				if let end = calendar.date(from: calendar.dateComponents([.year, .month, .day], from: currentDate)) {
+				if let end = calendar.date(from: calendar.dateComponents([.year, .month, .day],
+								from: currentDate.addingTimeInterval(Constants.Time.day * 2))) {
 					start = calendar.date(byAdding: .day, value: -30, to: end) ?? end
 					return (startOfPeriod: start, endOfPeriod: end)
 				}
@@ -266,23 +268,17 @@ final class PressureOverviewViewModel: ObservableObject {
 		return (startOfPeriod: currentDate, endOfPeriod: currentDate)
 	}
 	
-	func startTimer() {
-		let dispatchWorkItemON = DispatchWorkItem { 
-			guard self.dataStore.measurements.isEmpty else { return }
-			self.tipIsActive = true
-		}
-		let dispatchWorkItemOff = DispatchWorkItem {
-			self.tipIsActive = false
-		}
-		DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: dispatchWorkItemON)
-		DispatchQueue.main.asyncAfter(deadline: .now() + 15, execute: dispatchWorkItemOff)
+	func startAletrTimerIfNeeded() {
+		guard self.dataStore.measurements.isEmpty else { return }
+		DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { self.tipIsActive = true })
+		DispatchQueue.main.asyncAfter(deadline: .now() + 15, execute: { self.tipIsActive = false })
 	}
 	
 	init(dataStore: DataStore) {
 		self.dataStore = dataStore
 		self.formattedDate = Date.now.formatted(.dateTime.month().year())
 		self.currentDate = Date()
-		startTimer() 
+		startAletrTimerIfNeeded() 
 	}
 	
 }
