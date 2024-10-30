@@ -9,7 +9,7 @@ import SwiftUI
 
 struct OverlayTip: View {
 	
-	@StateObject var viewModel: PressureOverviewViewModel
+	@EnvironmentObject private var viewModel: PressureOverviewViewModel
 	
 	var body: some View {
 		ZStack {

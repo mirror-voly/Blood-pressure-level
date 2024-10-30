@@ -22,21 +22,22 @@ struct AddNewMeasurementScreen: View {
 				
 				AddNewHeaderView()
 
-				MainFieldsView(viewModel: viewModel)
+				MainFieldsView()
 
-				DateFields(viewModel: viewModel)
+				DateFields()
 				
-				NoteFieldView(viewModel: viewModel)
+				NoteFieldView()
 				
 				Spacer()
 				
-				AddNewButtonView(viewModel: viewModel)
+				AddNewButtonView()
 				
 			}
 			.padding()
 		}
 		.navigationBarBackButtonHidden()
 		.navigationBarTitleDisplayMode(.inline)
+		.environmentObject(viewModel)
     }
 
 	init(dataStore: DataStore) {

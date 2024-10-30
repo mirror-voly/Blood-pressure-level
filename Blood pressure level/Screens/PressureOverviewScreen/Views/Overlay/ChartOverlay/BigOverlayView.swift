@@ -9,7 +9,6 @@ import SwiftUI
 
 struct BigOverlayView: View {
 	
-	@StateObject var viewModel: PressureOverviewViewModel
 	let selectedMessurment: SelectedMeasurementsInfo
 	
 	var body: some View {
@@ -33,7 +32,7 @@ struct BigOverlayView: View {
 					Spacer()
 					
 					VStack(alignment: .leading) {
-						SmallOverlayDateView(viewModel: viewModel, selectedMessurment: selectedMessurment, formatStyle: .month)
+						SmallOverlayDateView(selectedMessurment: selectedMessurment, formatStyle: .month)
 						
 						if selectedMessurment.note.first != nil {
 							NoteOverlayView()

@@ -15,9 +15,9 @@ struct OverlaySelectionPresenter: View {
 		if let selectedMessurment = viewModel.selectedMessurment {
 
 			if selectedMessurment.systolicLevelsMin != nil {
-				BigOverlayView(viewModel: viewModel, selectedMessurment: selectedMessurment)
+				BigOverlayView(selectedMessurment: selectedMessurment)
 			} else {
-				SmallOverlayView(viewModel: viewModel, selectedMessurment: selectedMessurment)
+				SmallOverlayView(selectedMessurment: selectedMessurment)
 			}
 		}
 	}

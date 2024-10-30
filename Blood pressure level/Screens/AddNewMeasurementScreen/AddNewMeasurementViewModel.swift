@@ -71,7 +71,6 @@ final class AddNewMeasurementViewModel: ObservableObject {
 		dataStore.addOrEditMeasurement(measurement, forEdit: oldMeasurementID != nil)
 	}
 
-	
 	init(dataStore: DataStore) {
 		self.dataStore = dataStore
 	}

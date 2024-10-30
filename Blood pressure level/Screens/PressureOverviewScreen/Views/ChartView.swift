@@ -10,10 +10,9 @@ import Charts
 
 struct ChartView: View {
 	
-	@StateObject var viewModel: PressureOverviewViewModel
+	@EnvironmentObject private var viewModel: PressureOverviewViewModel
 	
 	var body: some View {
-		
 		Chart {
 			// MARK: - Chart data placement
 			ForEach(viewModel.chartAverageMeasurements) { measurement in

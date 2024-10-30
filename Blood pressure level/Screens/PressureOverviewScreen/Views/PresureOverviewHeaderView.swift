@@ -6,11 +6,10 @@
 //
 
 import SwiftUI
-import RxSwift
 
 struct PresureOverviewHeaderView: View {
 	
-	@StateObject var viewModel: PressureOverviewViewModel
+	@EnvironmentObject private var viewModel: PressureOverviewViewModel
 	
 	var body: some View {
 		VStack(alignment: .center, spacing: Constants.Spacing.regular) {

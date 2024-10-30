@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DateFieldView: View {
 	
-	@StateObject var viewModel: AddNewMeasurementViewModel
+	@EnvironmentObject private var viewModel: AddNewMeasurementViewModel
 	let displayedComponents: DatePickerComponents
 	
     var body: some View {

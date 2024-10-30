@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddNewButtonView: View {
 	
-	@StateObject var viewModel: AddNewMeasurementViewModel
+	@EnvironmentObject private var viewModel: AddNewMeasurementViewModel
 	@Environment(\.dismiss) var dismiss
 	
     var body: some View {

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MainFieldsView: View {
 	
-	@StateObject var viewModel: AddNewMeasurementViewModel
+	@EnvironmentObject private var viewModel: AddNewMeasurementViewModel
 	
 	var body: some View {
 		HStack(alignment: .top, spacing: Constants.Spacing.big) {
@@ -23,10 +23,9 @@ struct MainFieldsView: View {
 							.font(.system(size: Constants.FontSize.verySmall))
 							.foregroundStyle(.main.opacity(Constants.Opacity.big))
 						
-						TextFieldView(viewModel: viewModel,
+						TextFieldView(text: $viewModel.systolicText,
 									  placeholder: Constants.Placeholder.systolicPlaceholder,
-									  keyboardType: .decimalPad,
-									  text: $viewModel.systolicText)
+									  keyboardType: .decimalPad)
 						.onChange(of: viewModel.systolicText) { newValue in
 							viewModel.systolicText = newValue.removingNonNumericCharacters()
 						}
@@ -37,17 +36,17 @@ struct MainFieldsView: View {
 							.font(.system(size: Constants.FontSize.verySmall))
 							.foregroundStyle(.main.opacity(Constants.Opacity.big))
 						
-						TextFieldView(viewModel: viewModel,
+						TextFieldView(text: $viewModel.diastolicText,
 									  placeholder: Constants.Placeholder.diastolicPlaceholder,
-									  keyboardType: .decimalPad,
-									  text: $viewModel.diastolicText)
+									  keyboardType: .decimalPad)
 						.onChange(of: viewModel.diastolicText) { newValue in
 							viewModel.diastolicText = newValue.removingNonNumericCharacters()
 						}
 					}
 				}
 			}
-			.frame(width: Constants.FrameSize.pressureFieldsViewWidth, height: Constants.FrameSize.mainFieldsViewHeight)
+			.frame(width: Constants.FrameSize.pressureFieldsViewWidth,
+				   height: Constants.FrameSize.mainFieldsViewHeight)
 			
 			VStack(alignment: .leading)   { 
 				Text("pulse".localized)
@@ -55,10 +54,9 @@ struct MainFieldsView: View {
 				
 				Spacer()
 				
-				TextFieldView(viewModel: viewModel,
+				TextFieldView(text: $viewModel.pulseText,
 							  placeholder: Constants.Placeholder.pulsePlaceholder,
-							  keyboardType: .decimalPad,
-							  text: $viewModel.pulseText)
+							  keyboardType: .decimalPad)
 				.onChange(of: viewModel.pulseText) { newValue in
 					viewModel.pulseText = newValue.removingNonNumericCharacters()
 				}

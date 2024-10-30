@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PresureNoteHeader: View {
 	
-	@StateObject var viewModel: PressureOverviewViewModel
+	@EnvironmentObject private var viewModel: PressureOverviewViewModel
 	
 	var body: some View {
 		HStack(alignment: .top, spacing: Constants.Spacing.regular) {

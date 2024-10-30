@@ -9,6 +9,7 @@ import SwiftUI
 
 
 struct BigOverlayPulseView: View {
+	
 	let pulseMax: Int?
 	let pulseMin: Int?
 	

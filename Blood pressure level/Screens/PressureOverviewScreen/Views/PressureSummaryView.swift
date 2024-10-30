@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PressureSummaryView: View {
 	
-	@StateObject var viewModel: PressureOverviewViewModel
+	@EnvironmentObject private var viewModel: PressureOverviewViewModel
 	
 	var body: some View {
 		VStack(alignment: .leading, spacing: Constants.Spacing.regular) {
@@ -94,7 +94,7 @@ struct PressureSummaryView: View {
 				Spacer()
 			}
 			
-			ChartView(viewModel: viewModel)
+			ChartView()
 				.frame(maxWidth: .infinity, maxHeight: Constants.Chart.maxHeight)
 			
 			Button(action: {

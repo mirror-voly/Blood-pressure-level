@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct SmallOverlayDateView: View {
-	@StateObject var viewModel: PressureOverviewViewModel
+	
+	@EnvironmentObject private var viewModel: PressureOverviewViewModel
 	let selectedMessurment: SelectedMeasurementsInfo
 	let formatStyle: PresentationPeriod
 	

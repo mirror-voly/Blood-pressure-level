@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct NoteOverlayView: View {
+	
     var body: some View {
 		HStack {
 			Image(systemName: "circle")

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CustomSegmentContolView: View {
 	
-	@StateObject var viewModel: PressureOverviewViewModel
+	@EnvironmentObject private var viewModel: PressureOverviewViewModel
 	
 	var body: some View {
 		HStack(spacing: Constants.SegmentedControl.spacing, content: {

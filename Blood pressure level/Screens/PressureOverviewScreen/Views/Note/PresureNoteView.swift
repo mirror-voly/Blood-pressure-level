@@ -9,17 +9,17 @@ import SwiftUI
 
 struct PresureNoteView: View {
 	
-	@StateObject var viewModel: PressureOverviewViewModel
+	@EnvironmentObject private var viewModel: PressureOverviewViewModel
 	
 	var body: some View {
 		VStack(alignment: .leading, spacing: Constants.Spacing.small) {
 			VStack {
-				PresureNoteHeader(viewModel: viewModel)
+				PresureNoteHeader()
 				
 				if viewModel.measurementsWithNotes.isEmpty {
-					NoteEmptyStateView(viewModel: viewModel)
+					NoteEmptyStateView()
 				} else {
-					NoteList(viewModel: viewModel)
+					NoteList()
 				}
 			}
 			.padding()	

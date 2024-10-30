@@ -19,15 +19,15 @@ struct PressureOverviewScreen: View {
 			ZStack {
 				BackgroundView(backgroundType: .mainScreen)
 				VStack {
-					PresureOverviewHeaderView(viewModel: viewModel)
+					PresureOverviewHeaderView()
 						.padding(.bottom)
 					
 					VStack(spacing: Constants.Spacing.regular) {
-						CustomSegmentContolView(viewModel: viewModel)
+						CustomSegmentContolView()
 						
-						PressureSummaryView(viewModel: viewModel)
+						PressureSummaryView()
 						
-						PresureNoteView(viewModel: viewModel)
+						PresureNoteView()
 					}
 					
 					Spacer()
@@ -36,7 +36,7 @@ struct PressureOverviewScreen: View {
 				
 				if viewModel.tipIsActive {
 					//TODO: Need to highlight button too
-					OverlayTip(viewModel: viewModel)
+					OverlayTip()
 				}
 			}
 			.navigationDestination(isPresented: $viewModel.addNewScreenIsPresented) {
@@ -46,7 +46,9 @@ struct PressureOverviewScreen: View {
 		.onAppear(perform: {
 			dataStore.fetchedResult = measurementData
 		})
+		.environmentObject(viewModel)
 	}
+	
 	init(dataStore: DataStore) {
 		self._viewModel = StateObject(wrappedValue: PressureOverviewViewModel(dataStore: dataStore))
 	}

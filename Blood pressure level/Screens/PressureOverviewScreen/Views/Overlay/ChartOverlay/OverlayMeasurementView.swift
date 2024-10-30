@@ -10,6 +10,7 @@ import SwiftUI
 import SwiftUI
 
 struct OverlayMeasurementView: View {
+	
 	let title: String
 	let minValue: String? // Optional minValue
 	let maxValue: String

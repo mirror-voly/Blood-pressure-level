@@ -9,8 +9,6 @@ import SwiftUI
 
 struct NoteEmptyStateView: View {
 	
-	@StateObject var viewModel: PressureOverviewViewModel
-	
     var body: some View {
 		Group {
 			Divider()

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NoteList: View {
 	
-	@StateObject var viewModel: PressureOverviewViewModel
+	@EnvironmentObject private var viewModel: PressureOverviewViewModel
 	
     var body: some View {
 		if let note = viewModel.selectedMessurment?.note, !note.isEmpty {

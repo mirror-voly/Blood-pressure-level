@@ -9,11 +9,10 @@ import SwiftUI
 
 struct TextFieldView: View {
 	
-	@StateObject var viewModel: AddNewMeasurementViewModel
-	let placeholder: String
-	let keyboardType: UIKeyboardType
 	@Binding var text: String
 	@State var isOnChange = false
+	let placeholder: String
+	let keyboardType: UIKeyboardType
 	
 	var body: some View {
 		TextField(Constants.General.emptyString,

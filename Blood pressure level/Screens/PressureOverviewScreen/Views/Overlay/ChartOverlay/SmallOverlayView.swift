@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SmallOverlayView: View {
 	
-	@StateObject var viewModel: PressureOverviewViewModel
+	@EnvironmentObject private var viewModel: PressureOverviewViewModel
 	let selectedMessurment: SelectedMeasurementsInfo
 	
 	var body: some View {
@@ -23,7 +23,7 @@ struct SmallOverlayView: View {
 				}
 			}
 			
-			SmallOverlayDateView(viewModel: viewModel, selectedMessurment: selectedMessurment, formatStyle: .day)
+			SmallOverlayDateView(selectedMessurment: selectedMessurment, formatStyle: .day)
 			
 			if selectedMessurment.note.first != nil {
 				NoteOverlayView()
