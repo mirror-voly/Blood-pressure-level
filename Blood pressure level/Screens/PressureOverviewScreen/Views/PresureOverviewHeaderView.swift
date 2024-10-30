@@ -51,5 +51,6 @@ struct PresureOverviewHeaderView: View {
 				
 			})
 		}
+		.padding(.bottom)
 	}
 }

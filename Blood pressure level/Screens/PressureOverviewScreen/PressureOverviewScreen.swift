@@ -43,9 +43,6 @@ struct PressureOverviewScreen: View {
 				AddNewMeasurementScreen(dataStore: dataStore)
 			}
 		}
-		.onAppear(perform: {
-			dataStore.fetchedResult = measurementData
-		})
 		.environmentObject(viewModel)
 	}
 	

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -23,8 +23,6 @@
 		516E7EB12CCBBF7700741283 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 516E7EAF2CCBBF7700741283 /* Localizable.strings */; };
 		516E7EB32CCBBFE000741283 /* String+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516E7EB22CCBBFE000741283 /* String+Localized.swift */; };
 		516E7EB72CCBCED300741283 /* Measurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516E7EB62CCBCED300741283 /* Measurement.swift */; };
-		516E7EBD2CCBDC4E00741283 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 516E7EBC2CCBDC4E00741283 /* RxCocoa */; };
-		516E7EBF2CCBDC4E00741283 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 516E7EBE2CCBDC4E00741283 /* RxSwift */; };
 		516E7EC12CCBDC8600741283 /* PressureOverviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516E7EC02CCBDC8600741283 /* PressureOverviewViewModel.swift */; };
 		516F94192CD2161600ED1BF0 /* OverlayMeasurementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516F94182CD2161600ED1BF0 /* OverlayMeasurementView.swift */; };
 		516F941B2CD2168E00ED1BF0 /* SmallOverlayDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516F941A2CD2168E00ED1BF0 /* SmallOverlayDateView.swift */; };
@@ -50,8 +48,6 @@
 		5191C6352CCA782300AD3403 /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5191C6342CCA782300AD3403 /* Triangle.swift */; };
 		5191C6372CCA7A6F00AD3403 /* AddNewMeasurementScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5191C6362CCA7A6F00AD3403 /* AddNewMeasurementScreen.swift */; };
 		51934F702CD04791003349F2 /* SelectedMeasurementsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51934F6F2CD04791003349F2 /* SelectedMeasurementsInfo.swift */; };
-		51934F732CD080A9003349F2 /* RxRelay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51934F722CD080A9003349F2 /* RxRelay.swift */; };
-		51934F752CD0817E003349F2 /* SubscriptionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51934F742CD0817E003349F2 /* SubscriptionsManager.swift */; };
 		51B415CC2CD21906007863EC /* BigOverlayPulseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B415CB2CD21906007863EC /* BigOverlayPulseView.swift */; };
 		51C95D982CD0538B0054B405 /* NoteFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C95D972CD0538B0054B405 /* NoteFieldView.swift */; };
 		51C95D9A2CD05A050054B405 /* DatePrepare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C95D992CD05A050054B405 /* DatePrepare.swift */; };
@@ -104,8 +100,6 @@
 		5191C6342CCA782300AD3403 /* Triangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Triangle.swift; sourceTree = "<group>"; };
 		5191C6362CCA7A6F00AD3403 /* AddNewMeasurementScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewMeasurementScreen.swift; sourceTree = "<group>"; };
 		51934F6F2CD04791003349F2 /* SelectedMeasurementsInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedMeasurementsInfo.swift; sourceTree = "<group>"; };
-		51934F722CD080A9003349F2 /* RxRelay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxRelay.swift; sourceTree = "<group>"; };
-		51934F742CD0817E003349F2 /* SubscriptionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsManager.swift; sourceTree = "<group>"; };
 		51934F762CD08317003349F2 /* LICENSE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
 		51B415CB2CD21906007863EC /* BigOverlayPulseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigOverlayPulseView.swift; sourceTree = "<group>"; };
 		51C95D972CD0538B0054B405 /* NoteFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteFieldView.swift; sourceTree = "<group>"; };
@@ -120,8 +114,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				516E7EBF2CCBDC4E00741283 /* RxSwift in Frameworks */,
-				516E7EBD2CCBDC4E00741283 /* RxCocoa in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,7 +266,6 @@
 				517015062CC939900058BC9F /* Enums */,
 				516E7EB52CCBC2BF00741283 /* Extentions */,
 				516E7EAF2CCBBF7700741283 /* Localizable.strings */,
-				51934F782CD08496003349F2 /* RxSwift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -296,15 +287,6 @@
 				517014F62CC8E1860058BC9F /* Persistence.swift */,
 			);
 			path = Memory;
-			sourceTree = "<group>";
-		};
-		51934F782CD08496003349F2 /* RxSwift */ = {
-			isa = PBXGroup;
-			children = (
-				51934F722CD080A9003349F2 /* RxRelay.swift */,
-				51934F742CD0817E003349F2 /* SubscriptionsManager.swift */,
-			);
-			path = RxSwift;
 			sourceTree = "<group>";
 		};
 		51B415CE2CD2239C007863EC /* ChartOverlay */ = {
@@ -338,8 +320,6 @@
 			);
 			name = "Blood pressure level";
 			packageProductDependencies = (
-				516E7EBC2CCBDC4E00741283 /* RxCocoa */,
-				516E7EBE2CCBDC4E00741283 /* RxSwift */,
 			);
 			productName = "Blood pressure level";
 			productReference = 517014EA2CC8E1850058BC9F /* Blood pressure level.app */;
@@ -371,7 +351,6 @@
 			);
 			mainGroup = 517014E12CC8E1850058BC9F;
 			packageReferences = (
-				516E7EBB2CCBDC4E00741283 /* XCLocalSwiftPackageReference "../../RxSwift-main" */,
 				51934F712CD04953003349F2 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
 			);
 			productRefGroup = 517014EB2CC8E1850058BC9F /* Products */;
@@ -436,14 +415,12 @@
 				516E7EAC2CCBBB9400741283 /* MainFieldsView.swift in Sources */,
 				516CACAA2CCE3CA400762B0A /* ChartView.swift in Sources */,
 				516E7EAA2CCB9D0400741283 /* Constants.swift in Sources */,
-				51934F732CD080A9003349F2 /* RxRelay.swift in Sources */,
 				517064BD2CCFA1F600641620 /* OverlaySelectionPresenter.swift in Sources */,
 				5170150A2CC93A5C0058BC9F /* PresureOverviewHeaderView.swift in Sources */,
 				516E7EC12CCBDC8600741283 /* PressureOverviewViewModel.swift in Sources */,
 				51C95D9A2CD05A050054B405 /* DatePrepare.swift in Sources */,
 				5191C62B2CCA1EFB00AD3403 /* PresureNoteView.swift in Sources */,
 				517064BF2CCFC65500641620 /* PresureNoteHeader.swift in Sources */,
-				51934F752CD0817E003349F2 /* SubscriptionsManager.swift in Sources */,
 				517015052CC930520058BC9F /* CustomSegmentContolView.swift in Sources */,
 				516E7EA82CCB9B6100741283 /* BackgroundType.swift in Sources */,
 				51934F702CD04791003349F2 /* SelectedMeasurementsInfo.swift in Sources */,
@@ -677,13 +654,6 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		516E7EBB2CCBDC4E00741283 /* XCLocalSwiftPackageReference "../../RxSwift-main" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = "../../RxSwift-main";
-		};
-/* End XCLocalSwiftPackageReference section */
-
 /* Begin XCRemoteSwiftPackageReference section */
 		51934F712CD04953003349F2 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -694,17 +664,6 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		516E7EBC2CCBDC4E00741283 /* RxCocoa */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = RxCocoa;
-		};
-		516E7EBE2CCBDC4E00741283 /* RxSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = RxSwift;
-		};
-/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		517014F82CC8E1860058BC9F /* Blood_pressure_level.xcdatamodeld */ = {
