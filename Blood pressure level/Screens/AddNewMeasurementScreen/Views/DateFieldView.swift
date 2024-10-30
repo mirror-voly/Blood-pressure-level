@@ -21,7 +21,7 @@ struct DateFieldView: View {
 			.datePickerStyle(.compact)
 			.fixedSize()
 
-			Text(viewModel.getDateText(displayedComponents: displayedComponents))
+			Text(viewModel.getDateFieldViewText(displayedComponents: displayedComponents))
 				.font(.system(size: Constants.FontSize.big))
 				.padding()
 				.foregroundStyle(viewModel.datePickerSeparatedChangeChecker(displayedComponents) ? .main : .secondaryGrayDark)

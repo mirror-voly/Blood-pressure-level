@@ -11,8 +11,6 @@ import SwiftUI
 final class AddNewMeasurementViewModel: ObservableObject {
 	
 	private let dataStore: DataStore
-	private let datePrepare: DatePrepare
-	private let measurementID = UUID()
 	let currentDate = Date()
 	
 	@Published var systolicText = Constants.General.emptyString {
@@ -36,8 +34,8 @@ final class AddNewMeasurementViewModel: ObservableObject {
 		canNotBeSaved = !systolicText.isEmpty && !diastolicText.isEmpty ? false : true 
 	}
 	
-	func getDateText(displayedComponents: DatePickerComponents) -> String {
-		datePrepare.getFormatedDate(date: date, displayedComponents: displayedComponents)
+	func getDateFieldViewText(displayedComponents: DatePickerComponents) -> String {
+		DatePrepare.getFormatedDate(date: date, displayedComponents: displayedComponents)
 	}
 	
 	func datePickerSeparatedChangeChecker(_ displayedComponents: DatePickerComponents) -> Bool {
@@ -49,11 +47,9 @@ final class AddNewMeasurementViewModel: ObservableObject {
 	}
 	
 	private func checkEditOrAddByTimeInterval() -> UUID? {
-		let thirtyMinutesBefore = date.addingTimeInterval(-Constants.Time.halfanHour)
-		let thirtyMinutesAfter = date.addingTimeInterval(Constants.Time.halfanHour)
-		
+		let hourBefore = date.addingTimeInterval(-Constants.Time.hour)
 		guard let measurement = dataStore.measurements.first(where: { measurement in
-			measurement.date >= thirtyMinutesBefore && measurement.date <= thirtyMinutesAfter
+			measurement.date >= hourBefore && measurement.date <= date
 		}) else {
 			return nil
 		}
@@ -62,23 +58,21 @@ final class AddNewMeasurementViewModel: ObservableObject {
 
 	func buttonAction() {
 		guard let systolicLevel = Int(systolicText), let diastolicLevel = Int(diastolicText) else { return }
-		let measurementID = checkEditOrAddByTimeInterval() ?? measurementID
+		let oldMeasurementID = checkEditOrAddByTimeInterval()
 		
 		let measurement = Measurement(
 				systolicLevel: systolicLevel,
 				diastolicLevel: diastolicLevel,
-				id: measurementID,
+				id: oldMeasurementID ?? UUID(),
 				date: date,
 				pulse: Int(pulseText),
 				note: noteText.isEmpty ? nil : noteText
 			)
-		dataStore.addOrEditMeasurement(measurement)
-		canNotBeSaved = true
+		dataStore.addOrEditMeasurement(measurement, forEdit: oldMeasurementID != nil)
 	}
 
 	
-	init(dataStore: DataStore, datePrepare: DatePrepare) {
+	init(dataStore: DataStore) {
 		self.dataStore = dataStore
-		self.datePrepare = datePrepare
 	}
 }

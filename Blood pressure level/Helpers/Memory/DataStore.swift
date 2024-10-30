@@ -37,8 +37,9 @@ final class DataStore: ObservableObject {
 		self.measurements = measurements
 	}
 
-	func addOrEditMeasurement(_ measurement: Measurement) {
-		if let index = measurements.firstIndex(where: { $0.id == measurement.id }) {
+	func addOrEditMeasurement(_ measurement: Measurement, forEdit: Bool) {
+		if forEdit {
+			guard let index = measurements.firstIndex(where: { $0.id == measurement.id }) else { return }
 			measurements[index] = measurement
 			PersistenceController.convertAndEdit(measurement) 
 		} else {

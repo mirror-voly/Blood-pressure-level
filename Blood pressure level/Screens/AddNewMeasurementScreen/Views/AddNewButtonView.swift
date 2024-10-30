@@ -10,10 +10,12 @@ import SwiftUI
 struct AddNewButtonView: View {
 	
 	@StateObject var viewModel: AddNewMeasurementViewModel
+	@Environment(\.dismiss) var dismiss
 	
     var body: some View {
 		Button {
 			viewModel.buttonAction()
+			dismiss()
 		} label: {
 			Text("save".localized)
 				.frame(maxWidth: .infinity)

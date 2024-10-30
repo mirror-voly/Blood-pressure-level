@@ -107,6 +107,7 @@ enum Constants {
 	}
 	
 	enum Time {
+		static let hour: CGFloat = 3600
 		static let halfanHour: CGFloat = 1800
 		static let halfADay: CGFloat = 43200
 	}

@@ -9,7 +9,7 @@ import SwiftUI
 
 final class DatePrepare {
 	
-	func getFormatedDate(date: Date, displayedComponents: DatePickerComponents) -> String {
+	static func getFormatedDate(date: Date, displayedComponents: DatePickerComponents) -> String {
 		let formattedDate: String
 		if displayedComponents == .hourAndMinute {
 			formattedDate = date.formatted(.dateTime.hour().minute())
