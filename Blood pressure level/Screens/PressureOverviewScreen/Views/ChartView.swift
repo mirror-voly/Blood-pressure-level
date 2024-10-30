@@ -92,7 +92,7 @@ struct ChartView: View {
 				RuleMark(y: .value("high", Constants.Chart.highLine))
 					.foregroundStyle(.red.opacity(Constants.Opacity.big))
 				
-				RuleMark(y: .value("low", Constants.Chart.highLine))
+				RuleMark(y: .value("low", Constants.Chart.lowLine))
 					.foregroundStyle(.blue.opacity(Constants.Opacity.big))
 			}
 			.lineStyle(
