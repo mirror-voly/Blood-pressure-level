@@ -11,35 +11,31 @@ struct AddNewMeasurementScreen: View {
 	
 	@StateObject private var viewModel: AddNewMeasurementViewModel
 	
-    var body: some View {
-		ZStack {
-			BackgroundView(backgroundType: .addNewScreen)
-				.onTapGesture {
-					hideKeyboard()
-				}
+	var body: some View {
+		VStack(spacing: Constants.Spacing.regular) {
+			AddNewHeaderView()
 			
-			VStack(spacing: Constants.Spacing.regular) {
-				
-				AddNewHeaderView()
-
-				MainFieldsView()
-
-				DateFields()
-				
-				NoteFieldView()
-				
-				Spacer()
-				
-				AddNewButtonView()
-				
-			}
-			.padding()
+			MainFieldsView()
+			
+			DateFields()
+			
+			NoteFieldView()
+			
+			Spacer()
+			
+			AddNewButtonView()
+			
 		}
+		.padding()
 		.navigationBarBackButtonHidden()
 		.navigationBarTitleDisplayMode(.inline)
+		.background(BackgroundView(backgroundType: .addNewScreen)
+			.onTapGesture {
+				hideKeyboard()
+			})
 		.environmentObject(viewModel)
-    }
-
+	}
+	
 	init(dataStore: DataStore) {
 		self._viewModel = StateObject(wrappedValue: AddNewMeasurementViewModel(dataStore: dataStore))
 	}

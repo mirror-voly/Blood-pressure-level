@@ -16,28 +16,25 @@ struct PressureOverviewScreen: View {
 	
 	var body: some View {
 		NavigationStack {
-			ZStack {
-				BackgroundView(backgroundType: .mainScreen)
-				VStack {
-					PresureOverviewHeaderView()
-						.padding(.bottom)
-					
-					VStack(spacing: Constants.Spacing.regular) {
-						CustomSegmentContolView()
-						
-						PressureSummaryView()
-						
-						PresureNoteView()
-					}
-					
-					Spacer()
-				}
-				.padding(.horizontal)
+			VStack {
+				PresureOverviewHeaderView()
+					.padding(.bottom)
 				
-				if viewModel.tipIsActive {
-					//TODO: Need to highlight button too
-					OverlayTip()
+				VStack(spacing: Constants.Spacing.regular) {
+					CustomSegmentContolView()
+					
+					PressureSummaryView()
+						.zIndex(0.2)
+					
+					PresureNoteView()
 				}
+				
+				Spacer()
+			}
+			.padding(.horizontal)
+			.background(BackgroundView(backgroundType: .mainScreen))
+			.overlay { 
+				OverlayTip()
 			}
 			.navigationDestination(isPresented: $viewModel.addNewScreenIsPresented) {
 				AddNewMeasurementScreen(dataStore: dataStore)
