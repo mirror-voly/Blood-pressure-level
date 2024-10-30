@@ -16,7 +16,7 @@ struct PresureNoteView: View {
 			VStack {
 				PresureNoteHeader()
 				
-				if viewModel.measurementsWithNotes.isEmpty {
+				if viewModel.measurementsWithNote.isEmpty {
 					NoteEmptyStateView()
 				} else {
 					NoteList()

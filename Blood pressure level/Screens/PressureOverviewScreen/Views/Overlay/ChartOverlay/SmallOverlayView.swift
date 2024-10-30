@@ -23,7 +23,7 @@ struct SmallOverlayView: View {
 				}
 			}
 			
-			SmallOverlayDateView(selectedMessurment: selectedMessurment, formatStyle: .day)
+			OverlayDateView(selectedMessurment: selectedMessurment, formatStyle: .day)
 			
 			if selectedMessurment.note.first != nil {
 				NoteOverlayView()

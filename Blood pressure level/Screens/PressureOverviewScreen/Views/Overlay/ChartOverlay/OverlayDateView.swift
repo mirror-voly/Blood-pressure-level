@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SmallOverlayDateView: View {
+struct OverlayDateView: View {
 	
 	@EnvironmentObject private var viewModel: PressureOverviewViewModel
 	let selectedMessurment: SelectedMeasurementsInfo
@@ -19,11 +19,11 @@ struct SmallOverlayDateView: View {
 				HStack(spacing: Constants.Spacing.verySmall) {
 					Text("today".localized)
 						.font(.system(size: Constants.FontSize.micro))
-					Text(viewModel.getDateText(date: selectedMessurment.date, formatStyle: formatStyle))
+					Text(viewModel.getOverlayDateText(date: selectedMessurment.date, formatStyle: formatStyle))
 						.font(.system(size: Constants.FontSize.micro))
 				}
 			} else {
-				Text(viewModel.getDateText(date: selectedMessurment.date, formatStyle: .month))
+				Text(viewModel.getOverlayDateText(date: selectedMessurment.date, formatStyle: .month))
 					.font(.system(size: Constants.FontSize.micro))
 			}
 		}

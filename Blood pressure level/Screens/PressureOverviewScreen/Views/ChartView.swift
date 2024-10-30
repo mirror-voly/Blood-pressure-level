@@ -18,12 +18,12 @@ struct ChartView: View {
 			ForEach(viewModel.chartAverageMeasurements) { measurement in
 				Plot {
 					LineMark(x: .value("hour", measurement.date,
-									   unit: viewModel.calendarComponentForPeriod),
+									   unit: viewModel.chartUnitForPeriod),
 							 y: .value("systolicLevel", measurement.systolicLevel))
 					.foregroundStyle(by: .value("Pressure", "systolic"))
 					
 					LineMark(x: .value("hour", measurement.date,
-									   unit: viewModel.calendarComponentForPeriod),
+									   unit: viewModel.chartUnitForPeriod),
 							 y: .value("systolicLevel", measurement.diastolicLevel))
 					.foregroundStyle(by: .value("pressure", "diastolic"))
 				}
@@ -32,21 +32,22 @@ struct ChartView: View {
 				
 				Plot {
 					PointMark(x: .value("hour", measurement.date,
-										unit: viewModel.calendarComponentForPeriod), y: .value("systolicLevel", measurement.systolicLevel))
+										unit: viewModel.chartUnitForPeriod),
+							  y: .value("systolicLevel", measurement.systolicLevel))
 					.foregroundStyle(.systolic)
 					
 					
 					PointMark(x: .value("hour", measurement.date,
-										unit: viewModel.calendarComponentForPeriod),
+										unit: viewModel.chartUnitForPeriod),
 							  y: .value("diastolicLevel", measurement.diastolicLevel))
 					.foregroundStyle(.diastolic)
 				}
 				.symbolSize(Constants.Chart.symbolSize)
 			}
 			// MARK: - Chart note icons
-			ForEach(viewModel.measurementsWithNotes) { measurement in
+			ForEach(viewModel.measurementsWithNote) { measurement in
 				PointMark(x: .value("hour", measurement.date,
-									unit: viewModel.calendarComponentForPeriod),
+									unit: viewModel.chartUnitForPeriod),
 						  y: .value("systolicLevel", measurement.systolicLevel))
 				.symbol {
 					Image(systemName: "circle")
@@ -143,13 +144,13 @@ struct ChartView: View {
 			}
 		}
 		
-//		 MARK: Day X axis
+//		 MARK: X axis
 		.chartXScale(domain: viewModel.timeInterval.startOfPeriod...viewModel.timeInterval.endOfPeriod)
 		.chartXAxis {
-			AxisMarks(values: viewModel.getAxisValues()) { value in
+			AxisMarks(values: viewModel.getChartAxisValues()) { value in
 				AxisValueLabel {
 					if let date = value.as(Date.self) {
-						return Text(viewModel.formatDate(for: date))
+						return Text(viewModel.formatChartXAxisDateFor(date: date))
 					}
 					return Text(Constants.General.emptyString)
 				}

@@ -7,11 +7,17 @@
 
 import CoreData
 
+/// Контроллер для управления сохранением и извлечением данных с использованием Core Data.
 struct PersistenceController {
-    static let shared = PersistenceController()
-
-    let container: NSPersistentContainer
 	
+	/// Общий экземпляр PersistenceController.
+	static let shared = PersistenceController()
+
+	/// Контейнер для управления Core Data.
+	let container: NSPersistentContainer
+	
+	/// Преобразует и сохраняет измерение в Core Data.
+	/// - Parameter measurement: Измерение, которое нужно сохранить.
 	static func convertAndSave(_ measurement: Measurement) {
 		let result = PersistenceController.shared
 		let context = result.container.viewContext
@@ -33,6 +39,8 @@ struct PersistenceController {
 		}
 	}
 
+	/// Преобразует и редактирует существующее измерение в Core Data.
+	/// - Parameter measurement: Измерение, которое нужно отредактировать.
 	static func convertAndEdit(_ measurement: Measurement) {
 		let result = PersistenceController.shared
 		let context = result.container.viewContext
@@ -55,14 +63,14 @@ struct PersistenceController {
 		}
 	}
 
-
-    init() {
-        container = NSPersistentContainer(name: "Blood_pressure_level")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                print("Unresolved error \(error), \(error.userInfo)")
-            }
-        })
-        container.viewContext.automaticallyMergesChangesFromParent = true
-    }
+	/// Инициализирует PersistenceController и загружает хранилище данных.
+	init() {
+		container = NSPersistentContainer(name: "Blood_pressure_level")
+		container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+			if let error = error as NSError? {
+				print("Unresolved error \(error), \(error.userInfo)")
+			}
+		})
+		container.viewContext.automaticallyMergesChangesFromParent = true
+	}
 }

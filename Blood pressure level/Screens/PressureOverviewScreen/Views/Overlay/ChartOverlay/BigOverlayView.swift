@@ -32,7 +32,7 @@ struct BigOverlayView: View {
 					Spacer()
 					
 					VStack(alignment: .leading) {
-						SmallOverlayDateView(selectedMessurment: selectedMessurment, formatStyle: .month)
+						OverlayDateView(selectedMessurment: selectedMessurment, formatStyle: .month)
 						
 						if selectedMessurment.note.first != nil {
 							NoteOverlayView()

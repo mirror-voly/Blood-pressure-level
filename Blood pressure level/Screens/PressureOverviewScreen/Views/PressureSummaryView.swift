@@ -65,7 +65,7 @@ struct PressureSummaryView: View {
 			
 			HStack {
 				if viewModel.period != .day {
-					Text(viewModel.periodInfo.capitalized)
+					Text(viewModel.dateIntervalStringForPeriod.capitalized)
 						.font(.system(size: Constants.FontSize.micro))
 				} else {
 					Text("today".localized)

@@ -20,7 +20,7 @@ struct NoteList: View {
 					}
 				}
 			}
-		} else if viewModel.measurementsWithNotes.count == 1, let noteInfo = viewModel.getNoteInfo() {
+		} else if viewModel.measurementsWithNote.count == 1, let noteInfo = viewModel.getNoteInfo(measurement: nil) {
 			ScrollView {
 				NoteView(noteInfo: noteInfo)
 			}

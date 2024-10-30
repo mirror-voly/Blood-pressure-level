@@ -8,115 +8,104 @@
 import SwiftUI
 import Charts
 
+/// ViewModel для отображения информации о давлении.
 final class PressureOverviewViewModel: ObservableObject {
 	
+	// MARK: - Published variables
+	
+	/// Период отображения данных (день, неделя, месяц).
 	@Published var period: PresentationPeriod = .day {
 		didSet {
 			selectedMessurment = nil
 		}
 	}
+	
+	/// Активен ли подсказка.
 	@Published var tipIsActive = false
+	
+	/// Признак того, что экран добавления нового измерения представлен.
 	@Published var addNewScreenIsPresented = false
-	@Published var isNoteViewOpened = false
+	
+	/// Выбранная информация о измерении.
 	@Published var selectedMessurment: SelectedMeasurementsInfo?
 	
-	private let dataStore: DataStore
+	// MARK: - Local constants
+	
+	/// Отформатированная дата.
 	let formattedDate: String
-	private let formatter = DateFormatter()
-	private let calendar = Calendar.current
+	
+	/// Калькулятор для измерений.
+	private let measurementsCalculator = MeasurementsCalculator()
+	
+	/// Калькулятор для дат.
+	private let dateCalculator = DateCalculator()
+	
+	/// Хранилище данных.
+	private let dataStore: DataStore
+	
+	/// Текущая дата.
 	private let currentDate: Date
-	var periodInfo: String {
-		let date = getTimeInterval() 
-		let start = date.startOfPeriod.formatted(.dateTime.month().day())
-		let end = date.endOfPeriod.formatted(.dateTime.month().day())
-		return "\(start)-\(end)"
-	}
-	private var filteredMeasurementsForPresentationPeriod: [Measurement] {
-		getMeasurementsForPresentationPeriod()
-	}
-	var chartAverageMeasurements: [Measurement] {
-		period != .day ? sortAndMakeAverageMeasurements(filteredMeasurementsForPresentationPeriod) : filteredMeasurementsForPresentationPeriod
-	}
-	var measurementsWithNotes: [Measurement] {
-		let filterNotes = filteredMeasurementsForPresentationPeriod.filter({ $0.note != nil })
-		
-		return period != .day ? findAverageNote(filterNotes) : filterNotes
-		
-	}
+	
+	// MARK: - Calculated variables
+	
+	/// Интервал времени для выбранного периода.
 	var timeInterval: (startOfPeriod: Date, endOfPeriod: Date) {
 		getTimeInterval()
 	}
+	
+	/// Строка с интервалом дат для выбранного периода.
+	var dateIntervalStringForPeriod: String {
+		return DatePresenter.getStartAndEndDateString(startOfPeriod: timeInterval.startOfPeriod,
+													  endOfPeriod: timeInterval.endOfPeriod)
+	}
+	
+	/// Отфильтрованные измерения для выбранного периода.
+	private var filteredMeasurementsForPresentationPeriod: [Measurement] {
+		getMeasurementsForPresentationPeriod()
+	}
+	
+	/// Средние измерения для графика.
+	var chartAverageMeasurements: [Measurement] {
+		period != .day ? getAverageMeasurementsByDays(filteredMeasurementsForPresentationPeriod) : filteredMeasurementsForPresentationPeriod
+	}
+	
+	/// Измерения с заметками.
+	var measurementsWithNote: [Measurement] {
+		let filteredNotes = filteredMeasurementsForPresentationPeriod.filter({ $0.note != nil })
+		return period != .day ? findNotesIn(filteredNotes) : filteredNotes
+	}
+	
+	/// Информация о минимальном и максимальном уровне давления.
 	var minAndMaxPressureLevelInfo: String? {
-		guard let info = getMinAndMaxPressureLevel() else { return nil }
-		if let diastolicMin = info.diastolic.min, let systolicMin = info.systolic.min {
-			return "\(systolicMin) - \(info.systolic.max) / \(diastolicMin) - \(info.diastolic.max)"
-		} else {
-			return "\(info.systolic.max) / \(info.diastolic.max)"
-		}
+		measurementsCalculator.getMinAndMaxPressureLevelStringResult(filteredMeasurementsForPresentationPeriod)
 	}
+	
+	/// Информация о минимальном и максимальном уровне пульса.
 	var minAndMaxPulseLevelInfo: String? {
-		guard let pulse = getMinAndMaxPulseLevel() else { return nil }
-		if let min = pulse.min, min != pulse.max {
-			return "\(min) - \(pulse.max)"
-		} else {
-			return "\(pulse.max)"
-		}
-	}
-	var calendarComponentForPeriod: Calendar.Component {
-		switch period {
-			case .day:
-					.hour
-			case .week:
-					.day
-			case .month:
-					.day
-		}
-	}
-	//MARK: Functions
-	private func sortByTime(measurements: [Measurement]) -> [Measurement] {
-		measurements.sorted(by: { $0.date > $1.date	})
+		measurementsCalculator.getMinAndMaxPulseLevelStringResult(filteredMeasurementsForPresentationPeriod)
 	}
 	
-	private func sortAndMakeAverageMeasurements(_ measurements: [Measurement]) -> [Measurement] {
-		var groupedMeasurements: [Date: [Measurement]] = [:]
-		var averagedMeasurements: [Measurement] = []
-		for measurement in measurements {
-			let dateKey = Calendar.current.startOfDay(for: measurement.date)
-			groupedMeasurements[dateKey, default: []].append(measurement)
-		}
-		
-		for (_, group) in groupedMeasurements {
-			if !group.isEmpty {
-				let averageSystolic = group.map { $0.systolicLevel }.reduce(0, +) / group.count
-				let averageDiastolic = group.map { $0.diastolicLevel }.reduce(0, +) / group.count
-				let averagedMeasurement = Measurement(systolicLevel: averageSystolic, diastolicLevel: averageDiastolic, id: UUID(), date: group[0].date, pulse: nil, note: nil)
-				averagedMeasurements.append(averagedMeasurement)
-			}
-		}
-		let sortedMeasurements = sortByTime(measurements: averagedMeasurements)
-		return sortedMeasurements
+	/// Единица измерения для графика в зависимости от периода.
+	var chartUnitForPeriod: Calendar.Component {
+		return period == .day ? .hour : .day
 	}
 	
-	func findAverageNote(_ filterNotes: [Measurement]) -> [Measurement] {
-		let chartDates = Set(chartAverageMeasurements.map { Calendar.current.startOfDay(for: $0.date) })
-		
-		return filterNotes.compactMap { item in
-			let itemDate = Calendar.current.startOfDay(for: item.date)
-			return chartDates.contains(itemDate) ? chartAverageMeasurements.first(where: { Calendar.current.startOfDay(for: $0.date) == itemDate }) : nil
-		}
-	}
-
-	private func getMeasurementsForPresentationPeriod() -> [Measurement] {
-		let (startOfPeriod, endOfPeriod) = getTimeInterval()
-		
-		let filtered = dataStore.measurements.filter { measurement in
-			return measurement.date >= startOfPeriod && measurement.date < endOfPeriod
-		}
-		
-		return sortByTime(measurements: filtered)
+	// MARK: - Functions
+	
+	/// Запускает таймер для отображения подсказки, если это необходимо.
+	private func startAlertTimerIfNeeded() {
+		guard self.dataStore.measurements.isEmpty else { return }
+		DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { self.tipIsActive = true })
+		DispatchQueue.main.asyncAfter(deadline: .now() + 15, execute: { self.tipIsActive = false })
 	}
 	
-	func getAxisValues() -> AxisMarkValues {
+	/// Получает интервал времени для выбранного периода.
+	func getTimeInterval() -> (startOfPeriod: Date, endOfPeriod: Date) {
+		dateCalculator.getTimeInterval(period: period, currentDate: currentDate)
+	}
+	
+	/// Получает значения оси графика.
+	func getChartAxisValues() -> AxisMarkValues {
 		switch period {
 			case .day:
 				return .automatic(desiredCount: 5)
@@ -126,58 +115,85 @@ final class PressureOverviewViewModel: ObservableObject {
 				return .stride(by: .day, count: 5)
 		}
 	}
-
-	func getMinAndMaxPressureLevel() -> (systolic: (max: Int, min: Int?), diastolic: (max: Int, min: Int?))? {
-		guard !filteredMeasurementsForPresentationPeriod.isEmpty else { return nil }
+	
+	/// Получает текст для отображения даты на графике.
+	func getOverlayDateText(date: Date, formatStyle: PresentationPeriod) -> String {
+		DatePresenter.getOverlayDateText(date: date, formatStyle: formatStyle)
+	}
+	
+	/// Форматирует дату для оси X графика.
+	/// - Parameter date: Дата, которую нужно отформатировать.
+	/// - Returns: Отформатированная строка даты.
+	func formatChartXAxisDateFor(date: Date) -> String {
+		DatePresenter.formatChartXAxisDateFor(period: period, date: date)
+	}
+	
+	/// Получает измерения для выбранного периода.
+	/// - Returns: Массив измерений, соответствующих выбранному периоду.
+	private func getMeasurementsForPresentationPeriod() -> [Measurement] {
+		let (startOfPeriod, endOfPeriod) = getTimeInterval()
 		
-		let systolic: (Int, Int?)
-		let diastolic: (Int, Int?)
-		
-		switch filteredMeasurementsForPresentationPeriod.count {
-		case 1:
-			let first = filteredMeasurementsForPresentationPeriod[0]
-				systolic = (first.systolicLevel, nil)
-				diastolic = (first.diastolicLevel, nil)
-		case let count where count > 1:
-			let systolicLevels = filteredMeasurementsForPresentationPeriod.map { $0.systolicLevel }
-			let diastolicLevels = filteredMeasurementsForPresentationPeriod.map { $0.diastolicLevel }
-			guard let maxSystolic = systolicLevels.max(),
-				  let minSystolic = systolicLevels.min(),
-				  let maxDiastolic = diastolicLevels.max(),
-				  let minDiastolic = diastolicLevels.min() else {
-				return nil
+		return dataStore.measurements.filter { measurement in
+			return measurement.date >= startOfPeriod && measurement.date < endOfPeriod
+		}
+	}
+	
+	/// Находит и устанавливает выбранное измерение на основе значения по оси X.
+	/// - Parameter xValue: Значение по оси X, для которого нужно найти измерение.
+	func findAndSetSelection(xValue: Date) {
+		let shift = period == .day ? Constants.Time.halfanHour : Constants.Time.halfADay
+		let measurements = filteredMeasurementsForPresentationPeriod.filter({ measurement in
+			return measurement.date >= xValue.addingTimeInterval(-shift) && measurement.date <= xValue.addingTimeInterval(shift)
+		})
+		selectedMessurment = getSummaryInfoForSelectedMeasurements(measurements)
+	}
+	
+	/// Получает средние измерения по дням.
+	/// - Parameter measurements: Массив измерений для усреднения.
+	/// - Returns: Массив средних измерений.
+	private func getAverageMeasurementsByDays(_ measurements: [Measurement]) -> [Measurement] {
+		var groupedMeasurements: [Date: [Measurement]] = [:]
+		for measurement in measurements {
+			let dateKey = Calendar.current.startOfDay(for: measurement.date)
+			groupedMeasurements[dateKey, default: []].append(measurement)
+		}
+		var averagedMeasurements: [Measurement] = []
+		for (_, group) in groupedMeasurements {
+			if !group.isEmpty {
+				let averageSystolic = group.map { $0.systolicLevel }.reduce(0, +) / group.count
+				let averageDiastolic = group.map { $0.diastolicLevel }.reduce(0, +) / group.count
+				let notes = group.compactMap { $0.note }
+				let averagedMeasurement = Measurement(systolicLevel: averageSystolic, diastolicLevel: averageDiastolic, id: UUID(), date: group[0].date, pulse: nil, note: notes.first)
+				averagedMeasurements.append(averagedMeasurement)
 			}
-				systolic = (maxSystolic, minSystolic)
-				diastolic = (maxDiastolic, minDiastolic)
-		default:
-			return nil
 		}
-		
-		return (systolic, diastolic)
+		let sortedMeasurements = averagedMeasurements.sorted(by: { $0.date > $1.date })
+		return sortedMeasurements
 	}
 	
-	func getMinAndMaxPulseLevel() -> (max: Int, min: Int?)? {
-		guard !filteredMeasurementsForPresentationPeriod.isEmpty else { return nil }
-		let pulseInfo: (Int, Int?)?
-		switch filteredMeasurementsForPresentationPeriod.count {
-			case 1:
-				let first = filteredMeasurementsForPresentationPeriod[0]
-				if let pulse = first.pulse {
-					pulseInfo = (pulse, nil)
-				} else {
-					pulseInfo = nil
-				}
-			case let count where count > 1:
-				let pulses = filteredMeasurementsForPresentationPeriod.compactMap { $0.pulse }
-				guard let biggestPulse = pulses.max(), let smallestPulse = pulses.min() else { return nil }
-				pulseInfo = (max: biggestPulse, min: smallestPulse)
-			default:
-				return nil
+	/// Находит измерения с заметками в заданном массиве измерений.
+	/// - Parameter measurements: Массив измерений для фильтрации.
+	/// - Returns: Массив измерений с заметками.
+	func findNotesIn(_ measurements: [Measurement]) -> [Measurement] {
+		let chartDates = Set(chartAverageMeasurements.map { Calendar.current.startOfDay(for: $0.date) })
+		let measurementsWithNote = measurements.compactMap { item in
+			let itemDate = Calendar.current.startOfDay(for: item.date)
+			return chartDates.contains(itemDate) ? chartAverageMeasurements.first(where: { Calendar.current.startOfDay(for: $0.date) == itemDate }) : nil
 		}
-		return pulseInfo
+		return measurementsWithNote
 	}
 	
-	func makeSelectedInfo(measurements: [Measurement]) -> SelectedMeasurementsInfo? {
+	/// Получает информацию о заметке и времени для заданного измерения.
+	/// - Parameter measurement: Измерение, для которого нужно получить информацию.
+	/// - Returns: Кортеж с временем и текстом заметки, если они существуют.
+	func getNoteInfo(measurement: Measurement?) -> (time: String, text: String)? {
+		DatePresenter.getNoteWithDateText(measurement: measurement, measurementsWithNote: measurementsWithNote)
+	}
+	
+	/// Получает сводную информацию о выбранных измерениях.
+	/// - Parameter measurements: Массив измерений для анализа.
+	/// - Returns: Сводная информация о измерениях, если они существуют.
+	func getSummaryInfoForSelectedMeasurements(_ measurements: [Measurement]) -> SelectedMeasurementsInfo? {
 		guard let firstMeasurement = measurements.first else { return nil }
 		let systolicLevels = measurements.map { $0.systolicLevel }
 		let diastolicLevels = measurements.map { $0.diastolicLevel }
@@ -186,7 +202,7 @@ final class PressureOverviewViewModel: ObservableObject {
 		
 		guard let systolicLevelsMax = systolicLevels.max(), let diastolicLevelMax = diastolicLevels.max() else { return nil }
 		
-		let	systolicLevelsMin = systolicLevels.min()
+		let systolicLevelsMin = systolicLevels.min()
 		let diastolicLevelMin = diastolicLevels.min()
 		let pulseMax = pulses.max()
 		let pulseMin = pulses.min()
@@ -196,7 +212,7 @@ final class PressureOverviewViewModel: ObservableObject {
 		let info = SelectedMeasurementsInfo(systolicLevelsMax: systolicLevelsMax,
 											systolicLevelsMin: systolicLevelsMin == systolicLevelsMax ? nil : systolicLevelsMin,
 											diastolicLevelMax: diastolicLevelMax,
-											diastolicLevelMin: diastolicLevelMin == diastolicLevelMax ? nil : systolicLevelsMin,
+											diastolicLevelMin: diastolicLevelMin == diastolicLevelMax ? nil : diastolicLevelMin,
 											pulseMax: pulseMax,
 											pulseMin: pulseMax == pulseMin ? nil : pulseMin,
 											note: notesInfo,
@@ -204,81 +220,12 @@ final class PressureOverviewViewModel: ObservableObject {
 		return info
 	}
 	
-	func getDateText(date: Date, formatStyle: PresentationPeriod) -> String {
-		DatePrepare.formatDate(date: date, formatStyle: formatStyle)
-	}
-	
-	func findAndSetSelection(xValue: Date) {
-		let shift: Double = period == .day ? Constants.Time.halfanHour : Constants.Time.halfADay
-		let measurements = filteredMeasurementsForPresentationPeriod.filter({ measurement in
-			return measurement.date >= xValue.addingTimeInterval(-shift) && measurement.date <= xValue.addingTimeInterval(shift)
-		})
-		selectedMessurment = makeSelectedInfo(measurements: measurements)
-	}
-	
-	func getNoteInfo(measurement: Measurement?) -> (time: String, text: String)? {
-		guard let measurement = measurement, let note = measurement.note else { return nil }
-		formatter.dateFormat = "d.MM H:mm"
-		return (formatter.string(from: measurement.date), note)
-	}
-	
-	func getNoteInfo() -> (time: String, text: String)? {
-		guard let measurement = measurementsWithNotes.first, let note = measurement.note else { return nil }
-		formatter.dateFormat = "d.MM H:mm"
-		return (formatter.string(from: measurement.date), note)
-	}
-	
-	func formatDate(for date: Date) -> String {
-		switch period {
-		case .day:
-			formatter.dateFormat = "H"
-		case .week, .month:
-			formatter.dateFormat = "d.MM"
-		}
-		return formatter.string(from: date)
-	}
-	
-	func getTimeInterval() -> (startOfPeriod: Date, endOfPeriod: Date) {
-		let start: Date
-		let end: Date
-		
-		switch period {
-			case .day:
-				start = calendar.startOfDay(for: currentDate)
-				end = start.addingTimeInterval(86400)
-				return (startOfPeriod: start, endOfPeriod: end)
-				
-			case .week:
-				if let startDate = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear],
-																			   from: currentDate)) {
-					start = startDate
-					let days = calendar.date(byAdding: .day, value: 6, to: start) ?? start
-					end = days.addingTimeInterval(86399)
-					return (startOfPeriod: start, endOfPeriod: end)
-				}
-				
-			case .month:
-				if let end = calendar.date(from: calendar.dateComponents([.year, .month, .day],
-								from: currentDate.addingTimeInterval(Constants.Time.day * 2))) {
-					start = calendar.date(byAdding: .day, value: -30, to: end) ?? end
-					return (startOfPeriod: start, endOfPeriod: end)
-				}
-		}
-		
-		return (startOfPeriod: currentDate, endOfPeriod: currentDate)
-	}
-	
-	func startAletrTimerIfNeeded() {
-		guard self.dataStore.measurements.isEmpty else { return }
-		DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { self.tipIsActive = true })
-		DispatchQueue.main.asyncAfter(deadline: .now() + 15, execute: { self.tipIsActive = false })
-	}
+	// MARK: - init
 	
 	init(dataStore: DataStore) {
 		self.dataStore = dataStore
 		self.formattedDate = Date.now.formatted(.dateTime.month().year())
 		self.currentDate = Date()
-		startAletrTimerIfNeeded() 
+		startAlertTimerIfNeeded() 
 	}
-	
 }

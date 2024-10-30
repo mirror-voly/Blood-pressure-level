@@ -24,11 +24,9 @@ struct PressureOverviewScreen: View {
 					CustomSegmentContolView()
 					
 					PressureSummaryView()
-						.zIndex(0.2)
 					
 					PresureNoteView()
 				}
-				
 				Spacer()
 			}
 			.padding(.horizontal)
